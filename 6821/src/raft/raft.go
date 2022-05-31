@@ -19,13 +19,15 @@ package raft
 
 import (
 	//	"bytes"
+	"fmt"
+	"math/rand"
 	"sync"
 	"sync/atomic"
+	"time"
 
 	//	"6.824/labgob"
 	"6.824/labrpc"
 )
-
 
 //
 // as each Raft peer becomes aware that successive log entries are
@@ -53,6 +55,12 @@ type ApplyMsg struct {
 //
 // A Go object implementing a single Raft peer.
 //
+const (
+	Master    = 1
+	Follower  = 2
+	Candidate = 3
+)
+
 type Raft struct {
 	mu        sync.Mutex          // Lock to protect shared access to this peer's state
 	peers     []*labrpc.ClientEnd // RPC end points of all peers
@@ -60,6 +68,11 @@ type Raft struct {
 	me        int                 // this peer's index into peers[]
 	dead      int32               // set by Kill()
 
+	job         int   //* 服务器当前角色，Master or Follower
+	term        int   //* term 当前集群的任期
+	lastreserve int64 //* uint64 -> time.Now().UnixMicro()
+	voteforid   int   //* 当前对应的 master
+	Log         int   //* 表示当前的日志条数
 	// Your data here (2A, 2B, 2C).
 	// Look at the paper's Figure 2 for a description of what
 	// state a Raft server must maintain.
@@ -70,9 +83,9 @@ type Raft struct {
 // believes it is the leader.
 func (rf *Raft) GetState() (int, bool) {
 
-	var term int
-	var isleader bool
-	// Your code here (2A).
+	var term int = rf.term
+	var isleader bool = (rf.job == Master)
+
 	return term, isleader
 }
 
@@ -91,7 +104,6 @@ func (rf *Raft) persist() {
 	// data := w.Bytes()
 	// rf.persister.SaveRaftState(data)
 }
-
 
 //
 // restore previously persisted state.
@@ -115,7 +127,6 @@ func (rf *Raft) readPersist(data []byte) {
 	// }
 }
 
-
 //
 // A service wants to switch to snapshot.  Only do so if Raft hasn't
 // have more recent info since it communicate the snapshot on applyCh.
@@ -136,28 +147,135 @@ func (rf *Raft) Snapshot(index int, snapshot []byte) {
 
 }
 
-
 //
 // example RequestVote RPC arguments structure.
 // field names must start with capital letters!
 //
+
 type RequestVoteArgs struct {
 	// Your data here (2A, 2B).
+	Cur_term int //* 发起投票的任期
+	Cur_log  int //* 发起者的日志条数
+	Id       int //* 发起者的 ID
 }
 
-//
-// example RequestVote RPC reply structure.
-// field names must start with capital letters!
-//
 type RequestVoteReply struct {
-	// Your data here (2A).
+	Ok bool //* true 则代表 我投票给发起投票的人 false 则代表不投票
 }
 
-//
-// example RequestVote RPC handler.
-//
-func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
-	// Your code here (2A, 2B).
+func (rf *Raft) SendRequestVote(server int, args *RequestVoteArgs, reply *RequestVoteReply) bool {
+	ok := rf.peers[server].Call("Raft.RequestVote", args, reply)
+	return ok
+}
+
+func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) bool {
+	//* 投票的结果必须是，我的任期 <= 你的
+	//* 且我的日志条目是 <= 你的
+	if rf.term >= args.Cur_term {
+		reply.Ok = false
+		return false
+	}
+	if rf.Log >= args.Cur_log {
+		reply.Ok = false
+		return false
+	}
+	reply.Ok = true
+	return true
+}
+
+type AppendEntriesArgs struct {
+	Heartbeatime int64 //* 更新心跳时间，在 rpc 调用方更新
+	Cur_term     int   //* 发起心跳的任期
+	Id           int   //* 发起心跳的id
+}
+
+type AppendEntriesReply struct {
+}
+
+//* 只有当前集群的 master 才会定期向其他的follower 发送心跳
+//*
+func (rf *Raft) HeartBeatToClient(i int, args *AppendEntriesArgs, reply *AppendEntriesReply) bool {
+	ok := rf.peers[i].Call("Raft.HeartBeat", args, reply)
+	return ok
+}
+
+//* 心跳也需要判断任期，如果发起者的任期 < 当前的任期
+//* 则返回error,
+//* raft server中保存了 当前集群的 master id
+//* 如果不同，心跳失败
+func (rf *Raft) HeartBeat(args *AppendEntriesArgs, reply *AppendEntriesReply) bool {
+	if args.Cur_term < rf.term {
+		return false
+	}
+	if args.Id != rf.voteforid && rf.voteforid != -1 {
+		return false
+	}
+	rf.lastreserve = args.Heartbeatime
+	rf.voteforid = args.Id
+	return true
+}
+
+func (rf *Raft) RaftServerInit() {
+	rand.Seed(time.Now().UnixMicro())
+	for {
+		//* 先 sleep 一段时间，再去判断是否超时
+		//* 超时 => 发起投票
+		//* 150ms ~ 300ms
+		election := rand.Intn(150) + 150
+		time.Sleep(time.Duration(election))
+
+		if time.Now().UnixMicro()-rf.lastreserve > (int64)(election+1000) {
+			//* 发现超时， 则开始投票
+			if rf.job != Master {
+				//* 发起选举时，自己给也自己投票
+				var vote_me int32 = 1
+				args := RequestVoteArgs{}
+				args.Cur_log = rf.Log
+				//* 发起选举时，自己的 term + 1
+				rf.term++
+				args.Cur_term = rf.term
+				args.Id = rf.me
+				for i := range rf.peers {
+					go func(servernumber int) {
+						reply := RequestVoteReply{}
+						err := rf.SendRequestVote(servernumber, &args, &reply)
+						if err == false {
+							fmt.Printf("error, can not sendRequestVote\n")
+						}
+						if reply.Ok == true {
+							//* 原子相加
+							atomic.AddInt32(&vote_me, 1)
+						}
+					}(i)
+					//* 如果发现自己的票数 > 集群的总节点数 / 2
+					if vote_me > (int32)(len(rf.peers)/2) {
+						//* 自己成为 Master
+						//* 并且开始与其他节点发送心跳，
+						rf.job = Master
+						fmt.Printf("%d be writer \n", rf.me)
+					}
+				}
+			}
+		}
+
+		//* 如果自己是 Master, 则给其他节点发送心跳
+		if rf.job == Master {
+			entryargs := AppendEntriesArgs{}
+			entryargs.Cur_term = rf.term
+			entryargs.Heartbeatime = time.Now().UnixMicro()
+			entryargs.Id = rf.me
+			entryreply := AppendEntriesReply{}
+			for i := range rf.peers {
+				go func(servernumber int) {
+					err := rf.HeartBeatToClient(i, &entryargs, &entryreply)
+					if err == false {
+						fmt.Printf("error, %d hearbeat error!\n", rf.me)
+					}
+				}(i)
+			}
+		}
+
+	}
 }
 
 //
@@ -189,11 +307,6 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 // that the caller passes the address of the reply struct with &, not
 // the struct itself.
 //
-func (rf *Raft) sendRequestVote(server int, args *RequestVoteArgs, reply *RequestVoteReply) bool {
-	ok := rf.peers[server].Call("Raft.RequestVote", args, reply)
-	return ok
-}
-
 
 //
 // the service using Raft (e.g. a k/v server) wants to start
@@ -215,7 +328,6 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	isLeader := true
 
 	// Your code here (2B).
-
 
 	return index, term, isLeader
 }
@@ -245,10 +357,7 @@ func (rf *Raft) killed() bool {
 // heartsbeats recently.
 func (rf *Raft) ticker() {
 	for rf.killed() == false {
-
-		// Your code here to check if a leader election should
-		// be started and to randomize sleeping time using
-		// time.Sleep().
+		rf.RaftServerInit()
 
 	}
 }
@@ -264,21 +373,23 @@ func (rf *Raft) ticker() {
 // Make() must return quickly, so it should start goroutines
 // for any long-running work.
 //
+//* 有一个服务用于启动服务器
 func Make(peers []*labrpc.ClientEnd, me int,
 	persister *Persister, applyCh chan ApplyMsg) *Raft {
 	rf := &Raft{}
 	rf.peers = peers
 	rf.persister = persister
 	rf.me = me
-
-	// Your initialization code here (2A, 2B, 2C).
+	//* 集群开始的时候都是 follower, 任期为 0,
+	rf.job = Follower
+	rf.term = 0
+	rf.voteforid = -1
 
 	// initialize from state persisted before a crash
 	rf.readPersist(persister.ReadRaftState())
 
 	// start ticker goroutine to start elections
 	go rf.ticker()
-
 
 	return rf
 }
