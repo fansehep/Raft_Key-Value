@@ -1,0 +1,523 @@
+Test (2A): initial election ...
+2022/06/03 21:44:40 raft.go:328: id: 0 term: 1 start requestvote
+2022/06/03 21:44:40 raft.go:328: id: 1 term: 1 start requestvote
+2022/06/03 21:44:40 raft.go:328: id: 2 term: 1 start requestvote
+2022/06/03 21:44:40 raft.go:185: id: 0 term: 1 no vote 2 1
+2022/06/03 21:44:40 raft.go:185: id: 1 term: 1 no vote 0 1
+2022/06/03 21:44:40 raft.go:185: id: 2 term: 1 no vote 0 1
+2022/06/03 21:44:40 raft.go:185: id: 0 term: 1 no vote 1 1
+2022/06/03 21:44:40 raft.go:185: id: 2 term: 1 no vote 1 1
+2022/06/03 21:44:40 raft.go:185: id: 1 term: 1 no vote 2 1
+--- FAIL: TestInitialElection2A (5.19s)
+    config.go:460: expected one leader, got none
+Test (2A): election after network failure ...
+2022/06/03 21:44:46 raft.go:328: id: 1 term: 1 start requestvote
+2022/06/03 21:44:46 raft.go:328: id: 0 term: 1 start requestvote
+2022/06/03 21:44:46 raft.go:328: id: 2 term: 1 start requestvote
+2022/06/03 21:44:46 raft.go:185: id: 1 term: 1 no vote 2 1
+2022/06/03 21:44:46 raft.go:185: id: 2 term: 1 no vote 1 1
+2022/06/03 21:44:46 raft.go:185: id: 0 term: 1 no vote 1 1
+2022/06/03 21:44:46 raft.go:185: id: 0 term: 1 no vote 2 1
+2022/06/03 21:44:46 raft.go:185: id: 1 term: 1 no vote 0 1
+2022/06/03 21:44:46 raft.go:185: id: 2 term: 1 no vote 0 1
+--- FAIL: TestReElection2A (4.97s)
+    config.go:460: expected one leader, got none
+Test (2A): multiple elections ...
+2022/06/03 21:44:51 raft.go:328: id: 0 term: 1 start requestvote
+2022/06/03 21:44:51 raft.go:328: id: 1 term: 1 start requestvote
+==================
+WARNING: DATA RACE
+Read at 0x00c0001c62c0 by goroutine 97:
+  6.824/raft.(*Raft).RequestVote()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:176 +0xc4
+  runtime.call32()
+      /usr/lib/go/src/runtime/asm_amd64.s:702 +0x48
+  reflect.Value.Call()
+      /usr/lib/go/src/reflect/value.go:339 +0xd7
+  6.824/labrpc.(*Service).dispatch()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:496 +0x47b
+  6.824/labrpc.(*Server).dispatch()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:420 +0x265
+  6.824/labrpc.(*Network).processReq.func1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:240 +0x9c
+
+Previous write at 0x00c0001c62c0 by goroutine 73:
+  6.824/raft.(*Raft).ticker()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:320 +0x296
+  6.824/raft.Make.func1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x39
+
+Goroutine 97 (running) created at:
+  6.824/labrpc.(*Network).processReq()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:239 +0x291
+  6.824/labrpc.MakeNetwork.func1.1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:157 +0x9c
+
+Goroutine 73 (running) created at:
+  6.824/raft.Make()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x264
+  6.824/raft.(*config).start1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:322 +0xa4f
+  6.824/raft.make_config()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:97 +0x990
+  6.824/raft.TestManyElections2A()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/test_test.go:95 +0x50
+  testing.tRunner()
+      /usr/lib/go/src/testing/testing.go:1439 +0x213
+  testing.(*T).Run.func1()
+      /usr/lib/go/src/testing/testing.go:1486 +0x47
+==================
+==================
+WARNING: DATA RACE
+Read at 0x00c00019c2d0 by goroutine 97:
+  runtime.mapaccess1_fast64()
+      /usr/lib/go/src/runtime/map_fast64.go:13 +0x0
+  6.824/raft.(*Raft).RequestVote()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:178 +0x18f
+  runtime.call32()
+      /usr/lib/go/src/runtime/asm_amd64.s:702 +0x48
+  reflect.Value.Call()
+      /usr/lib/go/src/reflect/value.go:339 +0xd7
+  6.824/labrpc.(*Service).dispatch()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:496 +0x47b
+  6.824/labrpc.(*Server).dispatch()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:420 +0x265
+  6.824/labrpc.(*Network).processReq.func1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:240 +0x9c
+
+Previous write at 0x00c00019c2d0 by goroutine 73:
+  runtime.mapassign_fast64()
+      /usr/lib/go/src/runtime/map_fast64.go:93 +0x0
+  6.824/raft.(*Raft).ticker()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:324 +0x348
+  6.824/raft.Make.func1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x39
+
+Goroutine 97 (running) created at:
+  6.824/labrpc.(*Network).processReq()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:239 +0x291
+  6.824/labrpc.MakeNetwork.func1.1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:157 +0x9c
+
+Goroutine 73 (running) created at:
+  6.824/raft.Make()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x264
+  6.824/raft.(*config).start1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:322 +0xa4f
+  6.824/raft.make_config()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:97 +0x990
+  6.824/raft.TestManyElections2A()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/test_test.go:95 +0x50
+  testing.tRunner()
+      /usr/lib/go/src/testing/testing.go:1439 +0x213
+  testing.(*T).Run.func1()
+      /usr/lib/go/src/testing/testing.go:1486 +0x47
+==================
+==================
+WARNING: DATA RACE
+Read at 0x00c00020a4c8 by goroutine 97:
+  6.824/raft.(*Raft).RequestVote()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:178 +0x19c
+  runtime.call32()
+      /usr/lib/go/src/runtime/asm_amd64.s:702 +0x48
+  reflect.Value.Call()
+      /usr/lib/go/src/reflect/value.go:339 +0xd7
+  6.824/labrpc.(*Service).dispatch()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:496 +0x47b
+  6.824/labrpc.(*Server).dispatch()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:420 +0x265
+  6.824/labrpc.(*Network).processReq.func1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:240 +0x9c
+
+Previous write at 0x00c00020a4c8 by goroutine 73:
+  6.824/raft.(*Raft).ticker()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:324 +0x357
+  6.824/raft.Make.func1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x39
+
+Goroutine 97 (running) created at:
+  6.824/labrpc.(*Network).processReq()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:239 +0x291
+  6.824/labrpc.MakeNetwork.func1.1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:157 +0x9c
+
+Goroutine 73 (running) created at:
+  6.824/raft.Make()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x264
+  6.824/raft.(*config).start1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:322 +0xa4f
+  6.824/raft.make_config()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:97 +0x990
+  6.824/raft.TestManyElections2A()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/test_test.go:95 +0x50
+  testing.tRunner()
+      /usr/lib/go/src/testing/testing.go:1439 +0x213
+  testing.(*T).Run.func1()
+      /usr/lib/go/src/testing/testing.go:1486 +0x47
+==================
+2022/06/03 21:44:51 raft.go:185: id: 1 term: 1 no vote 0 1
+2022/06/03 21:44:51 raft.go:180: id: 4 term: 0 vote 1 1
+2022/06/03 21:44:51 raft.go:180: id: 2 term: 0 vote 0 1
+2022/06/03 21:44:51 raft.go:180: id: 6 term: 0 vote 0 1
+2022/06/03 21:44:51 raft.go:180: id: 3 term: 0 vote 0 1
+==================
+WARNING: DATA RACE
+Write at 0x00c00018e13c by goroutine 99:
+  sync/atomic.AddInt32()
+      /usr/lib/go/src/runtime/race_amd64.s:279 +0xb
+  sync/atomic.AddInt32()
+      <autogenerated>:1 +0x1a
+  6.824/raft.(*Raft).ticker.func5()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:384 +0x47
+
+Previous read at 0x00c00018e13c by goroutine 86:
+  6.824/raft.(*Raft).ticker.func2()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:376 +0x2f6
+  6.824/raft.(*Raft).ticker.func5()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:384 +0x47
+
+Goroutine 99 (running) created at:
+  6.824/raft.(*Raft).ticker()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:353 +0x96f
+  6.824/raft.Make.func1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x39
+
+Goroutine 86 (finished) created at:
+  6.824/raft.(*Raft).ticker()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:353 +0x96f
+  6.824/raft.Make.func1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x39
+==================
+2022/06/03 21:44:51 raft.go:180: id: 5 term: 0 vote 1 1
+2022/06/03 21:44:51 raft.go:185: id: 6 term: 0 no vote 1 1
+2022/06/03 21:44:51 raft.go:185: id: 3 term: 0 no vote 1 1
+2022/06/03 21:44:51 raft.go:185: id: 2 term: 0 no vote 1 1
+2022/06/03 21:44:51 raft.go:185: id: 4 term: 0 no vote 0 1
+2022/06/03 21:44:51 raft.go:185: id: 5 term: 0 no vote 0 1
+2022/06/03 21:44:51 raft.go:185: id: 0 term: 1 no vote 1 1
+2022/06/03 21:44:51 raft.go:377: id: 0 term 1 be Leader
+==================
+WARNING: DATA RACE
+Write at 0x00c0001c6038 by goroutine 90:
+  6.824/raft.(*Raft).ticker.func2()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:378 +0x3f1
+  6.824/raft.(*Raft).ticker.func5()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:384 +0x47
+
+Previous read at 0x00c0001c6038 by goroutine 71:
+  6.824/raft.(*Raft).ticker()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:387 +0x97c
+  6.824/raft.Make.func1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x39
+
+Goroutine 90 (running) created at:
+  6.824/raft.(*Raft).ticker()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:353 +0x96f
+  6.824/raft.Make.func1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x39
+
+Goroutine 71 (running) created at:
+  6.824/raft.Make()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x264
+  6.824/raft.(*config).start1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:322 +0xa4f
+  6.824/raft.make_config()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:97 +0x990
+  6.824/raft.TestManyElections2A()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/test_test.go:95 +0x50
+  testing.tRunner()
+      /usr/lib/go/src/testing/testing.go:1439 +0x213
+  testing.(*T).Run.func1()
+      /usr/lib/go/src/testing/testing.go:1486 +0x47
+==================
+==================
+WARNING: DATA RACE
+Write at 0x00c00019ca50 by goroutine 83:
+  runtime.mapassign_fast64()
+      /usr/lib/go/src/runtime/map_fast64.go:93 +0x0
+  6.824/raft.(*Raft).ticker()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:324 +0x348
+  6.824/raft.Make.func1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x39
+
+Previous write at 0x00c00019ca50 by goroutine 116:
+  runtime.mapassign_fast64()
+      /usr/lib/go/src/runtime/map_fast64.go:93 +0x0
+  6.824/raft.(*Raft).RequestVote()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:181 +0x499
+  runtime.call32()
+      /usr/lib/go/src/runtime/asm_amd64.s:702 +0x48
+  reflect.Value.Call()
+      /usr/lib/go/src/reflect/value.go:339 +0xd7
+  6.824/labrpc.(*Service).dispatch()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:496 +0x47b
+  6.824/labrpc.(*Server).dispatch()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:420 +0x265
+  6.824/labrpc.(*Network).processReq.func1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:240 +0x9c
+
+Goroutine 83 (running) created at:
+  6.824/raft.Make()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x264
+  6.824/raft.(*config).start1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:322 +0xa4f
+  6.824/raft.make_config()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:97 +0x990
+  6.824/raft.TestManyElections2A()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/test_test.go:95 +0x50
+  testing.tRunner()
+      /usr/lib/go/src/testing/testing.go:1439 +0x213
+  testing.(*T).Run.func1()
+      /usr/lib/go/src/testing/testing.go:1486 +0x47
+
+Goroutine 116 (finished) created at:
+  6.824/labrpc.(*Network).processReq()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:239 +0x291
+  6.824/labrpc.MakeNetwork.func1.1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:157 +0x9c
+==================
+==================
+WARNING: DATA RACE
+2022/06/03 21:44:51 raft.go:328: id: 2 term: 1 start requestvote
+Write at 0x00c000190b28 by goroutine 77:
+  6.824/raft.(*Raft).ticker()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:324 +0x357
+  6.824/raft.Make.func1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x39
+
+Previous write at 0x00c000190b28 by goroutine 120:
+  6.824/raft.(*Raft).RequestVote()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:181 +0x4a5
+  runtime.call32()
+      /usr/lib/go/src/runtime/asm_amd64.s:702 +0x48
+  reflect.Value.Call()
+      /usr/lib/go/src/reflect/value.go:339 +0xd7
+  6.824/labrpc.(*Service).dispatch()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:496 +0x47b
+  6.824/labrpc.(*Server).dispatch()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:420 +0x265
+  6.824/labrpc.(*Network).processReq.func1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:240 +0x9c
+
+Goroutine 77 (running) created at:
+  6.824/raft.Make()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x264
+  6.824/raft.(*config).start1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:322 +0xa4f
+  6.824/raft.make_config()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:97 +0x990
+  6.824/raft.TestManyElections2A()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/test_test.go:95 +0x50
+  testing.tRunner()
+      /usr/lib/go/src/testing/testing.go:1439 +0x213
+  testing.(*T).Run.func1()
+      /usr/lib/go/src/testing/testing.go:1486 +0x47
+
+Goroutine 120 (finished) created at:
+  6.824/labrpc.(*Network).processReq()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:239 +0x291
+  6.824/labrpc.MakeNetwork.func1.1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:157 +0x9c
+==================
+2022/06/03 21:44:51 raft.go:328: id: 6 term: 1 start requestvote
+2022/06/03 21:44:51 raft.go:328: id: 5 term: 1 start requestvote
+2022/06/03 21:44:51 raft.go:328: id: 4 term: 1 start requestvote
+2022/06/03 21:44:51 raft.go:328: id: 3 term: 1 start requestvote
+2022/06/03 21:44:51 raft.go:185: id: 4 term: 1 no vote 3 1
+2022/06/03 21:44:51 raft.go:185: id: 3 term: 1 no vote 5 1
+2022/06/03 21:44:51 raft.go:185: id: 5 term: 1 no vote 4 1
+2022/06/03 21:44:51 raft.go:185: id: 3 term: 1 no vote 2 1
+2022/06/03 21:44:51 raft.go:185: id: 4 term: 1 no vote 2 1
+2022/06/03 21:44:51 raft.go:185: id: 0 term: 1 no vote 5 1
+2022/06/03 21:44:51 raft.go:185: id: 1 term: 1 no vote 6 1
+2022/06/03 21:44:51 raft.go:185: id: 2 term: 1 no vote 6 1
+2022/06/03 21:44:51 raft.go:185: id: 4 term: 1 no vote 5 1
+2022/06/03 21:44:51 raft.go:185: id: 5 term: 1 no vote 6 1
+2022/06/03 21:44:51 raft.go:185: id: 4 term: 1 no vote 6 1
+2022/06/03 21:44:51 raft.go:185: id: 0 term: 1 no vote 2 1
+2022/06/03 21:44:51 raft.go:185: id: 1 term: 1 no vote 2 1
+2022/06/03 21:44:51 raft.go:185: id: 5 term: 1 no vote 2 1
+2022/06/03 21:44:51 raft.go:185: id: 6 term: 1 no vote 2 1
+2022/06/03 21:44:51 raft.go:185: id: 0 term: 1 no vote 6 1
+2022/06/03 21:44:51 raft.go:185: id: 1 term: 1 no vote 5 1
+2022/06/03 21:44:51 raft.go:185: id: 2 term: 1 no vote 5 1
+2022/06/03 21:44:51 raft.go:185: id: 6 term: 1 no vote 5 1
+2022/06/03 21:44:51 raft.go:185: id: 3 term: 1 no vote 6 1
+==================
+WARNING: DATA RACE
+Write at 0x00c0001c6538 by goroutine 115:
+  6.824/raft.(*Raft).AppendEntries()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:224 +0x15a
+  runtime.call32()
+      /usr/lib/go/src/runtime/asm_amd64.s:702 +0x48
+  reflect.Value.Call()
+      /usr/lib/go/src/reflect/value.go:339 +0xd7
+  6.824/labrpc.(*Service).dispatch()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:496 +0x47b
+  6.824/labrpc.(*Server).dispatch()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:420 +0x265
+  6.824/labrpc.(*Network).processReq.func1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:240 +0x9c
+
+Previous read at 0x00c0001c6538 by goroutine 75:
+  6.824/raft.(*Raft).ticker()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:387 +0x97c
+  6.824/raft.Make.func1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x39
+
+Goroutine 115 (running) created at:
+  6.824/labrpc.(*Network).processReq()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:239 +0x291
+  6.824/labrpc.MakeNetwork.func1.1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:157 +0x9c
+
+Goroutine 75 (running) created at:
+  6.824/raft.Make()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x264
+  6.824/raft.(*config).start1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:322 +0xa4f
+  6.824/raft.make_config()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:97 +0x990
+  6.824/raft.TestManyElections2A()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/test_test.go:95 +0x50
+  testing.tRunner()
+      /usr/lib/go/src/testing/testing.go:1439 +0x213
+  testing.(*T).Run.func1()
+      /usr/lib/go/src/testing/testing.go:1486 +0x47
+==================
+2022/06/03 21:44:51 raft.go:228: 0 1 to 2 1 append sussess
+2022/06/03 21:44:51 raft.go:228: 0 1 to 3 1 append sussess
+2022/06/03 21:44:51 raft.go:185: id: 3 term: 1 no vote 4 1
+2022/06/03 21:44:51 raft.go:228: 0 1 to 5 1 append sussess
+2022/06/03 21:44:51 raft.go:185: id: 2 term: 1 no vote 3 1
+==================
+WARNING: DATA RACE
+Write at 0x00c0001c62b8 by goroutine 105:
+  6.824/raft.(*Raft).AppendEntries()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:224 +0x15a
+  runtime.call32()
+      /usr/lib/go/src/runtime/asm_amd64.s:702 +0x48
+  reflect.Value.Call()
+      /usr/lib/go/src/reflect/value.go:339 +0xd7
+  6.824/labrpc.(*Service).dispatch()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:496 +0x47b
+  6.824/labrpc.(*Server).dispatch()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:420 +0x265
+  6.824/labrpc.(*Network).processReq.func1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:240 +0x9c
+
+Previous read at 0x00c0001c62b8 by goroutine 73:
+  6.824/raft.(*Raft).ticker()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:316 +0xfb
+  6.824/raft.Make.func1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x39
+
+Goroutine 105 (running) created at:
+  6.824/labrpc.(*Network).processReq()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:239 +0x291
+  6.824/labrpc.MakeNetwork.func1.1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:157 +0x9c
+
+Goroutine 73 (running) created at:
+  6.824/raft.Make()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x264
+  6.824/raft.(*config).start1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:322 +0xa4f
+  6.824/raft.make_config()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:97 +0x990
+  6.824/raft.TestManyElections2A()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/test_test.go:95 +0x50
+  testing.tRunner()
+      /usr/lib/go/src/testing/testing.go:1439 +0x213
+  testing.(*T).Run.func1()
+      /usr/lib/go/src/testing/testing.go:1486 +0x47
+==================
+2022/06/03 21:44:51 raft.go:228: 0 1 to 1 1 append sussess
+2022/06/03 21:44:51 raft.go:185: id: 5 term: 1 no vote 3 1
+2022/06/03 21:44:51 raft.go:185: id: 0 term: 1 no vote 3 1
+2022/06/03 21:44:51 raft.go:228: 0 1 to 4 1 append sussess
+2022/06/03 21:44:51 raft.go:185: id: 6 term: 1 no vote 4 1
+2022/06/03 21:44:51 raft.go:228: 0 1 to 6 1 append sussess
+2022/06/03 21:44:51 raft.go:185: id: 6 term: 1 no vote 3 1
+==================
+WARNING: DATA RACE
+Read at 0x00c0001c6548 by goroutine 75:
+  6.824/raft.(*Raft).ticker()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:317 +0x1da
+  6.824/raft.Make.func1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x39
+
+Previous write at 0x00c0001c6548 by goroutine 115:
+  6.824/raft.(*Raft).AppendEntries()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:225 +0x19d
+  runtime.call32()
+      /usr/lib/go/src/runtime/asm_amd64.s:702 +0x48
+  reflect.Value.Call()
+      /usr/lib/go/src/reflect/value.go:339 +0xd7
+  6.824/labrpc.(*Service).dispatch()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:496 +0x47b
+  6.824/labrpc.(*Server).dispatch()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:420 +0x265
+  6.824/labrpc.(*Network).processReq.func1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:240 +0x9c
+
+Goroutine 75 (running) created at:
+  6.824/raft.Make()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x264
+  6.824/raft.(*config).start1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:322 +0xa4f
+  6.824/raft.make_config()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:97 +0x990
+  6.824/raft.TestManyElections2A()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/test_test.go:95 +0x50
+  testing.tRunner()
+      /usr/lib/go/src/testing/testing.go:1439 +0x213
+  testing.(*T).Run.func1()
+      /usr/lib/go/src/testing/testing.go:1486 +0x47
+
+Goroutine 115 (finished) created at:
+  6.824/labrpc.(*Network).processReq()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:239 +0x291
+  6.824/labrpc.MakeNetwork.func1.1()
+      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:157 +0x9c
+==================
+2022/06/03 21:44:51 raft.go:185: id: 2 term: 1 no vote 4 1
+2022/06/03 21:44:51 raft.go:185: id: 1 term: 1 no vote 3 1
+2022/06/03 21:44:51 raft.go:185: id: 1 term: 1 no vote 4 1
+2022/06/03 21:44:51 raft.go:185: id: 0 term: 1 no vote 4 1
+2022/06/03 21:44:51 raft.go:228: 0 1 to 1 1 append sussess
+2022/06/03 21:44:51 raft.go:228: 0 1 to 5 1 append sussess
+2022/06/03 21:44:51 raft.go:228: 0 1 to 4 1 append sussess
+2022/06/03 21:44:51 raft.go:228: 0 1 to 6 1 append sussess
+2022/06/03 21:44:51 raft.go:228: 0 1 to 2 1 append sussess
+2022/06/03 21:44:51 raft.go:228: 0 1 to 3 1 append sussess
+2022/06/03 21:44:51 raft.go:228: 0 1 to 2 1 append sussess
+2022/06/03 21:44:51 raft.go:228: 0 1 to 3 1 append sussess
+2022/06/03 21:44:51 raft.go:228: 0 1 to 5 1 append sussess
+2022/06/03 21:44:51 raft.go:228: 0 1 to 1 1 append sussess
+2022/06/03 21:44:51 raft.go:228: 0 1 to 6 1 append sussess
+2022/06/03 21:44:51 raft.go:228: 0 1 to 4 1 append sussess
+2022/06/03 21:44:51 raft.go:328: id: 1 term: 2 start requestvote
+2022/06/03 21:44:51 raft.go:328: id: 5 term: 2 start requestvote
+2022/06/03 21:44:51 raft.go:180: id: 4 term: 1 vote 1 2
+2022/06/03 21:44:51 raft.go:185: id: 5 term: 2 no vote 1 2
+2022/06/03 21:44:51 raft.go:185: id: 1 term: 2 no vote 5 2
+2022/06/03 21:44:51 raft.go:180: id: 6 term: 1 vote 1 2
+2022/06/03 21:44:51 raft.go:185: id: 4 term: 1 no vote 5 2
+2022/06/03 21:44:51 raft.go:185: id: 6 term: 1 no vote 5 2
+2022/06/03 21:44:51 raft.go:328: id: 2 term: 2 start requestvote
+2022/06/03 21:44:51 raft.go:328: id: 6 term: 2 start requestvote
+2022/06/03 21:44:51 raft.go:328: id: 4 term: 2 start requestvote
+2022/06/03 21:44:51 raft.go:185: id: 5 term: 2 no vote 6 2
+2022/06/03 21:44:51 raft.go:328: id: 3 term: 2 start requestvote
+2022/06/03 21:44:51 raft.go:185: id: 1 term: 2 no vote 4 2
+2022/06/03 21:44:51 raft.go:185: id: 1 term: 2 no vote 6 2
+2022/06/03 21:44:51 raft.go:185: id: 4 term: 2 no vote 6 2
+2022/06/03 21:44:51 raft.go:185: id: 5 term: 2 no vote 4 2
+2022/06/03 21:44:51 raft.go:185: id: 6 term: 2 no vote 4 2
+--- FAIL: TestManyElections2A (5.66s)
+    config.go:460: expected one leader, got none
+    testing.go:1312: race detected during execution of test
+FAIL
+exit status 1
+FAIL	6.824/raft	15.838s
