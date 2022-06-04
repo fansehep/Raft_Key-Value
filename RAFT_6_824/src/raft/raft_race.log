@@ -1,523 +1,2576 @@
 Test (2A): initial election ...
-2022/06/03 21:44:40 raft.go:328: id: 0 term: 1 start requestvote
-2022/06/03 21:44:40 raft.go:328: id: 1 term: 1 start requestvote
-2022/06/03 21:44:40 raft.go:328: id: 2 term: 1 start requestvote
-2022/06/03 21:44:40 raft.go:185: id: 0 term: 1 no vote 2 1
-2022/06/03 21:44:40 raft.go:185: id: 1 term: 1 no vote 0 1
-2022/06/03 21:44:40 raft.go:185: id: 2 term: 1 no vote 0 1
-2022/06/03 21:44:40 raft.go:185: id: 0 term: 1 no vote 1 1
-2022/06/03 21:44:40 raft.go:185: id: 2 term: 1 no vote 1 1
-2022/06/03 21:44:40 raft.go:185: id: 1 term: 1 no vote 2 1
---- FAIL: TestInitialElection2A (5.19s)
-    config.go:460: expected one leader, got none
+2022/06/04 23:08:51 raft.go:331: id: 0 term: 1 start requestvote
+2022/06/04 23:08:51 raft.go:331: id: 1 term: 1 start requestvote
+2022/06/04 23:08:51 raft.go:331: id: 2 term: 1 start requestvote
+2022/06/04 23:08:51 raft.go:182: id: 0 term: 1 no vote 1 1
+2022/06/04 23:08:51 raft.go:182: id: 2 term: 1 no vote 0 1
+2022/06/04 23:08:51 raft.go:182: id: 2 term: 1 no vote 1 1
+2022/06/04 23:08:51 raft.go:182: id: 1 term: 1 no vote 0 1
+2022/06/04 23:08:51 raft.go:182: id: 0 term: 1 no vote 2 1
+2022/06/04 23:08:51 raft.go:182: id: 1 term: 1 no vote 2 1
+2022/06/04 23:08:51 raft.go:331: id: 0 term: 2 start requestvote
+2022/06/04 23:08:51 raft.go:331: id: 1 term: 2 start requestvote
+2022/06/04 23:08:51 raft.go:182: id: 1 term: 2 no vote 0 2
+2022/06/04 23:08:51 raft.go:176: id: 2 term: 1 vote 0 2
+2022/06/04 23:08:51 raft.go:371: id: 0 term 2 be Leader
+2022/06/04 23:08:51 raft.go:182: id: 2 term: 1 no vote 1 2
+2022/06/04 23:08:51 raft.go:182: id: 0 term: 2 no vote 1 2
+2022/06/04 23:08:51 raft.go:331: id: 2 term: 2 start requestvote
+2022/06/04 23:08:51 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:08:51 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:08:51 raft.go:182: id: 0 term: 2 no vote 2 2
+2022/06/04 23:08:51 raft.go:182: id: 1 term: 2 no vote 2 2
+2022/06/04 23:08:51 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:08:51 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:08:52 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:08:52 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:08:52 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:08:52 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:08:52 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:08:52 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:08:52 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:08:52 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:08:52 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:08:52 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:08:52 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:08:52 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:08:52 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:08:52 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:08:52 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:08:52 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:08:52 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:08:52 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:08:52 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:08:52 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:08:53 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:08:53 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:08:53 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:08:53 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:08:53 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:08:53 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:08:53 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:08:53 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:08:53 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:08:53 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:08:53 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:08:53 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:08:53 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:08:53 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:08:53 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:08:53 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:08:53 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:08:53 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:08:53 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:08:53 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:08:54 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:08:54 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:08:54 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:08:54 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:08:54 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:08:54 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:08:54 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:08:54 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:08:54 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:08:54 raft.go:228: 0 2 to 1 2 append sussess
+  ... Passed --   3.1  3   66    9384    0
 Test (2A): election after network failure ...
-2022/06/03 21:44:46 raft.go:328: id: 1 term: 1 start requestvote
-2022/06/03 21:44:46 raft.go:328: id: 0 term: 1 start requestvote
-2022/06/03 21:44:46 raft.go:328: id: 2 term: 1 start requestvote
-2022/06/03 21:44:46 raft.go:185: id: 1 term: 1 no vote 2 1
-2022/06/03 21:44:46 raft.go:185: id: 2 term: 1 no vote 1 1
-2022/06/03 21:44:46 raft.go:185: id: 0 term: 1 no vote 1 1
-2022/06/03 21:44:46 raft.go:185: id: 0 term: 1 no vote 2 1
-2022/06/03 21:44:46 raft.go:185: id: 1 term: 1 no vote 0 1
-2022/06/03 21:44:46 raft.go:185: id: 2 term: 1 no vote 0 1
---- FAIL: TestReElection2A (4.97s)
-    config.go:460: expected one leader, got none
+2022/06/04 23:08:54 raft.go:331: id: 1 term: 1 start requestvote
+2022/06/04 23:08:54 raft.go:331: id: 0 term: 1 start requestvote
+2022/06/04 23:08:54 raft.go:331: id: 2 term: 1 start requestvote
+2022/06/04 23:08:54 raft.go:182: id: 2 term: 1 no vote 1 1
+2022/06/04 23:08:54 raft.go:182: id: 1 term: 1 no vote 0 1
+2022/06/04 23:08:54 raft.go:182: id: 2 term: 1 no vote 0 1
+2022/06/04 23:08:54 raft.go:182: id: 0 term: 1 no vote 2 1
+2022/06/04 23:08:54 raft.go:182: id: 0 term: 1 no vote 1 1
+2022/06/04 23:08:54 raft.go:182: id: 1 term: 1 no vote 2 1
+2022/06/04 23:08:54 raft.go:331: id: 1 term: 2 start requestvote
+2022/06/04 23:08:54 raft.go:176: id: 2 term: 1 vote 1 2
+2022/06/04 23:08:54 raft.go:176: id: 0 term: 1 vote 1 2
+2022/06/04 23:08:54 raft.go:371: id: 1 term 2 be Leader
+2022/06/04 23:08:54 raft.go:331: id: 0 term: 2 start requestvote
+2022/06/04 23:08:54 raft.go:331: id: 2 term: 2 start requestvote
+2022/06/04 23:08:54 raft.go:182: id: 1 term: 2 no vote 0 2
+2022/06/04 23:08:54 raft.go:228: 1 2 to 2 2 append sussess
+2022/06/04 23:08:54 raft.go:182: id: 0 term: 2 no vote 2 2
+2022/06/04 23:08:54 raft.go:182: id: 2 term: 2 no vote 0 2
+2022/06/04 23:08:54 raft.go:228: 1 2 to 0 2 append sussess
+2022/06/04 23:08:54 raft.go:182: id: 1 term: 2 no vote 2 2
+2022/06/04 23:08:55 raft.go:228: 1 2 to 0 2 append sussess
+2022/06/04 23:08:55 raft.go:228: 1 2 to 2 2 append sussess
+2022/06/04 23:08:55 raft.go:331: id: 0 term: 3 start requestvote
+2022/06/04 23:08:55 raft.go:331: id: 2 term: 3 start requestvote
+2022/06/04 23:08:55 raft.go:182: id: 2 term: 3 no vote 0 3
+2022/06/04 23:08:55 raft.go:182: id: 0 term: 3 no vote 2 3
+2022/06/04 23:08:55 raft.go:331: id: 0 term: 4 start requestvote
+2022/06/04 23:08:55 raft.go:331: id: 2 term: 4 start requestvote
+2022/06/04 23:08:55 raft.go:182: id: 2 term: 4 no vote 0 4
+2022/06/04 23:08:55 raft.go:182: id: 0 term: 4 no vote 2 4
+2022/06/04 23:08:55 raft.go:331: id: 0 term: 5 start requestvote
+2022/06/04 23:08:55 raft.go:176: id: 2 term: 4 vote 0 5
+2022/06/04 23:08:55 raft.go:371: id: 0 term 5 be Leader
+2022/06/04 23:08:55 raft.go:331: id: 2 term: 5 start requestvote
+2022/06/04 23:08:55 raft.go:228: 0 5 to 2 5 append sussess
+2022/06/04 23:08:55 raft.go:182: id: 0 term: 5 no vote 2 5
+2022/06/04 23:08:55 raft.go:228: 0 5 to 2 5 append sussess
+2022/06/04 23:08:55 raft.go:228: 0 5 to 2 5 append sussess
+2022/06/04 23:08:56 raft.go:228: 0 5 to 1 5 append sussess
+2022/06/04 23:08:56 raft.go:228: 0 5 to 2 5 append sussess
+2022/06/04 23:08:56 raft.go:228: 0 5 to 1 5 append sussess
+2022/06/04 23:08:56 raft.go:228: 0 5 to 2 5 append sussess
+2022/06/04 23:08:56 raft.go:228: 0 5 to 2 5 append sussess
+2022/06/04 23:08:56 raft.go:228: 0 5 to 1 5 append sussess
+2022/06/04 23:08:56 raft.go:228: 0 5 to 1 5 append sussess
+2022/06/04 23:08:56 raft.go:228: 0 5 to 2 5 append sussess
+2022/06/04 23:08:56 raft.go:228: 0 5 to 2 5 append sussess
+2022/06/04 23:08:56 raft.go:228: 0 5 to 1 5 append sussess
+2022/06/04 23:08:56 raft.go:331: id: 2 term: 6 start requestvote
+2022/06/04 23:08:56 raft.go:331: id: 1 term: 6 start requestvote
+2022/06/04 23:08:56 raft.go:331: id: 2 term: 7 start requestvote
+2022/06/04 23:08:56 raft.go:331: id: 1 term: 7 start requestvote
+2022/06/04 23:08:57 raft.go:331: id: 1 term: 8 start requestvote
+2022/06/04 23:08:57 raft.go:331: id: 2 term: 8 start requestvote
+2022/06/04 23:08:57 raft.go:331: id: 2 term: 9 start requestvote
+2022/06/04 23:08:57 raft.go:331: id: 1 term: 9 start requestvote
+2022/06/04 23:08:57 raft.go:331: id: 2 term: 10 start requestvote
+2022/06/04 23:08:57 raft.go:331: id: 1 term: 10 start requestvote
+2022/06/04 23:08:57 raft.go:331: id: 2 term: 11 start requestvote
+2022/06/04 23:08:58 raft.go:331: id: 1 term: 11 start requestvote
+2022/06/04 23:08:58 raft.go:331: id: 2 term: 12 start requestvote
+2022/06/04 23:08:58 raft.go:331: id: 1 term: 12 start requestvote
+2022/06/04 23:08:58 raft.go:331: id: 2 term: 13 start requestvote
+2022/06/04 23:08:58 raft.go:331: id: 1 term: 13 start requestvote
+2022/06/04 23:08:58 raft.go:182: id: 2 term: 13 no vote 1 13
+2022/06/04 23:08:58 raft.go:182: id: 1 term: 13 no vote 2 13
+2022/06/04 23:08:58 raft.go:331: id: 2 term: 14 start requestvote
+2022/06/04 23:08:58 raft.go:176: id: 1 term: 13 vote 2 14
+2022/06/04 23:08:58 raft.go:371: id: 2 term 14 be Leader
+2022/06/04 23:08:58 raft.go:228: 2 14 to 1 14 append sussess
+2022/06/04 23:08:59 raft.go:228: 2 14 to 1 14 append sussess
+2022/06/04 23:08:59 raft.go:228: 2 14 to 0 14 append sussess
+2022/06/04 23:08:59 raft.go:228: 2 14 to 1 14 append sussess
+2022/06/04 23:08:59 raft.go:228: 2 14 to 1 14 append sussess
+2022/06/04 23:08:59 raft.go:228: 2 14 to 0 14 append sussess
+2022/06/04 23:08:59 raft.go:228: 2 14 to 0 14 append sussess
+2022/06/04 23:08:59 raft.go:228: 2 14 to 1 14 append sussess
+2022/06/04 23:08:59 raft.go:228: 2 14 to 0 14 append sussess
+2022/06/04 23:08:59 raft.go:228: 2 14 to 1 14 append sussess
+2022/06/04 23:08:59 raft.go:228: 2 14 to 1 14 append sussess
+2022/06/04 23:08:59 raft.go:228: 2 14 to 0 14 append sussess
+  ... Passed --   5.0  3  174   16560    0
 Test (2A): multiple elections ...
-2022/06/03 21:44:51 raft.go:328: id: 0 term: 1 start requestvote
-2022/06/03 21:44:51 raft.go:328: id: 1 term: 1 start requestvote
-==================
-WARNING: DATA RACE
-Read at 0x00c0001c62c0 by goroutine 97:
-  6.824/raft.(*Raft).RequestVote()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:176 +0xc4
-  runtime.call32()
-      /usr/lib/go/src/runtime/asm_amd64.s:702 +0x48
-  reflect.Value.Call()
-      /usr/lib/go/src/reflect/value.go:339 +0xd7
-  6.824/labrpc.(*Service).dispatch()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:496 +0x47b
-  6.824/labrpc.(*Server).dispatch()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:420 +0x265
-  6.824/labrpc.(*Network).processReq.func1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:240 +0x9c
-
-Previous write at 0x00c0001c62c0 by goroutine 73:
-  6.824/raft.(*Raft).ticker()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:320 +0x296
-  6.824/raft.Make.func1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x39
-
-Goroutine 97 (running) created at:
-  6.824/labrpc.(*Network).processReq()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:239 +0x291
-  6.824/labrpc.MakeNetwork.func1.1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:157 +0x9c
-
-Goroutine 73 (running) created at:
-  6.824/raft.Make()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x264
-  6.824/raft.(*config).start1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:322 +0xa4f
-  6.824/raft.make_config()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:97 +0x990
-  6.824/raft.TestManyElections2A()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/test_test.go:95 +0x50
-  testing.tRunner()
-      /usr/lib/go/src/testing/testing.go:1439 +0x213
-  testing.(*T).Run.func1()
-      /usr/lib/go/src/testing/testing.go:1486 +0x47
-==================
-==================
-WARNING: DATA RACE
-Read at 0x00c00019c2d0 by goroutine 97:
-  runtime.mapaccess1_fast64()
-      /usr/lib/go/src/runtime/map_fast64.go:13 +0x0
-  6.824/raft.(*Raft).RequestVote()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:178 +0x18f
-  runtime.call32()
-      /usr/lib/go/src/runtime/asm_amd64.s:702 +0x48
-  reflect.Value.Call()
-      /usr/lib/go/src/reflect/value.go:339 +0xd7
-  6.824/labrpc.(*Service).dispatch()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:496 +0x47b
-  6.824/labrpc.(*Server).dispatch()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:420 +0x265
-  6.824/labrpc.(*Network).processReq.func1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:240 +0x9c
-
-Previous write at 0x00c00019c2d0 by goroutine 73:
-  runtime.mapassign_fast64()
-      /usr/lib/go/src/runtime/map_fast64.go:93 +0x0
-  6.824/raft.(*Raft).ticker()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:324 +0x348
-  6.824/raft.Make.func1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x39
-
-Goroutine 97 (running) created at:
-  6.824/labrpc.(*Network).processReq()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:239 +0x291
-  6.824/labrpc.MakeNetwork.func1.1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:157 +0x9c
-
-Goroutine 73 (running) created at:
-  6.824/raft.Make()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x264
-  6.824/raft.(*config).start1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:322 +0xa4f
-  6.824/raft.make_config()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:97 +0x990
-  6.824/raft.TestManyElections2A()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/test_test.go:95 +0x50
-  testing.tRunner()
-      /usr/lib/go/src/testing/testing.go:1439 +0x213
-  testing.(*T).Run.func1()
-      /usr/lib/go/src/testing/testing.go:1486 +0x47
-==================
-==================
-WARNING: DATA RACE
-Read at 0x00c00020a4c8 by goroutine 97:
-  6.824/raft.(*Raft).RequestVote()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:178 +0x19c
-  runtime.call32()
-      /usr/lib/go/src/runtime/asm_amd64.s:702 +0x48
-  reflect.Value.Call()
-      /usr/lib/go/src/reflect/value.go:339 +0xd7
-  6.824/labrpc.(*Service).dispatch()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:496 +0x47b
-  6.824/labrpc.(*Server).dispatch()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:420 +0x265
-  6.824/labrpc.(*Network).processReq.func1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:240 +0x9c
-
-Previous write at 0x00c00020a4c8 by goroutine 73:
-  6.824/raft.(*Raft).ticker()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:324 +0x357
-  6.824/raft.Make.func1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x39
-
-Goroutine 97 (running) created at:
-  6.824/labrpc.(*Network).processReq()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:239 +0x291
-  6.824/labrpc.MakeNetwork.func1.1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:157 +0x9c
-
-Goroutine 73 (running) created at:
-  6.824/raft.Make()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x264
-  6.824/raft.(*config).start1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:322 +0xa4f
-  6.824/raft.make_config()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:97 +0x990
-  6.824/raft.TestManyElections2A()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/test_test.go:95 +0x50
-  testing.tRunner()
-      /usr/lib/go/src/testing/testing.go:1439 +0x213
-  testing.(*T).Run.func1()
-      /usr/lib/go/src/testing/testing.go:1486 +0x47
-==================
-2022/06/03 21:44:51 raft.go:185: id: 1 term: 1 no vote 0 1
-2022/06/03 21:44:51 raft.go:180: id: 4 term: 0 vote 1 1
-2022/06/03 21:44:51 raft.go:180: id: 2 term: 0 vote 0 1
-2022/06/03 21:44:51 raft.go:180: id: 6 term: 0 vote 0 1
-2022/06/03 21:44:51 raft.go:180: id: 3 term: 0 vote 0 1
-==================
-WARNING: DATA RACE
-Write at 0x00c00018e13c by goroutine 99:
-  sync/atomic.AddInt32()
-      /usr/lib/go/src/runtime/race_amd64.s:279 +0xb
-  sync/atomic.AddInt32()
-      <autogenerated>:1 +0x1a
-  6.824/raft.(*Raft).ticker.func5()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:384 +0x47
-
-Previous read at 0x00c00018e13c by goroutine 86:
-  6.824/raft.(*Raft).ticker.func2()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:376 +0x2f6
-  6.824/raft.(*Raft).ticker.func5()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:384 +0x47
-
-Goroutine 99 (running) created at:
-  6.824/raft.(*Raft).ticker()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:353 +0x96f
-  6.824/raft.Make.func1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x39
-
-Goroutine 86 (finished) created at:
-  6.824/raft.(*Raft).ticker()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:353 +0x96f
-  6.824/raft.Make.func1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x39
-==================
-2022/06/03 21:44:51 raft.go:180: id: 5 term: 0 vote 1 1
-2022/06/03 21:44:51 raft.go:185: id: 6 term: 0 no vote 1 1
-2022/06/03 21:44:51 raft.go:185: id: 3 term: 0 no vote 1 1
-2022/06/03 21:44:51 raft.go:185: id: 2 term: 0 no vote 1 1
-2022/06/03 21:44:51 raft.go:185: id: 4 term: 0 no vote 0 1
-2022/06/03 21:44:51 raft.go:185: id: 5 term: 0 no vote 0 1
-2022/06/03 21:44:51 raft.go:185: id: 0 term: 1 no vote 1 1
-2022/06/03 21:44:51 raft.go:377: id: 0 term 1 be Leader
-==================
-WARNING: DATA RACE
-Write at 0x00c0001c6038 by goroutine 90:
-  6.824/raft.(*Raft).ticker.func2()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:378 +0x3f1
-  6.824/raft.(*Raft).ticker.func5()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:384 +0x47
-
-Previous read at 0x00c0001c6038 by goroutine 71:
-  6.824/raft.(*Raft).ticker()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:387 +0x97c
-  6.824/raft.Make.func1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x39
-
-Goroutine 90 (running) created at:
-  6.824/raft.(*Raft).ticker()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:353 +0x96f
-  6.824/raft.Make.func1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x39
-
-Goroutine 71 (running) created at:
-  6.824/raft.Make()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x264
-  6.824/raft.(*config).start1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:322 +0xa4f
-  6.824/raft.make_config()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:97 +0x990
-  6.824/raft.TestManyElections2A()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/test_test.go:95 +0x50
-  testing.tRunner()
-      /usr/lib/go/src/testing/testing.go:1439 +0x213
-  testing.(*T).Run.func1()
-      /usr/lib/go/src/testing/testing.go:1486 +0x47
-==================
-==================
-WARNING: DATA RACE
-Write at 0x00c00019ca50 by goroutine 83:
-  runtime.mapassign_fast64()
-      /usr/lib/go/src/runtime/map_fast64.go:93 +0x0
-  6.824/raft.(*Raft).ticker()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:324 +0x348
-  6.824/raft.Make.func1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x39
-
-Previous write at 0x00c00019ca50 by goroutine 116:
-  runtime.mapassign_fast64()
-      /usr/lib/go/src/runtime/map_fast64.go:93 +0x0
-  6.824/raft.(*Raft).RequestVote()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:181 +0x499
-  runtime.call32()
-      /usr/lib/go/src/runtime/asm_amd64.s:702 +0x48
-  reflect.Value.Call()
-      /usr/lib/go/src/reflect/value.go:339 +0xd7
-  6.824/labrpc.(*Service).dispatch()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:496 +0x47b
-  6.824/labrpc.(*Server).dispatch()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:420 +0x265
-  6.824/labrpc.(*Network).processReq.func1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:240 +0x9c
-
-Goroutine 83 (running) created at:
-  6.824/raft.Make()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x264
-  6.824/raft.(*config).start1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:322 +0xa4f
-  6.824/raft.make_config()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:97 +0x990
-  6.824/raft.TestManyElections2A()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/test_test.go:95 +0x50
-  testing.tRunner()
-      /usr/lib/go/src/testing/testing.go:1439 +0x213
-  testing.(*T).Run.func1()
-      /usr/lib/go/src/testing/testing.go:1486 +0x47
-
-Goroutine 116 (finished) created at:
-  6.824/labrpc.(*Network).processReq()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:239 +0x291
-  6.824/labrpc.MakeNetwork.func1.1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:157 +0x9c
-==================
-==================
-WARNING: DATA RACE
-2022/06/03 21:44:51 raft.go:328: id: 2 term: 1 start requestvote
-Write at 0x00c000190b28 by goroutine 77:
-  6.824/raft.(*Raft).ticker()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:324 +0x357
-  6.824/raft.Make.func1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x39
-
-Previous write at 0x00c000190b28 by goroutine 120:
-  6.824/raft.(*Raft).RequestVote()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:181 +0x4a5
-  runtime.call32()
-      /usr/lib/go/src/runtime/asm_amd64.s:702 +0x48
-  reflect.Value.Call()
-      /usr/lib/go/src/reflect/value.go:339 +0xd7
-  6.824/labrpc.(*Service).dispatch()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:496 +0x47b
-  6.824/labrpc.(*Server).dispatch()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:420 +0x265
-  6.824/labrpc.(*Network).processReq.func1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:240 +0x9c
-
-Goroutine 77 (running) created at:
-  6.824/raft.Make()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x264
-  6.824/raft.(*config).start1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:322 +0xa4f
-  6.824/raft.make_config()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:97 +0x990
-  6.824/raft.TestManyElections2A()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/test_test.go:95 +0x50
-  testing.tRunner()
-      /usr/lib/go/src/testing/testing.go:1439 +0x213
-  testing.(*T).Run.func1()
-      /usr/lib/go/src/testing/testing.go:1486 +0x47
-
-Goroutine 120 (finished) created at:
-  6.824/labrpc.(*Network).processReq()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:239 +0x291
-  6.824/labrpc.MakeNetwork.func1.1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:157 +0x9c
-==================
-2022/06/03 21:44:51 raft.go:328: id: 6 term: 1 start requestvote
-2022/06/03 21:44:51 raft.go:328: id: 5 term: 1 start requestvote
-2022/06/03 21:44:51 raft.go:328: id: 4 term: 1 start requestvote
-2022/06/03 21:44:51 raft.go:328: id: 3 term: 1 start requestvote
-2022/06/03 21:44:51 raft.go:185: id: 4 term: 1 no vote 3 1
-2022/06/03 21:44:51 raft.go:185: id: 3 term: 1 no vote 5 1
-2022/06/03 21:44:51 raft.go:185: id: 5 term: 1 no vote 4 1
-2022/06/03 21:44:51 raft.go:185: id: 3 term: 1 no vote 2 1
-2022/06/03 21:44:51 raft.go:185: id: 4 term: 1 no vote 2 1
-2022/06/03 21:44:51 raft.go:185: id: 0 term: 1 no vote 5 1
-2022/06/03 21:44:51 raft.go:185: id: 1 term: 1 no vote 6 1
-2022/06/03 21:44:51 raft.go:185: id: 2 term: 1 no vote 6 1
-2022/06/03 21:44:51 raft.go:185: id: 4 term: 1 no vote 5 1
-2022/06/03 21:44:51 raft.go:185: id: 5 term: 1 no vote 6 1
-2022/06/03 21:44:51 raft.go:185: id: 4 term: 1 no vote 6 1
-2022/06/03 21:44:51 raft.go:185: id: 0 term: 1 no vote 2 1
-2022/06/03 21:44:51 raft.go:185: id: 1 term: 1 no vote 2 1
-2022/06/03 21:44:51 raft.go:185: id: 5 term: 1 no vote 2 1
-2022/06/03 21:44:51 raft.go:185: id: 6 term: 1 no vote 2 1
-2022/06/03 21:44:51 raft.go:185: id: 0 term: 1 no vote 6 1
-2022/06/03 21:44:51 raft.go:185: id: 1 term: 1 no vote 5 1
-2022/06/03 21:44:51 raft.go:185: id: 2 term: 1 no vote 5 1
-2022/06/03 21:44:51 raft.go:185: id: 6 term: 1 no vote 5 1
-2022/06/03 21:44:51 raft.go:185: id: 3 term: 1 no vote 6 1
-==================
-WARNING: DATA RACE
-Write at 0x00c0001c6538 by goroutine 115:
-  6.824/raft.(*Raft).AppendEntries()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:224 +0x15a
-  runtime.call32()
-      /usr/lib/go/src/runtime/asm_amd64.s:702 +0x48
-  reflect.Value.Call()
-      /usr/lib/go/src/reflect/value.go:339 +0xd7
-  6.824/labrpc.(*Service).dispatch()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:496 +0x47b
-  6.824/labrpc.(*Server).dispatch()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:420 +0x265
-  6.824/labrpc.(*Network).processReq.func1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:240 +0x9c
-
-Previous read at 0x00c0001c6538 by goroutine 75:
-  6.824/raft.(*Raft).ticker()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:387 +0x97c
-  6.824/raft.Make.func1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x39
-
-Goroutine 115 (running) created at:
-  6.824/labrpc.(*Network).processReq()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:239 +0x291
-  6.824/labrpc.MakeNetwork.func1.1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:157 +0x9c
-
-Goroutine 75 (running) created at:
-  6.824/raft.Make()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x264
-  6.824/raft.(*config).start1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:322 +0xa4f
-  6.824/raft.make_config()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:97 +0x990
-  6.824/raft.TestManyElections2A()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/test_test.go:95 +0x50
-  testing.tRunner()
-      /usr/lib/go/src/testing/testing.go:1439 +0x213
-  testing.(*T).Run.func1()
-      /usr/lib/go/src/testing/testing.go:1486 +0x47
-==================
-2022/06/03 21:44:51 raft.go:228: 0 1 to 2 1 append sussess
-2022/06/03 21:44:51 raft.go:228: 0 1 to 3 1 append sussess
-2022/06/03 21:44:51 raft.go:185: id: 3 term: 1 no vote 4 1
-2022/06/03 21:44:51 raft.go:228: 0 1 to 5 1 append sussess
-2022/06/03 21:44:51 raft.go:185: id: 2 term: 1 no vote 3 1
-==================
-WARNING: DATA RACE
-Write at 0x00c0001c62b8 by goroutine 105:
-  6.824/raft.(*Raft).AppendEntries()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:224 +0x15a
-  runtime.call32()
-      /usr/lib/go/src/runtime/asm_amd64.s:702 +0x48
-  reflect.Value.Call()
-      /usr/lib/go/src/reflect/value.go:339 +0xd7
-  6.824/labrpc.(*Service).dispatch()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:496 +0x47b
-  6.824/labrpc.(*Server).dispatch()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:420 +0x265
-  6.824/labrpc.(*Network).processReq.func1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:240 +0x9c
-
-Previous read at 0x00c0001c62b8 by goroutine 73:
-  6.824/raft.(*Raft).ticker()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:316 +0xfb
-  6.824/raft.Make.func1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x39
-
-Goroutine 105 (running) created at:
-  6.824/labrpc.(*Network).processReq()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:239 +0x291
-  6.824/labrpc.MakeNetwork.func1.1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:157 +0x9c
-
-Goroutine 73 (running) created at:
-  6.824/raft.Make()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x264
-  6.824/raft.(*config).start1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:322 +0xa4f
-  6.824/raft.make_config()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:97 +0x990
-  6.824/raft.TestManyElections2A()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/test_test.go:95 +0x50
-  testing.tRunner()
-      /usr/lib/go/src/testing/testing.go:1439 +0x213
-  testing.(*T).Run.func1()
-      /usr/lib/go/src/testing/testing.go:1486 +0x47
-==================
-2022/06/03 21:44:51 raft.go:228: 0 1 to 1 1 append sussess
-2022/06/03 21:44:51 raft.go:185: id: 5 term: 1 no vote 3 1
-2022/06/03 21:44:51 raft.go:185: id: 0 term: 1 no vote 3 1
-2022/06/03 21:44:51 raft.go:228: 0 1 to 4 1 append sussess
-2022/06/03 21:44:51 raft.go:185: id: 6 term: 1 no vote 4 1
-2022/06/03 21:44:51 raft.go:228: 0 1 to 6 1 append sussess
-2022/06/03 21:44:51 raft.go:185: id: 6 term: 1 no vote 3 1
-==================
-WARNING: DATA RACE
-Read at 0x00c0001c6548 by goroutine 75:
-  6.824/raft.(*Raft).ticker()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:317 +0x1da
-  6.824/raft.Make.func1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x39
-
-Previous write at 0x00c0001c6548 by goroutine 115:
-  6.824/raft.(*Raft).AppendEntries()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:225 +0x19d
-  runtime.call32()
-      /usr/lib/go/src/runtime/asm_amd64.s:702 +0x48
-  reflect.Value.Call()
-      /usr/lib/go/src/reflect/value.go:339 +0xd7
-  6.824/labrpc.(*Service).dispatch()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:496 +0x47b
-  6.824/labrpc.(*Server).dispatch()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:420 +0x265
-  6.824/labrpc.(*Network).processReq.func1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:240 +0x9c
-
-Goroutine 75 (running) created at:
-  6.824/raft.Make()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/raft.go:453 +0x264
-  6.824/raft.(*config).start1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:322 +0xa4f
-  6.824/raft.make_config()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/config.go:97 +0x990
-  6.824/raft.TestManyElections2A()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/raft/test_test.go:95 +0x50
-  testing.tRunner()
-      /usr/lib/go/src/testing/testing.go:1439 +0x213
-  testing.(*T).Run.func1()
-      /usr/lib/go/src/testing/testing.go:1486 +0x47
-
-Goroutine 115 (finished) created at:
-  6.824/labrpc.(*Network).processReq()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:239 +0x291
-  6.824/labrpc.MakeNetwork.func1.1()
-      /home/fan/GitHub/Raft_Key-Value/RAFT_6_824/src/labrpc/labrpc.go:157 +0x9c
-==================
-2022/06/03 21:44:51 raft.go:185: id: 2 term: 1 no vote 4 1
-2022/06/03 21:44:51 raft.go:185: id: 1 term: 1 no vote 3 1
-2022/06/03 21:44:51 raft.go:185: id: 1 term: 1 no vote 4 1
-2022/06/03 21:44:51 raft.go:185: id: 0 term: 1 no vote 4 1
-2022/06/03 21:44:51 raft.go:228: 0 1 to 1 1 append sussess
-2022/06/03 21:44:51 raft.go:228: 0 1 to 5 1 append sussess
-2022/06/03 21:44:51 raft.go:228: 0 1 to 4 1 append sussess
-2022/06/03 21:44:51 raft.go:228: 0 1 to 6 1 append sussess
-2022/06/03 21:44:51 raft.go:228: 0 1 to 2 1 append sussess
-2022/06/03 21:44:51 raft.go:228: 0 1 to 3 1 append sussess
-2022/06/03 21:44:51 raft.go:228: 0 1 to 2 1 append sussess
-2022/06/03 21:44:51 raft.go:228: 0 1 to 3 1 append sussess
-2022/06/03 21:44:51 raft.go:228: 0 1 to 5 1 append sussess
-2022/06/03 21:44:51 raft.go:228: 0 1 to 1 1 append sussess
-2022/06/03 21:44:51 raft.go:228: 0 1 to 6 1 append sussess
-2022/06/03 21:44:51 raft.go:228: 0 1 to 4 1 append sussess
-2022/06/03 21:44:51 raft.go:328: id: 1 term: 2 start requestvote
-2022/06/03 21:44:51 raft.go:328: id: 5 term: 2 start requestvote
-2022/06/03 21:44:51 raft.go:180: id: 4 term: 1 vote 1 2
-2022/06/03 21:44:51 raft.go:185: id: 5 term: 2 no vote 1 2
-2022/06/03 21:44:51 raft.go:185: id: 1 term: 2 no vote 5 2
-2022/06/03 21:44:51 raft.go:180: id: 6 term: 1 vote 1 2
-2022/06/03 21:44:51 raft.go:185: id: 4 term: 1 no vote 5 2
-2022/06/03 21:44:51 raft.go:185: id: 6 term: 1 no vote 5 2
-2022/06/03 21:44:51 raft.go:328: id: 2 term: 2 start requestvote
-2022/06/03 21:44:51 raft.go:328: id: 6 term: 2 start requestvote
-2022/06/03 21:44:51 raft.go:328: id: 4 term: 2 start requestvote
-2022/06/03 21:44:51 raft.go:185: id: 5 term: 2 no vote 6 2
-2022/06/03 21:44:51 raft.go:328: id: 3 term: 2 start requestvote
-2022/06/03 21:44:51 raft.go:185: id: 1 term: 2 no vote 4 2
-2022/06/03 21:44:51 raft.go:185: id: 1 term: 2 no vote 6 2
-2022/06/03 21:44:51 raft.go:185: id: 4 term: 2 no vote 6 2
-2022/06/03 21:44:51 raft.go:185: id: 5 term: 2 no vote 4 2
-2022/06/03 21:44:51 raft.go:185: id: 6 term: 2 no vote 4 2
---- FAIL: TestManyElections2A (5.66s)
-    config.go:460: expected one leader, got none
-    testing.go:1312: race detected during execution of test
-FAIL
-exit status 1
-FAIL	6.824/raft	15.838s
+2022/06/04 23:08:59 raft.go:331: id: 4 term: 1 start requestvote
+2022/06/04 23:08:59 raft.go:331: id: 5 term: 1 start requestvote
+2022/06/04 23:08:59 raft.go:331: id: 0 term: 1 start requestvote
+2022/06/04 23:08:59 raft.go:331: id: 1 term: 1 start requestvote
+2022/06/04 23:08:59 raft.go:331: id: 6 term: 1 start requestvote
+2022/06/04 23:08:59 raft.go:331: id: 3 term: 1 start requestvote
+2022/06/04 23:08:59 raft.go:331: id: 2 term: 1 start requestvote
+2022/06/04 23:08:59 raft.go:182: id: 3 term: 1 no vote 4 1
+2022/06/04 23:08:59 raft.go:182: id: 1 term: 1 no vote 4 1
+2022/06/04 23:08:59 raft.go:182: id: 1 term: 1 no vote 3 1
+2022/06/04 23:08:59 raft.go:182: id: 0 term: 1 no vote 4 1
+2022/06/04 23:08:59 raft.go:182: id: 3 term: 1 no vote 0 1
+2022/06/04 23:08:59 raft.go:182: id: 2 term: 1 no vote 4 1
+2022/06/04 23:08:59 raft.go:182: id: 0 term: 1 no vote 1 1
+2022/06/04 23:08:59 raft.go:182: id: 5 term: 1 no vote 4 1
+2022/06/04 23:08:59 raft.go:182: id: 2 term: 1 no vote 1 1
+2022/06/04 23:08:59 raft.go:182: id: 1 term: 1 no vote 6 1
+2022/06/04 23:08:59 raft.go:182: id: 1 term: 1 no vote 5 1
+2022/06/04 23:08:59 raft.go:182: id: 3 term: 1 no vote 2 1
+2022/06/04 23:08:59 raft.go:182: id: 0 term: 1 no vote 3 1
+2022/06/04 23:08:59 raft.go:182: id: 6 term: 1 no vote 5 1
+2022/06/04 23:08:59 raft.go:182: id: 4 term: 1 no vote 3 1
+2022/06/04 23:08:59 raft.go:182: id: 4 term: 1 no vote 2 1
+2022/06/04 23:08:59 raft.go:182: id: 6 term: 1 no vote 0 1
+2022/06/04 23:08:59 raft.go:182: id: 6 term: 1 no vote 3 1
+2022/06/04 23:08:59 raft.go:182: id: 2 term: 1 no vote 6 1
+2022/06/04 23:08:59 raft.go:182: id: 4 term: 1 no vote 6 1
+2022/06/04 23:08:59 raft.go:182: id: 6 term: 1 no vote 4 1
+2022/06/04 23:08:59 raft.go:182: id: 1 term: 1 no vote 0 1
+2022/06/04 23:08:59 raft.go:182: id: 1 term: 1 no vote 2 1
+2022/06/04 23:08:59 raft.go:182: id: 4 term: 1 no vote 1 1
+2022/06/04 23:08:59 raft.go:182: id: 2 term: 1 no vote 0 1
+2022/06/04 23:08:59 raft.go:182: id: 0 term: 1 no vote 2 1
+2022/06/04 23:08:59 raft.go:182: id: 3 term: 1 no vote 6 1
+2022/06/04 23:08:59 raft.go:182: id: 0 term: 1 no vote 5 1
+2022/06/04 23:08:59 raft.go:182: id: 6 term: 1 no vote 2 1
+2022/06/04 23:08:59 raft.go:182: id: 4 term: 1 no vote 5 1
+2022/06/04 23:08:59 raft.go:182: id: 3 term: 1 no vote 5 1
+2022/06/04 23:08:59 raft.go:182: id: 5 term: 1 no vote 3 1
+2022/06/04 23:08:59 raft.go:182: id: 5 term: 1 no vote 0 1
+2022/06/04 23:08:59 raft.go:182: id: 2 term: 1 no vote 5 1
+2022/06/04 23:08:59 raft.go:182: id: 4 term: 1 no vote 0 1
+2022/06/04 23:08:59 raft.go:182: id: 0 term: 1 no vote 6 1
+2022/06/04 23:08:59 raft.go:182: id: 6 term: 1 no vote 1 1
+2022/06/04 23:08:59 raft.go:182: id: 5 term: 1 no vote 1 1
+2022/06/04 23:08:59 raft.go:182: id: 3 term: 1 no vote 1 1
+2022/06/04 23:08:59 raft.go:182: id: 2 term: 1 no vote 3 1
+2022/06/04 23:08:59 raft.go:182: id: 5 term: 1 no vote 6 1
+2022/06/04 23:08:59 raft.go:182: id: 5 term: 1 no vote 2 1
+2022/06/04 23:08:59 raft.go:331: id: 4 term: 2 start requestvote
+2022/06/04 23:08:59 raft.go:176: id: 2 term: 1 vote 4 2
+2022/06/04 23:08:59 raft.go:176: id: 0 term: 1 vote 4 2
+2022/06/04 23:08:59 raft.go:331: id: 0 term: 2 start requestvote
+2022/06/04 23:08:59 raft.go:176: id: 3 term: 1 vote 4 2
+2022/06/04 23:08:59 raft.go:176: id: 5 term: 1 vote 4 2
+2022/06/04 23:08:59 raft.go:331: id: 1 term: 2 start requestvote
+2022/06/04 23:08:59 raft.go:176: id: 6 term: 1 vote 4 2
+2022/06/04 23:08:59 raft.go:182: id: 5 term: 1 no vote 0 2
+2022/06/04 23:08:59 raft.go:371: id: 4 term 2 be Leader
+2022/06/04 23:08:59 raft.go:182: id: 4 term: 2 no vote 1 2
+2022/06/04 23:08:59 raft.go:182: id: 2 term: 1 no vote 0 2
+2022/06/04 23:08:59 raft.go:182: id: 6 term: 1 no vote 0 2
+2022/06/04 23:08:59 raft.go:182: id: 1 term: 2 no vote 4 2
+2022/06/04 23:08:59 raft.go:182: id: 1 term: 2 no vote 0 2
+2022/06/04 23:08:59 raft.go:182: id: 5 term: 1 no vote 1 2
+2022/06/04 23:08:59 raft.go:182: id: 3 term: 1 no vote 1 2
+2022/06/04 23:08:59 raft.go:182: id: 3 term: 1 no vote 0 2
+2022/06/04 23:08:59 raft.go:331: id: 6 term: 2 start requestvote
+2022/06/04 23:08:59 raft.go:182: id: 2 term: 1 no vote 1 2
+2022/06/04 23:08:59 raft.go:182: id: 6 term: 2 no vote 1 2
+2022/06/04 23:08:59 raft.go:182: id: 4 term: 2 no vote 0 2
+2022/06/04 23:08:59 raft.go:182: id: 4 term: 2 no vote 6 2
+2022/06/04 23:08:59 raft.go:182: id: 5 term: 1 no vote 6 2
+2022/06/04 23:08:59 raft.go:182: id: 1 term: 2 no vote 6 2
+2022/06/04 23:08:59 raft.go:182: id: 2 term: 1 no vote 6 2
+2022/06/04 23:08:59 raft.go:182: id: 0 term: 2 no vote 6 2
+2022/06/04 23:08:59 raft.go:182: id: 3 term: 1 no vote 6 2
+2022/06/04 23:08:59 raft.go:182: id: 0 term: 2 no vote 1 2
+2022/06/04 23:08:59 raft.go:331: id: 5 term: 2 start requestvote
+2022/06/04 23:08:59 raft.go:228: 4 2 to 5 2 append sussess
+2022/06/04 23:08:59 raft.go:228: 4 2 to 0 2 append sussess
+2022/06/04 23:08:59 raft.go:228: 4 2 to 6 2 append sussess
+2022/06/04 23:08:59 raft.go:228: 4 2 to 2 2 append sussess
+2022/06/04 23:08:59 raft.go:228: 4 2 to 1 2 append sussess
+2022/06/04 23:08:59 raft.go:228: 4 2 to 3 2 append sussess
+2022/06/04 23:09:00 raft.go:331: id: 5 term: 3 start requestvote
+2022/06/04 23:09:00 raft.go:331: id: 0 term: 3 start requestvote
+2022/06/04 23:09:00 raft.go:331: id: 1 term: 3 start requestvote
+2022/06/04 23:09:00 raft.go:176: id: 6 term: 2 vote 5 3
+2022/06/04 23:09:00 raft.go:182: id: 1 term: 3 no vote 5 3
+2022/06/04 23:09:00 raft.go:182: id: 1 term: 3 no vote 0 3
+2022/06/04 23:09:00 raft.go:182: id: 5 term: 3 no vote 0 3
+2022/06/04 23:09:00 raft.go:182: id: 0 term: 3 no vote 5 3
+2022/06/04 23:09:00 raft.go:182: id: 6 term: 2 no vote 0 3
+2022/06/04 23:09:00 raft.go:182: id: 0 term: 3 no vote 1 3
+2022/06/04 23:09:00 raft.go:331: id: 2 term: 3 start requestvote
+2022/06/04 23:09:00 raft.go:331: id: 3 term: 3 start requestvote
+2022/06/04 23:09:00 raft.go:182: id: 5 term: 3 no vote 1 3
+2022/06/04 23:09:00 raft.go:182: id: 6 term: 2 no vote 1 3
+2022/06/04 23:09:00 raft.go:331: id: 6 term: 3 start requestvote
+2022/06/04 23:09:00 raft.go:182: id: 0 term: 3 no vote 6 3
+2022/06/04 23:09:00 raft.go:182: id: 1 term: 3 no vote 6 3
+2022/06/04 23:09:00 raft.go:182: id: 5 term: 3 no vote 6 3
+2022/06/04 23:09:00 raft.go:331: id: 5 term: 4 start requestvote
+2022/06/04 23:09:00 raft.go:176: id: 0 term: 3 vote 5 4
+2022/06/04 23:09:00 raft.go:176: id: 6 term: 3 vote 5 4
+2022/06/04 23:09:00 raft.go:176: id: 1 term: 3 vote 5 4
+2022/06/04 23:09:00 raft.go:371: id: 5 term 4 be Leader
+2022/06/04 23:09:00 raft.go:228: 5 4 to 6 4 append sussess
+2022/06/04 23:09:00 raft.go:228: 5 4 to 1 4 append sussess
+2022/06/04 23:09:00 raft.go:228: 5 4 to 0 4 append sussess
+2022/06/04 23:09:00 raft.go:331: id: 2 term: 4 start requestvote
+2022/06/04 23:09:00 raft.go:228: 5 4 to 0 4 append sussess
+2022/06/04 23:09:00 raft.go:228: 5 4 to 6 4 append sussess
+2022/06/04 23:09:00 raft.go:228: 5 4 to 1 4 append sussess
+2022/06/04 23:09:00 raft.go:331: id: 3 term: 4 start requestvote
+2022/06/04 23:09:00 raft.go:228: 5 4 to 2 4 append sussess
+2022/06/04 23:09:00 raft.go:228: 5 4 to 4 4 append sussess
+2022/06/04 23:09:00 raft.go:228: 5 4 to 3 4 append sussess
+2022/06/04 23:09:00 raft.go:331: id: 0 term: 5 start requestvote
+2022/06/04 23:09:00 raft.go:228: 5 4 to 2 4 append sussess
+2022/06/04 23:09:00 raft.go:331: id: 1 term: 5 start requestvote
+2022/06/04 23:09:00 raft.go:228: 5 4 to 3 4 append sussess
+2022/06/04 23:09:00 raft.go:228: 5 4 to 4 4 append sussess
+2022/06/04 23:09:00 raft.go:331: id: 6 term: 5 start requestvote
+2022/06/04 23:09:00 raft.go:228: 5 4 to 4 4 append sussess
+2022/06/04 23:09:00 raft.go:228: 5 4 to 2 4 append sussess
+2022/06/04 23:09:00 raft.go:228: 5 4 to 3 4 append sussess
+2022/06/04 23:09:00 raft.go:331: id: 0 term: 6 start requestvote
+2022/06/04 23:09:00 raft.go:228: 5 4 to 4 4 append sussess
+2022/06/04 23:09:00 raft.go:228: 5 4 to 3 4 append sussess
+2022/06/04 23:09:00 raft.go:228: 5 4 to 2 4 append sussess
+2022/06/04 23:09:00 raft.go:228: 5 4 to 2 4 append sussess
+2022/06/04 23:09:00 raft.go:228: 5 4 to 3 4 append sussess
+2022/06/04 23:09:00 raft.go:228: 5 4 to 4 4 append sussess
+2022/06/04 23:09:00 raft.go:331: id: 1 term: 6 start requestvote
+2022/06/04 23:09:00 raft.go:331: id: 6 term: 6 start requestvote
+2022/06/04 23:09:00 raft.go:228: 5 4 to 3 4 append sussess
+2022/06/04 23:09:01 raft.go:331: id: 0 term: 7 start requestvote
+2022/06/04 23:09:01 raft.go:176: id: 6 term: 6 vote 0 7
+2022/06/04 23:09:01 raft.go:176: id: 2 term: 4 vote 0 7
+2022/06/04 23:09:01 raft.go:176: id: 4 term: 4 vote 0 7
+2022/06/04 23:09:01 raft.go:176: id: 3 term: 4 vote 0 7
+2022/06/04 23:09:01 raft.go:371: id: 0 term 7 be Leader
+2022/06/04 23:09:01 raft.go:331: id: 4 term: 5 start requestvote
+2022/06/04 23:09:01 raft.go:176: id: 3 term: 4 vote 4 5
+2022/06/04 23:09:01 raft.go:188: id: 6 term: 6 no vote 4 5
+2022/06/04 23:09:01 raft.go:188: id: 0 term: 7 no vote 4 5
+2022/06/04 23:09:01 raft.go:176: id: 2 term: 4 vote 4 5
+2022/06/04 23:09:01 raft.go:331: id: 1 term: 7 start requestvote
+2022/06/04 23:09:01 raft.go:228: 0 7 to 4 7 append sussess
+2022/06/04 23:09:01 raft.go:228: 0 7 to 2 7 append sussess
+2022/06/04 23:09:01 raft.go:331: id: 3 term: 5 start requestvote
+2022/06/04 23:09:01 raft.go:228: 0 7 to 6 7 append sussess
+2022/06/04 23:09:01 raft.go:228: 0 7 to 3 7 append sussess
+2022/06/04 23:09:01 raft.go:188: id: 0 term: 7 no vote 3 5
+2022/06/04 23:09:01 raft.go:228: 0 7 to 6 7 append sussess
+2022/06/04 23:09:01 raft.go:228: 0 7 to 3 7 append sussess
+2022/06/04 23:09:01 raft.go:228: 0 7 to 2 7 append sussess
+2022/06/04 23:09:01 raft.go:228: 0 7 to 4 7 append sussess
+2022/06/04 23:09:01 raft.go:331: id: 1 term: 8 start requestvote
+2022/06/04 23:09:01 raft.go:228: 0 7 to 2 7 append sussess
+2022/06/04 23:09:01 raft.go:228: 0 7 to 3 7 append sussess
+2022/06/04 23:09:01 raft.go:228: 0 7 to 4 7 append sussess
+2022/06/04 23:09:01 raft.go:228: 0 7 to 6 7 append sussess
+2022/06/04 23:09:01 raft.go:228: 0 7 to 5 7 append sussess
+2022/06/04 23:09:01 raft.go:228: 0 7 to 6 7 append sussess
+2022/06/04 23:09:01 raft.go:228: 0 7 to 3 7 append sussess
+2022/06/04 23:09:01 raft.go:331: id: 4 term: 8 start requestvote
+2022/06/04 23:09:01 raft.go:331: id: 2 term: 8 start requestvote
+2022/06/04 23:09:01 raft.go:228: 0 7 to 3 7 append sussess
+2022/06/04 23:09:01 raft.go:228: 0 7 to 5 7 append sussess
+2022/06/04 23:09:01 raft.go:331: id: 1 term: 9 start requestvote
+2022/06/04 23:09:01 raft.go:228: 0 7 to 6 7 append sussess
+2022/06/04 23:09:01 raft.go:228: 0 7 to 5 7 append sussess
+2022/06/04 23:09:01 raft.go:228: 0 7 to 6 7 append sussess
+2022/06/04 23:09:01 raft.go:228: 0 7 to 3 7 append sussess
+2022/06/04 23:09:01 raft.go:331: id: 4 term: 9 start requestvote
+2022/06/04 23:09:01 raft.go:331: id: 2 term: 9 start requestvote
+2022/06/04 23:09:01 raft.go:228: 0 7 to 6 7 append sussess
+2022/06/04 23:09:01 raft.go:228: 0 7 to 3 7 append sussess
+2022/06/04 23:09:01 raft.go:228: 0 7 to 5 7 append sussess
+2022/06/04 23:09:01 raft.go:228: 0 7 to 5 7 append sussess
+2022/06/04 23:09:01 raft.go:228: 0 7 to 3 7 append sussess
+2022/06/04 23:09:01 raft.go:331: id: 1 term: 10 start requestvote
+2022/06/04 23:09:01 raft.go:228: 0 7 to 6 7 append sussess
+2022/06/04 23:09:01 raft.go:176: id: 5 term: 7 vote 1 10
+2022/06/04 23:09:01 raft.go:331: id: 2 term: 10 start requestvote
+2022/06/04 23:09:02 raft.go:182: id: 5 term: 7 no vote 2 10
+2022/06/04 23:09:02 raft.go:228: 0 7 to 5 7 append sussess
+2022/06/04 23:09:02 raft.go:176: id: 0 term: 7 vote 2 10
+2022/06/04 23:09:02 raft.go:176: id: 4 term: 9 vote 2 10
+2022/06/04 23:09:02 raft.go:331: id: 4 term: 10 start requestvote
+2022/06/04 23:09:02 raft.go:331: id: 3 term: 8 start requestvote
+2022/06/04 23:09:02 raft.go:182: id: 0 term: 7 no vote 4 10
+2022/06/04 23:09:02 raft.go:331: id: 6 term: 8 start requestvote
+2022/06/04 23:09:02 raft.go:182: id: 2 term: 10 no vote 4 10
+2022/06/04 23:09:02 raft.go:331: id: 1 term: 11 start requestvote
+2022/06/04 23:09:02 raft.go:182: id: 5 term: 7 no vote 4 10
+2022/06/04 23:09:02 raft.go:188: id: 0 term: 7 no vote 2 4
+2022/06/04 23:09:02 raft.go:228: 0 7 to 5 7 append sussess
+2022/06/04 23:09:02 raft.go:228: 0 7 to 5 7 append sussess
+2022/06/04 23:09:02 raft.go:331: id: 5 term: 8 start requestvote
+2022/06/04 23:09:02 raft.go:176: id: 0 term: 7 vote 5 8
+2022/06/04 23:09:02 raft.go:188: id: 2 term: 10 no vote 5 8
+2022/06/04 23:09:02 raft.go:188: id: 4 term: 10 no vote 5 8
+2022/06/04 23:09:02 raft.go:331: id: 2 term: 11 start requestvote
+2022/06/04 23:09:02 raft.go:176: id: 0 term: 7 vote 2 11
+2022/06/04 23:09:02 raft.go:331: id: 3 term: 9 start requestvote
+2022/06/04 23:09:02 raft.go:176: id: 4 term: 10 vote 2 11
+2022/06/04 23:09:02 raft.go:176: id: 5 term: 8 vote 2 11
+2022/06/04 23:09:02 raft.go:371: id: 2 term 11 be Leader
+2022/06/04 23:09:02 raft.go:331: id: 5 term: 9 start requestvote
+2022/06/04 23:09:02 raft.go:188: id: 4 term: 10 no vote 2 9
+2022/06/04 23:09:02 raft.go:176: id: 0 term: 7 vote 5 9
+2022/06/04 23:09:02 raft.go:188: id: 4 term: 10 no vote 5 9
+2022/06/04 23:09:02 raft.go:188: id: 2 term: 11 no vote 5 9
+2022/06/04 23:09:02 raft.go:331: id: 4 term: 11 start requestvote
+2022/06/04 23:09:02 raft.go:182: id: 5 term: 9 no vote 4 11
+2022/06/04 23:09:02 raft.go:182: id: 2 term: 11 no vote 4 11
+2022/06/04 23:09:02 raft.go:182: id: 0 term: 7 no vote 4 11
+2022/06/04 23:09:02 raft.go:228: 2 11 to 0 11 append sussess
+2022/06/04 23:09:02 raft.go:228: 2 11 to 4 11 append sussess
+2022/06/04 23:09:02 raft.go:228: 2 11 to 5 11 append sussess
+2022/06/04 23:09:02 raft.go:331: id: 6 term: 9 start requestvote
+2022/06/04 23:09:02 raft.go:331: id: 1 term: 12 start requestvote
+2022/06/04 23:09:02 raft.go:228: 2 11 to 6 11 append sussess
+2022/06/04 23:09:02 raft.go:228: 2 11 to 4 11 append sussess
+2022/06/04 23:09:02 raft.go:228: 2 11 to 3 11 append sussess
+2022/06/04 23:09:02 raft.go:331: id: 5 term: 12 start requestvote
+2022/06/04 23:09:02 raft.go:331: id: 0 term: 12 start requestvote
+2022/06/04 23:09:02 raft.go:228: 2 11 to 6 11 append sussess
+2022/06/04 23:09:02 raft.go:228: 2 11 to 4 11 append sussess
+2022/06/04 23:09:02 raft.go:228: 2 11 to 3 11 append sussess
+2022/06/04 23:09:02 raft.go:331: id: 5 term: 13 start requestvote
+2022/06/04 23:09:02 raft.go:228: 2 11 to 6 11 append sussess
+2022/06/04 23:09:02 raft.go:228: 2 11 to 3 11 append sussess
+2022/06/04 23:09:02 raft.go:228: 2 11 to 4 11 append sussess
+2022/06/04 23:09:02 raft.go:331: id: 5 term: 14 start requestvote
+2022/06/04 23:09:02 raft.go:331: id: 1 term: 13 start requestvote
+2022/06/04 23:09:02 raft.go:228: 2 11 to 3 11 append sussess
+2022/06/04 23:09:02 raft.go:228: 2 11 to 4 11 append sussess
+2022/06/04 23:09:02 raft.go:331: id: 0 term: 13 start requestvote
+2022/06/04 23:09:02 raft.go:228: 2 11 to 6 11 append sussess
+2022/06/04 23:09:02 raft.go:228: 2 11 to 6 11 append sussess
+2022/06/04 23:09:02 raft.go:228: 2 11 to 3 11 append sussess
+2022/06/04 23:09:02 raft.go:228: 2 11 to 4 11 append sussess
+2022/06/04 23:09:02 raft.go:331: id: 5 term: 15 start requestvote
+2022/06/04 23:09:03 raft.go:331: id: 1 term: 14 start requestvote
+2022/06/04 23:09:03 raft.go:176: id: 4 term: 11 vote 1 14
+2022/06/04 23:09:03 raft.go:176: id: 6 term: 11 vote 1 14
+2022/06/04 23:09:03 raft.go:188: id: 5 term: 15 no vote 1 14
+2022/06/04 23:09:03 raft.go:176: id: 2 term: 11 vote 1 14
+2022/06/04 23:09:03 raft.go:228: 2 11 to 6 11 append sussess
+2022/06/04 23:09:03 raft.go:228: 2 11 to 4 11 append sussess
+2022/06/04 23:09:03 raft.go:331: id: 5 term: 16 start requestvote
+2022/06/04 23:09:03 raft.go:176: id: 4 term: 11 vote 5 16
+2022/06/04 23:09:03 raft.go:176: id: 2 term: 11 vote 5 16
+2022/06/04 23:09:03 raft.go:176: id: 6 term: 11 vote 5 16
+2022/06/04 23:09:03 raft.go:176: id: 1 term: 14 vote 5 16
+2022/06/04 23:09:03 raft.go:371: id: 5 term 16 be Leader
+2022/06/04 23:09:03 raft.go:331: id: 1 term: 15 start requestvote
+2022/06/04 23:09:03 raft.go:176: id: 6 term: 11 vote 1 15
+2022/06/04 23:09:03 raft.go:331: id: 3 term: 12 start requestvote
+2022/06/04 23:09:03 raft.go:176: id: 4 term: 11 vote 1 15
+2022/06/04 23:09:03 raft.go:188: id: 5 term: 16 no vote 1 15
+2022/06/04 23:09:03 raft.go:228: 2 11 to 6 11 append sussess
+2022/06/04 23:09:03 raft.go:176: id: 2 term: 11 vote 1 15
+2022/06/04 23:09:03 raft.go:331: id: 0 term: 14 start requestvote
+2022/06/04 23:09:03 raft.go:228: 2 11 to 4 11 append sussess
+2022/06/04 23:09:03 raft.go:228: 5 16 to 4 16 append sussess
+2022/06/04 23:09:03 raft.go:228: 5 16 to 6 16 append sussess
+2022/06/04 23:09:03 raft.go:228: 5 16 to 1 16 append sussess
+2022/06/04 23:09:03 raft.go:228: 5 16 to 2 16 append sussess
+2022/06/04 23:09:03 raft.go:228: 5 16 to 1 16 append sussess
+2022/06/04 23:09:03 raft.go:228: 5 16 to 2 16 append sussess
+2022/06/04 23:09:03 raft.go:228: 5 16 to 4 16 append sussess
+2022/06/04 23:09:03 raft.go:228: 5 16 to 6 16 append sussess
+2022/06/04 23:09:03 raft.go:228: 5 16 to 1 16 append sussess
+2022/06/04 23:09:03 raft.go:228: 5 16 to 6 16 append sussess
+2022/06/04 23:09:03 raft.go:228: 5 16 to 2 16 append sussess
+2022/06/04 23:09:03 raft.go:228: 5 16 to 4 16 append sussess
+2022/06/04 23:09:03 raft.go:331: id: 3 term: 13 start requestvote
+2022/06/04 23:09:03 raft.go:331: id: 0 term: 15 start requestvote
+2022/06/04 23:09:03 raft.go:228: 5 16 to 6 16 append sussess
+2022/06/04 23:09:03 raft.go:331: id: 1 term: 17 start requestvote
+2022/06/04 23:09:03 raft.go:176: id: 6 term: 16 vote 1 17
+2022/06/04 23:09:03 raft.go:176: id: 4 term: 16 vote 1 17
+2022/06/04 23:09:03 raft.go:176: id: 2 term: 16 vote 1 17
+2022/06/04 23:09:03 raft.go:176: id: 3 term: 13 vote 1 17
+2022/06/04 23:09:03 raft.go:331: id: 2 term: 17 start requestvote
+2022/06/04 23:09:03 raft.go:371: id: 1 term 17 be Leader
+2022/06/04 23:09:03 raft.go:182: id: 1 term: 17 no vote 2 17
+2022/06/04 23:09:03 raft.go:182: id: 6 term: 16 no vote 2 17
+2022/06/04 23:09:03 raft.go:188: id: 6 term: 16 no vote 3 13
+2022/06/04 23:09:03 raft.go:182: id: 3 term: 13 no vote 2 17
+2022/06/04 23:09:03 raft.go:182: id: 4 term: 16 no vote 2 17
+2022/06/04 23:09:03 raft.go:331: id: 4 term: 17 start requestvote
+2022/06/04 23:09:03 raft.go:182: id: 1 term: 17 no vote 4 17
+2022/06/04 23:09:03 raft.go:182: id: 6 term: 16 no vote 4 17
+2022/06/04 23:09:03 raft.go:182: id: 3 term: 13 no vote 4 17
+2022/06/04 23:09:03 raft.go:182: id: 2 term: 17 no vote 4 17
+2022/06/04 23:09:03 raft.go:228: 1 17 to 6 17 append sussess
+2022/06/04 23:09:03 raft.go:228: 1 17 to 2 17 append sussess
+2022/06/04 23:09:03 raft.go:331: id: 3 term: 14 start requestvote
+2022/06/04 23:09:03 raft.go:228: 1 17 to 3 17 append sussess
+2022/06/04 23:09:03 raft.go:228: 1 17 to 4 17 append sussess
+2022/06/04 23:09:03 raft.go:228: 1 17 to 4 17 append sussess
+2022/06/04 23:09:03 raft.go:228: 1 17 to 3 17 append sussess
+2022/06/04 23:09:03 raft.go:331: id: 2 term: 18 start requestvote
+2022/06/04 23:09:03 raft.go:331: id: 6 term: 18 start requestvote
+2022/06/04 23:09:03 raft.go:182: id: 6 term: 18 no vote 2 18
+2022/06/04 23:09:03 raft.go:331: id: 0 term: 16 start requestvote
+2022/06/04 23:09:03 raft.go:176: id: 1 term: 17 vote 6 18
+2022/06/04 23:09:03 raft.go:182: id: 2 term: 18 no vote 6 18
+2022/06/04 23:09:03 raft.go:176: id: 4 term: 17 vote 6 18
+2022/06/04 23:09:03 raft.go:182: id: 4 term: 17 no vote 2 18
+2022/06/04 23:09:03 raft.go:182: id: 1 term: 17 no vote 2 18
+2022/06/04 23:09:03 raft.go:176: id: 3 term: 17 vote 6 18
+2022/06/04 23:09:03 raft.go:182: id: 3 term: 17 no vote 2 18
+2022/06/04 23:09:03 raft.go:228: 1 17 to 3 17 append sussess
+2022/06/04 23:09:03 raft.go:228: 1 17 to 4 17 append sussess
+2022/06/04 23:09:03 raft.go:371: id: 6 term 18 be Leader
+2022/06/04 23:09:03 raft.go:228: 6 18 to 3 18 append sussess
+2022/06/04 23:09:03 raft.go:228: 6 18 to 4 18 append sussess
+2022/06/04 23:09:03 raft.go:228: 6 18 to 2 18 append sussess
+2022/06/04 23:09:03 raft.go:228: 6 18 to 1 18 append sussess
+2022/06/04 23:09:03 raft.go:228: 6 18 to 1 18 append sussess
+2022/06/04 23:09:03 raft.go:228: 6 18 to 4 18 append sussess
+2022/06/04 23:09:03 raft.go:228: 6 18 to 3 18 append sussess
+2022/06/04 23:09:03 raft.go:228: 6 18 to 2 18 append sussess
+2022/06/04 23:09:04 raft.go:228: 5 16 to 0 16 append sussess
+2022/06/04 23:09:04 raft.go:228: 6 18 to 0 18 append sussess
+2022/06/04 23:09:04 raft.go:228: 6 18 to 2 18 append sussess
+2022/06/04 23:09:04 raft.go:228: 6 18 to 5 18 append sussess
+2022/06/04 23:09:04 raft.go:228: 6 18 to 1 18 append sussess
+2022/06/04 23:09:04 raft.go:331: id: 4 term: 19 start requestvote
+2022/06/04 23:09:04 raft.go:331: id: 3 term: 19 start requestvote
+2022/06/04 23:09:04 raft.go:228: 6 18 to 1 18 append sussess
+2022/06/04 23:09:04 raft.go:228: 6 18 to 0 18 append sussess
+2022/06/04 23:09:04 raft.go:228: 6 18 to 5 18 append sussess
+2022/06/04 23:09:04 raft.go:228: 6 18 to 2 18 append sussess
+2022/06/04 23:09:04 raft.go:228: 6 18 to 2 18 append sussess
+2022/06/04 23:09:04 raft.go:228: 6 18 to 1 18 append sussess
+2022/06/04 23:09:04 raft.go:228: 6 18 to 0 18 append sussess
+2022/06/04 23:09:04 raft.go:228: 6 18 to 5 18 append sussess
+2022/06/04 23:09:04 raft.go:228: 6 18 to 1 18 append sussess
+2022/06/04 23:09:04 raft.go:228: 6 18 to 0 18 append sussess
+2022/06/04 23:09:04 raft.go:228: 6 18 to 2 18 append sussess
+2022/06/04 23:09:04 raft.go:228: 6 18 to 5 18 append sussess
+2022/06/04 23:09:04 raft.go:331: id: 4 term: 20 start requestvote
+2022/06/04 23:09:04 raft.go:331: id: 3 term: 20 start requestvote
+2022/06/04 23:09:04 raft.go:228: 6 18 to 1 18 append sussess
+2022/06/04 23:09:04 raft.go:228: 6 18 to 5 18 append sussess
+2022/06/04 23:09:04 raft.go:228: 6 18 to 2 18 append sussess
+2022/06/04 23:09:04 raft.go:228: 6 18 to 0 18 append sussess
+2022/06/04 23:09:04 raft.go:176: id: 6 term: 18 vote 4 20
+2022/06/04 23:09:04 raft.go:228: 6 18 to 2 18 append sussess
+2022/06/04 23:09:04 raft.go:228: 6 18 to 5 18 append sussess
+2022/06/04 23:09:04 raft.go:228: 6 18 to 0 18 append sussess
+2022/06/04 23:09:04 raft.go:228: 6 18 to 1 18 append sussess
+2022/06/04 23:09:04 raft.go:331: id: 4 term: 21 start requestvote
+2022/06/04 23:09:04 raft.go:176: id: 2 term: 18 vote 4 21
+2022/06/04 23:09:04 raft.go:176: id: 1 term: 18 vote 4 21
+2022/06/04 23:09:04 raft.go:176: id: 5 term: 18 vote 4 21
+2022/06/04 23:09:04 raft.go:176: id: 6 term: 18 vote 4 21
+2022/06/04 23:09:04 raft.go:176: id: 0 term: 18 vote 4 21
+2022/06/04 23:09:04 raft.go:371: id: 4 term 21 be Leader
+2022/06/04 23:09:04 raft.go:176: id: 3 term: 20 vote 4 21
+2022/06/04 23:09:04 raft.go:176: id: 1 term: 18 vote 3 19
+2022/06/04 23:09:04 raft.go:188: id: 4 term: 21 no vote 3 12
+2022/06/04 23:09:04 raft.go:228: 6 18 to 2 18 append sussess
+2022/06/04 23:09:04 raft.go:228: 6 18 to 5 18 append sussess
+2022/06/04 23:09:04 raft.go:228: 6 18 to 1 18 append sussess
+2022/06/04 23:09:04 raft.go:228: 6 18 to 0 18 append sussess
+2022/06/04 23:09:04 raft.go:228: 4 21 to 6 21 append sussess
+2022/06/04 23:09:04 raft.go:228: 4 21 to 5 21 append sussess
+2022/06/04 23:09:04 raft.go:228: 4 21 to 2 21 append sussess
+2022/06/04 23:09:04 raft.go:228: 4 21 to 0 21 append sussess
+2022/06/04 23:09:04 raft.go:228: 4 21 to 3 21 append sussess
+2022/06/04 23:09:04 raft.go:228: 4 21 to 1 21 append sussess
+2022/06/04 23:09:04 raft.go:228: 4 21 to 5 21 append sussess
+2022/06/04 23:09:04 raft.go:228: 4 21 to 1 21 append sussess
+2022/06/04 23:09:04 raft.go:228: 4 21 to 2 21 append sussess
+2022/06/04 23:09:04 raft.go:228: 4 21 to 3 21 append sussess
+2022/06/04 23:09:04 raft.go:228: 4 21 to 0 21 append sussess
+2022/06/04 23:09:04 raft.go:228: 4 21 to 6 21 append sussess
+2022/06/04 23:09:04 raft.go:228: 4 21 to 2 21 append sussess
+2022/06/04 23:09:04 raft.go:228: 4 21 to 5 21 append sussess
+2022/06/04 23:09:04 raft.go:228: 4 21 to 0 21 append sussess
+2022/06/04 23:09:04 raft.go:228: 4 21 to 1 21 append sussess
+2022/06/04 23:09:04 raft.go:228: 4 21 to 3 21 append sussess
+2022/06/04 23:09:04 raft.go:228: 4 21 to 6 21 append sussess
+2022/06/04 23:09:05 raft.go:228: 4 21 to 0 21 append sussess
+2022/06/04 23:09:05 raft.go:228: 4 21 to 6 21 append sussess
+2022/06/04 23:09:05 raft.go:228: 4 21 to 1 21 append sussess
+2022/06/04 23:09:05 raft.go:228: 4 21 to 5 21 append sussess
+2022/06/04 23:09:05 raft.go:228: 4 21 to 3 21 append sussess
+2022/06/04 23:09:05 raft.go:228: 4 21 to 2 21 append sussess
+  ... Passed --   5.5  7  882   85668    0
+Test (2A): initial election ...
+2022/06/04 23:09:05 raft.go:331: id: 2 term: 1 start requestvote
+2022/06/04 23:09:05 raft.go:331: id: 0 term: 1 start requestvote
+2022/06/04 23:09:05 raft.go:331: id: 1 term: 1 start requestvote
+2022/06/04 23:09:05 raft.go:182: id: 0 term: 1 no vote 2 1
+2022/06/04 23:09:05 raft.go:182: id: 2 term: 1 no vote 1 1
+2022/06/04 23:09:05 raft.go:182: id: 1 term: 1 no vote 2 1
+2022/06/04 23:09:05 raft.go:182: id: 0 term: 1 no vote 1 1
+2022/06/04 23:09:05 raft.go:182: id: 2 term: 1 no vote 0 1
+2022/06/04 23:09:05 raft.go:182: id: 1 term: 1 no vote 0 1
+2022/06/04 23:09:05 raft.go:331: id: 2 term: 2 start requestvote
+2022/06/04 23:09:05 raft.go:331: id: 0 term: 2 start requestvote
+2022/06/04 23:09:05 raft.go:182: id: 0 term: 2 no vote 2 2
+2022/06/04 23:09:05 raft.go:176: id: 1 term: 1 vote 2 2
+2022/06/04 23:09:05 raft.go:182: id: 1 term: 1 no vote 0 2
+2022/06/04 23:09:05 raft.go:182: id: 2 term: 2 no vote 0 2
+2022/06/04 23:09:05 raft.go:371: id: 2 term 2 be Leader
+2022/06/04 23:09:05 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:05 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:05 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:05 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:05 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:05 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:05 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:05 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:05 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:05 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:05 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:05 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:06 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:06 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:06 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:06 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:06 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:06 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:06 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:06 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:06 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:06 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:06 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:06 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:06 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:06 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:06 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:06 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:06 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:06 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:06 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:06 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:07 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:07 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:07 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:07 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:07 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:07 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:07 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:07 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:07 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:07 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:07 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:07 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:07 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:07 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:07 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:07 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:07 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:07 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:07 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:07 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:08 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:08 raft.go:228: 2 2 to 1 2 append sussess
+  ... Passed --   3.1  3   64    9250    0
+Test (2A): election after network failure ...
+2022/06/04 23:09:08 raft.go:331: id: 1 term: 1 start requestvote
+2022/06/04 23:09:08 raft.go:331: id: 2 term: 1 start requestvote
+2022/06/04 23:09:08 raft.go:331: id: 0 term: 1 start requestvote
+2022/06/04 23:09:08 raft.go:182: id: 0 term: 1 no vote 1 1
+2022/06/04 23:09:08 raft.go:182: id: 2 term: 1 no vote 1 1
+2022/06/04 23:09:08 raft.go:182: id: 1 term: 1 no vote 2 1
+2022/06/04 23:09:08 raft.go:182: id: 2 term: 1 no vote 0 1
+2022/06/04 23:09:08 raft.go:182: id: 0 term: 1 no vote 2 1
+2022/06/04 23:09:08 raft.go:182: id: 1 term: 1 no vote 0 1
+2022/06/04 23:09:08 raft.go:331: id: 2 term: 2 start requestvote
+2022/06/04 23:09:08 raft.go:331: id: 0 term: 2 start requestvote
+2022/06/04 23:09:08 raft.go:182: id: 0 term: 2 no vote 2 2
+2022/06/04 23:09:08 raft.go:176: id: 1 term: 1 vote 0 2
+2022/06/04 23:09:08 raft.go:182: id: 2 term: 2 no vote 0 2
+2022/06/04 23:09:08 raft.go:182: id: 1 term: 1 no vote 2 2
+2022/06/04 23:09:08 raft.go:371: id: 0 term 2 be Leader
+2022/06/04 23:09:08 raft.go:331: id: 1 term: 2 start requestvote
+2022/06/04 23:09:08 raft.go:182: id: 2 term: 2 no vote 1 2
+2022/06/04 23:09:08 raft.go:182: id: 0 term: 2 no vote 1 2
+2022/06/04 23:09:08 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:09:08 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:09:08 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:09:08 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:09:08 raft.go:331: id: 1 term: 3 start requestvote
+2022/06/04 23:09:08 raft.go:331: id: 2 term: 3 start requestvote
+2022/06/04 23:09:08 raft.go:182: id: 2 term: 3 no vote 1 3
+2022/06/04 23:09:08 raft.go:182: id: 1 term: 3 no vote 2 3
+2022/06/04 23:09:09 raft.go:331: id: 2 term: 4 start requestvote
+2022/06/04 23:09:09 raft.go:176: id: 1 term: 3 vote 2 4
+2022/06/04 23:09:09 raft.go:371: id: 2 term 4 be Leader
+2022/06/04 23:09:09 raft.go:331: id: 1 term: 4 start requestvote
+2022/06/04 23:09:09 raft.go:182: id: 2 term: 4 no vote 1 4
+2022/06/04 23:09:09 raft.go:228: 2 4 to 1 4 append sussess
+2022/06/04 23:09:09 raft.go:228: 2 4 to 0 4 append sussess
+2022/06/04 23:09:09 raft.go:228: 2 4 to 1 4 append sussess
+2022/06/04 23:09:09 raft.go:228: 2 4 to 1 4 append sussess
+2022/06/04 23:09:09 raft.go:228: 2 4 to 0 4 append sussess
+2022/06/04 23:09:09 raft.go:228: 2 4 to 1 4 append sussess
+2022/06/04 23:09:09 raft.go:228: 2 4 to 0 4 append sussess
+2022/06/04 23:09:09 raft.go:228: 2 4 to 1 4 append sussess
+2022/06/04 23:09:09 raft.go:228: 2 4 to 0 4 append sussess
+2022/06/04 23:09:09 raft.go:228: 2 4 to 1 4 append sussess
+2022/06/04 23:09:09 raft.go:228: 2 4 to 0 4 append sussess
+2022/06/04 23:09:09 raft.go:331: id: 1 term: 5 start requestvote
+2022/06/04 23:09:09 raft.go:331: id: 0 term: 5 start requestvote
+2022/06/04 23:09:10 raft.go:331: id: 1 term: 6 start requestvote
+2022/06/04 23:09:10 raft.go:331: id: 0 term: 6 start requestvote
+2022/06/04 23:09:10 raft.go:331: id: 1 term: 7 start requestvote
+2022/06/04 23:09:10 raft.go:331: id: 0 term: 7 start requestvote
+2022/06/04 23:09:10 raft.go:331: id: 0 term: 8 start requestvote
+2022/06/04 23:09:10 raft.go:331: id: 1 term: 8 start requestvote
+2022/06/04 23:09:10 raft.go:331: id: 0 term: 9 start requestvote
+2022/06/04 23:09:11 raft.go:331: id: 1 term: 9 start requestvote
+2022/06/04 23:09:11 raft.go:331: id: 0 term: 10 start requestvote
+2022/06/04 23:09:11 raft.go:331: id: 1 term: 10 start requestvote
+2022/06/04 23:09:11 raft.go:331: id: 0 term: 11 start requestvote
+2022/06/04 23:09:11 raft.go:331: id: 1 term: 11 start requestvote
+2022/06/04 23:09:11 raft.go:331: id: 0 term: 12 start requestvote
+2022/06/04 23:09:11 raft.go:331: id: 1 term: 12 start requestvote
+2022/06/04 23:09:11 raft.go:331: id: 0 term: 13 start requestvote
+2022/06/04 23:09:11 raft.go:188: id: 0 term: 13 no vote 1 12
+2022/06/04 23:09:11 raft.go:176: id: 1 term: 12 vote 0 13
+2022/06/04 23:09:11 raft.go:188: id: 0 term: 13 no vote 1 4
+2022/06/04 23:09:11 raft.go:371: id: 0 term 13 be Leader
+2022/06/04 23:09:11 raft.go:331: id: 1 term: 13 start requestvote
+2022/06/04 23:09:11 raft.go:182: id: 0 term: 13 no vote 1 13
+2022/06/04 23:09:11 raft.go:228: 0 13 to 1 13 append sussess
+2022/06/04 23:09:12 raft.go:228: 0 13 to 1 13 append sussess
+2022/06/04 23:09:12 raft.go:228: 0 13 to 1 13 append sussess
+2022/06/04 23:09:12 raft.go:228: 0 13 to 1 13 append sussess
+2022/06/04 23:09:12 raft.go:228: 0 13 to 1 13 append sussess
+2022/06/04 23:09:12 raft.go:228: 0 13 to 2 13 append sussess
+2022/06/04 23:09:12 raft.go:228: 0 13 to 2 13 append sussess
+2022/06/04 23:09:12 raft.go:228: 0 13 to 1 13 append sussess
+2022/06/04 23:09:12 raft.go:228: 0 13 to 2 13 append sussess
+2022/06/04 23:09:12 raft.go:228: 0 13 to 1 13 append sussess
+2022/06/04 23:09:12 raft.go:228: 0 13 to 2 13 append sussess
+2022/06/04 23:09:12 raft.go:228: 0 13 to 1 13 append sussess
+2022/06/04 23:09:12 raft.go:228: 0 13 to 1 13 append sussess
+2022/06/04 23:09:12 raft.go:228: 0 13 to 2 13 append sussess
+  ... Passed --   4.6  3  175   16977    0
+Test (2A): multiple elections ...
+2022/06/04 23:09:12 raft.go:331: id: 0 term: 1 start requestvote
+2022/06/04 23:09:12 raft.go:331: id: 2 term: 1 start requestvote
+2022/06/04 23:09:12 raft.go:331: id: 5 term: 1 start requestvote
+2022/06/04 23:09:12 raft.go:331: id: 6 term: 1 start requestvote
+2022/06/04 23:09:12 raft.go:331: id: 3 term: 1 start requestvote
+2022/06/04 23:09:12 raft.go:331: id: 4 term: 1 start requestvote
+2022/06/04 23:09:12 raft.go:331: id: 1 term: 1 start requestvote
+2022/06/04 23:09:12 raft.go:182: id: 2 term: 1 no vote 0 1
+2022/06/04 23:09:12 raft.go:182: id: 4 term: 1 no vote 2 1
+2022/06/04 23:09:12 raft.go:182: id: 0 term: 1 no vote 2 1
+2022/06/04 23:09:12 raft.go:182: id: 5 term: 1 no vote 2 1
+2022/06/04 23:09:12 raft.go:182: id: 3 term: 1 no vote 2 1
+2022/06/04 23:09:12 raft.go:182: id: 6 term: 1 no vote 2 1
+2022/06/04 23:09:12 raft.go:182: id: 1 term: 1 no vote 0 1
+2022/06/04 23:09:12 raft.go:182: id: 1 term: 1 no vote 2 1
+2022/06/04 23:09:12 raft.go:182: id: 3 term: 1 no vote 0 1
+2022/06/04 23:09:12 raft.go:182: id: 5 term: 1 no vote 0 1
+2022/06/04 23:09:12 raft.go:182: id: 6 term: 1 no vote 0 1
+2022/06/04 23:09:12 raft.go:182: id: 6 term: 1 no vote 5 1
+2022/06/04 23:09:12 raft.go:182: id: 0 term: 1 no vote 5 1
+2022/06/04 23:09:12 raft.go:182: id: 2 term: 1 no vote 5 1
+2022/06/04 23:09:12 raft.go:182: id: 3 term: 1 no vote 5 1
+2022/06/04 23:09:12 raft.go:182: id: 4 term: 1 no vote 5 1
+2022/06/04 23:09:12 raft.go:182: id: 6 term: 1 no vote 3 1
+2022/06/04 23:09:12 raft.go:182: id: 1 term: 1 no vote 5 1
+2022/06/04 23:09:12 raft.go:182: id: 0 term: 1 no vote 3 1
+2022/06/04 23:09:12 raft.go:182: id: 1 term: 1 no vote 3 1
+2022/06/04 23:09:12 raft.go:182: id: 1 term: 1 no vote 6 1
+2022/06/04 23:09:12 raft.go:182: id: 5 term: 1 no vote 3 1
+2022/06/04 23:09:12 raft.go:182: id: 4 term: 1 no vote 0 1
+2022/06/04 23:09:12 raft.go:182: id: 2 term: 1 no vote 3 1
+2022/06/04 23:09:12 raft.go:182: id: 4 term: 1 no vote 3 1
+2022/06/04 23:09:12 raft.go:182: id: 0 term: 1 no vote 4 1
+2022/06/04 23:09:12 raft.go:182: id: 5 term: 1 no vote 4 1
+2022/06/04 23:09:12 raft.go:182: id: 2 term: 1 no vote 6 1
+2022/06/04 23:09:12 raft.go:182: id: 6 term: 1 no vote 1 1
+2022/06/04 23:09:12 raft.go:182: id: 0 term: 1 no vote 6 1
+2022/06/04 23:09:12 raft.go:182: id: 5 term: 1 no vote 1 1
+2022/06/04 23:09:12 raft.go:182: id: 4 term: 1 no vote 1 1
+2022/06/04 23:09:12 raft.go:182: id: 3 term: 1 no vote 6 1
+2022/06/04 23:09:12 raft.go:182: id: 2 term: 1 no vote 1 1
+2022/06/04 23:09:12 raft.go:182: id: 0 term: 1 no vote 1 1
+2022/06/04 23:09:12 raft.go:182: id: 3 term: 1 no vote 1 1
+2022/06/04 23:09:12 raft.go:182: id: 5 term: 1 no vote 6 1
+2022/06/04 23:09:12 raft.go:182: id: 1 term: 1 no vote 4 1
+2022/06/04 23:09:12 raft.go:182: id: 6 term: 1 no vote 4 1
+2022/06/04 23:09:12 raft.go:182: id: 4 term: 1 no vote 6 1
+2022/06/04 23:09:12 raft.go:182: id: 3 term: 1 no vote 4 1
+2022/06/04 23:09:12 raft.go:182: id: 2 term: 1 no vote 4 1
+2022/06/04 23:09:13 raft.go:331: id: 0 term: 2 start requestvote
+2022/06/04 23:09:13 raft.go:331: id: 5 term: 2 start requestvote
+2022/06/04 23:09:13 raft.go:331: id: 4 term: 2 start requestvote
+2022/06/04 23:09:13 raft.go:331: id: 1 term: 2 start requestvote
+2022/06/04 23:09:13 raft.go:176: id: 3 term: 1 vote 0 2
+2022/06/04 23:09:13 raft.go:182: id: 4 term: 2 no vote 0 2
+2022/06/04 23:09:13 raft.go:182: id: 1 term: 2 no vote 0 2
+2022/06/04 23:09:13 raft.go:176: id: 6 term: 1 vote 0 2
+2022/06/04 23:09:13 raft.go:182: id: 5 term: 2 no vote 0 2
+2022/06/04 23:09:13 raft.go:182: id: 6 term: 1 no vote 5 2
+2022/06/04 23:09:13 raft.go:176: id: 2 term: 1 vote 0 2
+2022/06/04 23:09:13 raft.go:182: id: 3 term: 1 no vote 5 2
+2022/06/04 23:09:13 raft.go:182: id: 2 term: 1 no vote 5 2
+2022/06/04 23:09:13 raft.go:182: id: 0 term: 2 no vote 5 2
+2022/06/04 23:09:13 raft.go:182: id: 4 term: 2 no vote 5 2
+2022/06/04 23:09:13 raft.go:182: id: 1 term: 2 no vote 5 2
+2022/06/04 23:09:13 raft.go:182: id: 2 term: 1 no vote 4 2
+2022/06/04 23:09:13 raft.go:182: id: 6 term: 1 no vote 4 2
+2022/06/04 23:09:13 raft.go:182: id: 5 term: 2 no vote 4 2
+2022/06/04 23:09:13 raft.go:182: id: 3 term: 1 no vote 4 2
+2022/06/04 23:09:13 raft.go:182: id: 0 term: 2 no vote 4 2
+2022/06/04 23:09:13 raft.go:182: id: 1 term: 2 no vote 4 2
+2022/06/04 23:09:13 raft.go:182: id: 2 term: 1 no vote 1 2
+2022/06/04 23:09:13 raft.go:182: id: 3 term: 1 no vote 1 2
+2022/06/04 23:09:13 raft.go:182: id: 5 term: 2 no vote 1 2
+2022/06/04 23:09:13 raft.go:182: id: 0 term: 2 no vote 1 2
+2022/06/04 23:09:13 raft.go:182: id: 4 term: 2 no vote 1 2
+2022/06/04 23:09:13 raft.go:182: id: 6 term: 1 no vote 1 2
+2022/06/04 23:09:13 raft.go:371: id: 0 term 2 be Leader
+2022/06/04 23:09:13 raft.go:331: id: 2 term: 2 start requestvote
+2022/06/04 23:09:13 raft.go:331: id: 3 term: 2 start requestvote
+2022/06/04 23:09:13 raft.go:331: id: 6 term: 2 start requestvote
+2022/06/04 23:09:13 raft.go:182: id: 3 term: 2 no vote 2 2
+2022/06/04 23:09:13 raft.go:182: id: 4 term: 2 no vote 2 2
+2022/06/04 23:09:13 raft.go:182: id: 6 term: 2 no vote 2 2
+2022/06/04 23:09:13 raft.go:182: id: 0 term: 2 no vote 2 2
+2022/06/04 23:09:13 raft.go:182: id: 5 term: 2 no vote 2 2
+2022/06/04 23:09:13 raft.go:182: id: 1 term: 2 no vote 2 2
+2022/06/04 23:09:13 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:09:13 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:09:13 raft.go:228: 0 2 to 6 2 append sussess
+2022/06/04 23:09:13 raft.go:228: 0 2 to 3 2 append sussess
+2022/06/04 23:09:13 raft.go:228: 0 2 to 4 2 append sussess
+2022/06/04 23:09:13 raft.go:182: id: 0 term: 2 no vote 3 2
+2022/06/04 23:09:13 raft.go:182: id: 5 term: 2 no vote 3 2
+2022/06/04 23:09:13 raft.go:182: id: 4 term: 2 no vote 3 2
+2022/06/04 23:09:13 raft.go:228: 0 2 to 5 2 append sussess
+2022/06/04 23:09:13 raft.go:182: id: 1 term: 2 no vote 3 2
+2022/06/04 23:09:13 raft.go:182: id: 6 term: 2 no vote 3 2
+2022/06/04 23:09:13 raft.go:182: id: 2 term: 2 no vote 3 2
+2022/06/04 23:09:13 raft.go:182: id: 4 term: 2 no vote 6 2
+2022/06/04 23:09:13 raft.go:182: id: 1 term: 2 no vote 6 2
+2022/06/04 23:09:13 raft.go:182: id: 2 term: 2 no vote 6 2
+2022/06/04 23:09:13 raft.go:182: id: 5 term: 2 no vote 6 2
+2022/06/04 23:09:13 raft.go:182: id: 3 term: 2 no vote 6 2
+2022/06/04 23:09:13 raft.go:182: id: 0 term: 2 no vote 6 2
+2022/06/04 23:09:13 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:09:13 raft.go:228: 0 2 to 3 2 append sussess
+2022/06/04 23:09:13 raft.go:228: 0 2 to 5 2 append sussess
+2022/06/04 23:09:13 raft.go:228: 0 2 to 4 2 append sussess
+2022/06/04 23:09:13 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:09:13 raft.go:228: 0 2 to 6 2 append sussess
+2022/06/04 23:09:13 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:09:13 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:09:13 raft.go:228: 0 2 to 5 2 append sussess
+2022/06/04 23:09:13 raft.go:228: 0 2 to 6 2 append sussess
+2022/06/04 23:09:13 raft.go:331: id: 4 term: 3 start requestvote
+2022/06/04 23:09:13 raft.go:331: id: 3 term: 3 start requestvote
+2022/06/04 23:09:13 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:09:13 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:09:13 raft.go:228: 0 2 to 5 2 append sussess
+2022/06/04 23:09:13 raft.go:228: 0 2 to 6 2 append sussess
+2022/06/04 23:09:13 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:09:13 raft.go:228: 0 2 to 6 2 append sussess
+2022/06/04 23:09:13 raft.go:228: 0 2 to 5 2 append sussess
+2022/06/04 23:09:13 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:09:13 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:09:13 raft.go:228: 0 2 to 6 2 append sussess
+2022/06/04 23:09:13 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:09:13 raft.go:228: 0 2 to 5 2 append sussess
+2022/06/04 23:09:13 raft.go:331: id: 4 term: 4 start requestvote
+2022/06/04 23:09:13 raft.go:331: id: 3 term: 4 start requestvote
+2022/06/04 23:09:13 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:09:13 raft.go:228: 0 2 to 6 2 append sussess
+2022/06/04 23:09:13 raft.go:228: 0 2 to 5 2 append sussess
+2022/06/04 23:09:13 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:09:13 raft.go:228: 0 2 to 5 2 append sussess
+2022/06/04 23:09:13 raft.go:228: 0 2 to 6 2 append sussess
+2022/06/04 23:09:13 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:09:13 raft.go:331: id: 2 term: 3 start requestvote
+2022/06/04 23:09:13 raft.go:228: 0 2 to 6 2 append sussess
+2022/06/04 23:09:13 raft.go:228: 0 2 to 5 2 append sussess
+2022/06/04 23:09:13 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:09:14 raft.go:331: id: 4 term: 5 start requestvote
+2022/06/04 23:09:14 raft.go:228: 0 2 to 6 2 append sussess
+2022/06/04 23:09:14 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:09:14 raft.go:176: id: 5 term: 2 vote 4 5
+2022/06/04 23:09:14 raft.go:331: id: 3 term: 5 start requestvote
+2022/06/04 23:09:14 raft.go:228: 0 2 to 5 2 append sussess
+2022/06/04 23:09:14 raft.go:176: id: 1 term: 2 vote 4 5
+2022/06/04 23:09:14 raft.go:176: id: 0 term: 2 vote 4 5
+2022/06/04 23:09:14 raft.go:176: id: 6 term: 2 vote 4 5
+2022/06/04 23:09:14 raft.go:371: id: 4 term 5 be Leader
+2022/06/04 23:09:14 raft.go:228: 0 2 to 6 2 append sussess
+2022/06/04 23:09:14 raft.go:228: 0 2 to 5 2 append sussess
+2022/06/04 23:09:14 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:09:14 raft.go:228: 4 5 to 0 5 append sussess
+2022/06/04 23:09:14 raft.go:228: 4 5 to 5 5 append sussess
+2022/06/04 23:09:14 raft.go:228: 4 5 to 6 5 append sussess
+2022/06/04 23:09:14 raft.go:228: 4 5 to 1 5 append sussess
+2022/06/04 23:09:14 raft.go:331: id: 2 term: 4 start requestvote
+2022/06/04 23:09:14 raft.go:228: 4 5 to 1 5 append sussess
+2022/06/04 23:09:14 raft.go:228: 4 5 to 6 5 append sussess
+2022/06/04 23:09:14 raft.go:228: 4 5 to 5 5 append sussess
+2022/06/04 23:09:14 raft.go:228: 4 5 to 0 5 append sussess
+2022/06/04 23:09:14 raft.go:331: id: 3 term: 6 start requestvote
+2022/06/04 23:09:14 raft.go:228: 4 5 to 6 5 append sussess
+2022/06/04 23:09:14 raft.go:228: 4 5 to 2 5 append sussess
+2022/06/04 23:09:14 raft.go:331: id: 5 term: 6 start requestvote
+2022/06/04 23:09:14 raft.go:331: id: 1 term: 6 start requestvote
+2022/06/04 23:09:14 raft.go:331: id: 0 term: 6 start requestvote
+2022/06/04 23:09:14 raft.go:228: 4 5 to 2 5 append sussess
+2022/06/04 23:09:14 raft.go:228: 4 5 to 6 5 append sussess
+2022/06/04 23:09:14 raft.go:331: id: 3 term: 7 start requestvote
+2022/06/04 23:09:14 raft.go:176: id: 2 term: 5 vote 3 7
+2022/06/04 23:09:14 raft.go:176: id: 6 term: 5 vote 3 7
+2022/06/04 23:09:14 raft.go:176: id: 4 term: 5 vote 3 7
+2022/06/04 23:09:14 raft.go:371: id: 3 term 7 be Leader
+2022/06/04 23:09:14 raft.go:228: 4 5 to 2 5 append sussess
+2022/06/04 23:09:14 raft.go:228: 4 5 to 6 5 append sussess
+2022/06/04 23:09:14 raft.go:228: 3 7 to 6 7 append sussess
+2022/06/04 23:09:14 raft.go:228: 3 7 to 2 7 append sussess
+2022/06/04 23:09:14 raft.go:228: 3 7 to 4 7 append sussess
+2022/06/04 23:09:14 raft.go:228: 3 7 to 2 7 append sussess
+2022/06/04 23:09:14 raft.go:228: 3 7 to 6 7 append sussess
+2022/06/04 23:09:14 raft.go:228: 3 7 to 4 7 append sussess
+2022/06/04 23:09:14 raft.go:331: id: 5 term: 7 start requestvote
+2022/06/04 23:09:14 raft.go:331: id: 1 term: 7 start requestvote
+2022/06/04 23:09:14 raft.go:331: id: 0 term: 7 start requestvote
+2022/06/04 23:09:14 raft.go:228: 3 7 to 4 7 append sussess
+2022/06/04 23:09:14 raft.go:228: 3 7 to 6 7 append sussess
+2022/06/04 23:09:14 raft.go:228: 3 7 to 2 7 append sussess
+2022/06/04 23:09:14 raft.go:228: 3 7 to 1 7 append sussess
+2022/06/04 23:09:14 raft.go:228: 3 7 to 5 7 append sussess
+2022/06/04 23:09:14 raft.go:228: 3 7 to 0 7 append sussess
+2022/06/04 23:09:14 raft.go:331: id: 2 term: 8 start requestvote
+2022/06/04 23:09:14 raft.go:331: id: 6 term: 8 start requestvote
+2022/06/04 23:09:14 raft.go:331: id: 4 term: 8 start requestvote
+2022/06/04 23:09:15 raft.go:228: 3 7 to 1 7 append sussess
+2022/06/04 23:09:15 raft.go:228: 3 7 to 0 7 append sussess
+2022/06/04 23:09:15 raft.go:228: 3 7 to 5 7 append sussess
+2022/06/04 23:09:15 raft.go:228: 3 7 to 5 7 append sussess
+2022/06/04 23:09:15 raft.go:228: 3 7 to 1 7 append sussess
+2022/06/04 23:09:15 raft.go:228: 3 7 to 0 7 append sussess
+2022/06/04 23:09:15 raft.go:331: id: 2 term: 9 start requestvote
+2022/06/04 23:09:15 raft.go:331: id: 6 term: 9 start requestvote
+2022/06/04 23:09:15 raft.go:228: 3 7 to 1 7 append sussess
+2022/06/04 23:09:15 raft.go:228: 3 7 to 0 7 append sussess
+2022/06/04 23:09:15 raft.go:228: 3 7 to 5 7 append sussess
+2022/06/04 23:09:15 raft.go:331: id: 4 term: 9 start requestvote
+2022/06/04 23:09:15 raft.go:228: 3 7 to 5 7 append sussess
+2022/06/04 23:09:15 raft.go:228: 3 7 to 0 7 append sussess
+2022/06/04 23:09:15 raft.go:228: 3 7 to 1 7 append sussess
+2022/06/04 23:09:15 raft.go:331: id: 2 term: 10 start requestvote
+2022/06/04 23:09:15 raft.go:331: id: 6 term: 10 start requestvote
+2022/06/04 23:09:15 raft.go:176: id: 0 term: 7 vote 6 10
+2022/06/04 23:09:15 raft.go:176: id: 4 term: 9 vote 6 10
+2022/06/04 23:09:15 raft.go:182: id: 2 term: 10 no vote 6 10
+2022/06/04 23:09:15 raft.go:188: id: 0 term: 7 no vote 2 4
+2022/06/04 23:09:15 raft.go:331: id: 5 term: 8 start requestvote
+2022/06/04 23:09:15 raft.go:331: id: 1 term: 8 start requestvote
+2022/06/04 23:09:15 raft.go:331: id: 0 term: 8 start requestvote
+2022/06/04 23:09:15 raft.go:188: id: 2 term: 10 no vote 0 8
+2022/06/04 23:09:15 raft.go:188: id: 4 term: 9 no vote 0 8
+2022/06/04 23:09:15 raft.go:188: id: 6 term: 10 no vote 0 8
+2022/06/04 23:09:15 raft.go:331: id: 0 term: 9 start requestvote
+2022/06/04 23:09:15 raft.go:331: id: 4 term: 10 start requestvote
+2022/06/04 23:09:15 raft.go:188: id: 6 term: 10 no vote 0 9
+2022/06/04 23:09:15 raft.go:188: id: 4 term: 10 no vote 0 9
+2022/06/04 23:09:15 raft.go:188: id: 2 term: 10 no vote 0 9
+2022/06/04 23:09:15 raft.go:182: id: 0 term: 9 no vote 4 10
+2022/06/04 23:09:15 raft.go:182: id: 2 term: 10 no vote 4 10
+2022/06/04 23:09:15 raft.go:182: id: 6 term: 10 no vote 4 10
+2022/06/04 23:09:15 raft.go:331: id: 2 term: 11 start requestvote
+2022/06/04 23:09:15 raft.go:176: id: 6 term: 10 vote 2 11
+2022/06/04 23:09:15 raft.go:176: id: 0 term: 9 vote 2 11
+2022/06/04 23:09:15 raft.go:331: id: 5 term: 9 start requestvote
+2022/06/04 23:09:15 raft.go:176: id: 4 term: 10 vote 2 11
+2022/06/04 23:09:15 raft.go:371: id: 2 term 11 be Leader
+2022/06/04 23:09:15 raft.go:331: id: 6 term: 11 start requestvote
+2022/06/04 23:09:15 raft.go:182: id: 4 term: 10 no vote 6 11
+2022/06/04 23:09:15 raft.go:182: id: 2 term: 11 no vote 6 11
+2022/06/04 23:09:15 raft.go:182: id: 0 term: 9 no vote 6 11
+2022/06/04 23:09:15 raft.go:331: id: 0 term: 10 start requestvote
+2022/06/04 23:09:15 raft.go:182: id: 4 term: 10 no vote 0 10
+2022/06/04 23:09:15 raft.go:188: id: 6 term: 11 no vote 0 10
+2022/06/04 23:09:15 raft.go:188: id: 2 term: 11 no vote 0 10
+2022/06/04 23:09:15 raft.go:228: 2 11 to 6 11 append sussess
+2022/06/04 23:09:15 raft.go:228: 2 11 to 4 11 append sussess
+2022/06/04 23:09:15 raft.go:228: 2 11 to 0 11 append sussess
+2022/06/04 23:09:15 raft.go:331: id: 1 term: 9 start requestvote
+2022/06/04 23:09:15 raft.go:228: 2 11 to 6 11 append sussess
+2022/06/04 23:09:15 raft.go:228: 2 11 to 4 11 append sussess
+2022/06/04 23:09:15 raft.go:331: id: 5 term: 10 start requestvote
+2022/06/04 23:09:15 raft.go:228: 2 11 to 0 11 append sussess
+2022/06/04 23:09:15 raft.go:188: id: 1 term: 9 no vote 5 7
+2022/06/04 23:09:15 raft.go:228: 2 11 to 1 11 append sussess
+2022/06/04 23:09:15 raft.go:228: 2 11 to 4 11 append sussess
+2022/06/04 23:09:15 raft.go:228: 2 11 to 5 11 append sussess
+2022/06/04 23:09:16 raft.go:331: id: 0 term: 12 start requestvote
+2022/06/04 23:09:16 raft.go:228: 2 11 to 5 11 append sussess
+2022/06/04 23:09:16 raft.go:228: 2 11 to 4 11 append sussess
+2022/06/04 23:09:16 raft.go:228: 2 11 to 1 11 append sussess
+2022/06/04 23:09:16 raft.go:331: id: 6 term: 12 start requestvote
+2022/06/04 23:09:16 raft.go:228: 2 11 to 1 11 append sussess
+2022/06/04 23:09:16 raft.go:228: 2 11 to 4 11 append sussess
+2022/06/04 23:09:16 raft.go:228: 2 11 to 5 11 append sussess
+2022/06/04 23:09:16 raft.go:331: id: 0 term: 13 start requestvote
+2022/06/04 23:09:16 raft.go:228: 2 11 to 5 11 append sussess
+2022/06/04 23:09:16 raft.go:228: 2 11 to 1 11 append sussess
+2022/06/04 23:09:16 raft.go:228: 2 11 to 4 11 append sussess
+2022/06/04 23:09:16 raft.go:228: 2 11 to 1 11 append sussess
+2022/06/04 23:09:16 raft.go:228: 2 11 to 5 11 append sussess
+2022/06/04 23:09:16 raft.go:228: 2 11 to 4 11 append sussess
+2022/06/04 23:09:16 raft.go:331: id: 6 term: 13 start requestvote
+2022/06/04 23:09:16 raft.go:331: id: 0 term: 14 start requestvote
+2022/06/04 23:09:16 raft.go:188: id: 5 term: 11 no vote 0 7
+2022/06/04 23:09:16 raft.go:331: id: 5 term: 12 start requestvote
+2022/06/04 23:09:16 raft.go:176: id: 1 term: 11 vote 5 12
+2022/06/04 23:09:16 raft.go:176: id: 3 term: 7 vote 5 12
+2022/06/04 23:09:16 raft.go:188: id: 0 term: 14 no vote 5 12
+2022/06/04 23:09:16 raft.go:331: id: 6 term: 14 start requestvote
+2022/06/04 23:09:16 raft.go:331: id: 1 term: 12 start requestvote
+2022/06/04 23:09:16 raft.go:331: id: 4 term: 12 start requestvote
+2022/06/04 23:09:16 raft.go:182: id: 5 term: 12 no vote 1 12
+2022/06/04 23:09:16 raft.go:188: id: 0 term: 14 no vote 1 12
+2022/06/04 23:09:16 raft.go:182: id: 3 term: 7 no vote 1 12
+2022/06/04 23:09:16 raft.go:331: id: 5 term: 13 start requestvote
+2022/06/04 23:09:16 raft.go:188: id: 0 term: 14 no vote 5 13
+2022/06/04 23:09:16 raft.go:176: id: 3 term: 7 vote 5 13
+2022/06/04 23:09:16 raft.go:176: id: 1 term: 12 vote 5 13
+2022/06/04 23:09:16 raft.go:331: id: 1 term: 13 start requestvote
+2022/06/04 23:09:16 raft.go:331: id: 0 term: 15 start requestvote
+2022/06/04 23:09:16 raft.go:188: id: 0 term: 15 no vote 1 13
+2022/06/04 23:09:16 raft.go:182: id: 3 term: 7 no vote 1 13
+2022/06/04 23:09:16 raft.go:182: id: 5 term: 13 no vote 1 13
+2022/06/04 23:09:16 raft.go:176: id: 1 term: 13 vote 0 15
+2022/06/04 23:09:16 raft.go:176: id: 3 term: 7 vote 0 15
+2022/06/04 23:09:16 raft.go:176: id: 5 term: 13 vote 0 15
+2022/06/04 23:09:16 raft.go:371: id: 0 term 15 be Leader
+2022/06/04 23:09:16 raft.go:331: id: 5 term: 14 start requestvote
+2022/06/04 23:09:16 raft.go:176: id: 1 term: 13 vote 5 14
+2022/06/04 23:09:16 raft.go:176: id: 3 term: 7 vote 5 14
+2022/06/04 23:09:16 raft.go:188: id: 0 term: 15 no vote 5 14
+2022/06/04 23:09:16 raft.go:331: id: 1 term: 14 start requestvote
+2022/06/04 23:09:16 raft.go:188: id: 0 term: 15 no vote 1 14
+2022/06/04 23:09:16 raft.go:182: id: 3 term: 7 no vote 1 14
+2022/06/04 23:09:16 raft.go:182: id: 5 term: 14 no vote 1 14
+2022/06/04 23:09:16 raft.go:228: 0 15 to 1 15 append sussess
+2022/06/04 23:09:16 raft.go:228: 0 15 to 3 15 append sussess
+2022/06/04 23:09:16 raft.go:228: 0 15 to 5 15 append sussess
+2022/06/04 23:09:16 raft.go:331: id: 6 term: 15 start requestvote
+2022/06/04 23:09:16 raft.go:176: id: 2 term: 11 vote 6 15
+2022/06/04 23:09:16 raft.go:182: id: 0 term: 15 no vote 6 15
+2022/06/04 23:09:16 raft.go:182: id: 5 term: 15 no vote 6 15
+2022/06/04 23:09:16 raft.go:188: id: 5 term: 15 no vote 6 11
+2022/06/04 23:09:16 raft.go:331: id: 4 term: 13 start requestvote
+2022/06/04 23:09:16 raft.go:228: 0 15 to 6 15 append sussess
+2022/06/04 23:09:16 raft.go:228: 0 15 to 2 15 append sussess
+2022/06/04 23:09:16 raft.go:228: 0 15 to 5 15 append sussess
+2022/06/04 23:09:17 raft.go:331: id: 1 term: 16 start requestvote
+2022/06/04 23:09:17 raft.go:331: id: 3 term: 16 start requestvote
+2022/06/04 23:09:17 raft.go:228: 0 15 to 5 15 append sussess
+2022/06/04 23:09:17 raft.go:228: 0 15 to 6 15 append sussess
+2022/06/04 23:09:17 raft.go:228: 0 15 to 2 15 append sussess
+2022/06/04 23:09:17 raft.go:331: id: 4 term: 14 start requestvote
+2022/06/04 23:09:17 raft.go:228: 0 15 to 2 15 append sussess
+2022/06/04 23:09:17 raft.go:228: 0 15 to 6 15 append sussess
+2022/06/04 23:09:17 raft.go:228: 0 15 to 5 15 append sussess
+2022/06/04 23:09:17 raft.go:228: 0 15 to 6 15 append sussess
+2022/06/04 23:09:17 raft.go:228: 0 15 to 5 15 append sussess
+2022/06/04 23:09:17 raft.go:228: 0 15 to 2 15 append sussess
+2022/06/04 23:09:17 raft.go:331: id: 1 term: 17 start requestvote
+2022/06/04 23:09:17 raft.go:228: 0 15 to 6 15 append sussess
+2022/06/04 23:09:17 raft.go:228: 0 15 to 5 15 append sussess
+2022/06/04 23:09:17 raft.go:228: 0 15 to 2 15 append sussess
+2022/06/04 23:09:17 raft.go:331: id: 3 term: 17 start requestvote
+2022/06/04 23:09:17 raft.go:331: id: 4 term: 15 start requestvote
+2022/06/04 23:09:17 raft.go:188: id: 1 term: 17 no vote 4 15
+2022/06/04 23:09:17 raft.go:182: id: 2 term: 15 no vote 4 15
+2022/06/04 23:09:17 raft.go:182: id: 5 term: 15 no vote 4 15
+2022/06/04 23:09:17 raft.go:331: id: 2 term: 16 start requestvote
+2022/06/04 23:09:17 raft.go:331: id: 5 term: 16 start requestvote
+2022/06/04 23:09:17 raft.go:176: id: 4 term: 15 vote 2 16
+2022/06/04 23:09:17 raft.go:188: id: 1 term: 17 no vote 2 16
+2022/06/04 23:09:17 raft.go:182: id: 5 term: 16 no vote 2 16
+2022/06/04 23:09:17 raft.go:188: id: 1 term: 17 no vote 5 16
+2022/06/04 23:09:17 raft.go:182: id: 2 term: 16 no vote 5 16
+2022/06/04 23:09:17 raft.go:182: id: 4 term: 15 no vote 5 16
+2022/06/04 23:09:17 raft.go:331: id: 6 term: 16 start requestvote
+2022/06/04 23:09:17 raft.go:331: id: 4 term: 16 start requestvote
+2022/06/04 23:09:17 raft.go:188: id: 1 term: 17 no vote 4 16
+2022/06/04 23:09:17 raft.go:182: id: 5 term: 16 no vote 4 16
+2022/06/04 23:09:17 raft.go:182: id: 2 term: 16 no vote 4 16
+2022/06/04 23:09:17 raft.go:188: id: 4 term: 16 no vote 1 6
+2022/06/04 23:09:17 raft.go:331: id: 2 term: 17 start requestvote
+2022/06/04 23:09:17 raft.go:331: id: 5 term: 17 start requestvote
+2022/06/04 23:09:17 raft.go:182: id: 5 term: 17 no vote 2 17
+2022/06/04 23:09:17 raft.go:176: id: 4 term: 16 vote 2 17
+2022/06/04 23:09:17 raft.go:182: id: 1 term: 17 no vote 5 17
+2022/06/04 23:09:17 raft.go:182: id: 4 term: 16 no vote 5 17
+2022/06/04 23:09:17 raft.go:182: id: 2 term: 17 no vote 5 17
+2022/06/04 23:09:17 raft.go:182: id: 1 term: 17 no vote 2 17
+2022/06/04 23:09:17 raft.go:331: id: 1 term: 18 start requestvote
+2022/06/04 23:09:17 raft.go:176: id: 2 term: 17 vote 1 18
+2022/06/04 23:09:17 raft.go:331: id: 4 term: 17 start requestvote
+2022/06/04 23:09:17 raft.go:188: id: 1 term: 18 no vote 4 17
+2022/06/04 23:09:17 raft.go:176: id: 4 term: 17 vote 1 18
+2022/06/04 23:09:17 raft.go:176: id: 5 term: 17 vote 1 18
+2022/06/04 23:09:17 raft.go:331: id: 3 term: 18 start requestvote
+2022/06/04 23:09:17 raft.go:182: id: 2 term: 17 no vote 4 17
+2022/06/04 23:09:17 raft.go:182: id: 5 term: 17 no vote 4 17
+2022/06/04 23:09:17 raft.go:371: id: 1 term 18 be Leader
+2022/06/04 23:09:17 raft.go:331: id: 5 term: 18 start requestvote
+2022/06/04 23:09:17 raft.go:182: id: 2 term: 17 no vote 5 18
+2022/06/04 23:09:17 raft.go:182: id: 1 term: 18 no vote 5 18
+2022/06/04 23:09:17 raft.go:182: id: 4 term: 17 no vote 5 18
+2022/06/04 23:09:17 raft.go:331: id: 4 term: 18 start requestvote
+2022/06/04 23:09:17 raft.go:228: 1 18 to 4 18 append sussess
+2022/06/04 23:09:17 raft.go:228: 1 18 to 5 18 append sussess
+2022/06/04 23:09:17 raft.go:228: 1 18 to 2 18 append sussess
+2022/06/04 23:09:17 raft.go:182: id: 2 term: 18 no vote 4 18
+2022/06/04 23:09:17 raft.go:182: id: 1 term: 18 no vote 4 18
+2022/06/04 23:09:17 raft.go:182: id: 5 term: 18 no vote 4 18
+2022/06/04 23:09:17 raft.go:331: id: 6 term: 17 start requestvote
+2022/06/04 23:09:17 raft.go:228: 1 18 to 2 18 append sussess
+2022/06/04 23:09:17 raft.go:228: 1 18 to 4 18 append sussess
+2022/06/04 23:09:17 raft.go:228: 1 18 to 5 18 append sussess
+2022/06/04 23:09:17 raft.go:228: 1 18 to 0 18 append sussess
+2022/06/04 23:09:17 raft.go:228: 1 18 to 3 18 append sussess
+2022/06/04 23:09:17 raft.go:228: 1 18 to 2 18 append sussess
+2022/06/04 23:09:17 raft.go:228: 1 18 to 6 18 append sussess
+2022/06/04 23:09:17 raft.go:228: 1 18 to 5 18 append sussess
+2022/06/04 23:09:17 raft.go:228: 1 18 to 4 18 append sussess
+2022/06/04 23:09:18 raft.go:228: 1 18 to 2 18 append sussess
+2022/06/04 23:09:18 raft.go:228: 1 18 to 0 18 append sussess
+2022/06/04 23:09:18 raft.go:228: 1 18 to 4 18 append sussess
+2022/06/04 23:09:18 raft.go:228: 1 18 to 3 18 append sussess
+2022/06/04 23:09:18 raft.go:228: 1 18 to 5 18 append sussess
+2022/06/04 23:09:18 raft.go:228: 1 18 to 6 18 append sussess
+2022/06/04 23:09:18 raft.go:228: 1 18 to 0 18 append sussess
+2022/06/04 23:09:18 raft.go:228: 1 18 to 2 18 append sussess
+2022/06/04 23:09:18 raft.go:228: 1 18 to 4 18 append sussess
+2022/06/04 23:09:18 raft.go:228: 1 18 to 6 18 append sussess
+2022/06/04 23:09:18 raft.go:228: 1 18 to 3 18 append sussess
+2022/06/04 23:09:18 raft.go:228: 1 18 to 5 18 append sussess
+2022/06/04 23:09:18 raft.go:228: 1 18 to 0 18 append sussess
+2022/06/04 23:09:18 raft.go:228: 1 18 to 3 18 append sussess
+2022/06/04 23:09:18 raft.go:228: 1 18 to 5 18 append sussess
+2022/06/04 23:09:18 raft.go:228: 1 18 to 6 18 append sussess
+2022/06/04 23:09:18 raft.go:228: 1 18 to 2 18 append sussess
+2022/06/04 23:09:18 raft.go:228: 1 18 to 4 18 append sussess
+2022/06/04 23:09:18 raft.go:228: 1 18 to 3 18 append sussess
+2022/06/04 23:09:18 raft.go:228: 1 18 to 0 18 append sussess
+2022/06/04 23:09:18 raft.go:228: 1 18 to 5 18 append sussess
+2022/06/04 23:09:18 raft.go:228: 1 18 to 6 18 append sussess
+2022/06/04 23:09:18 raft.go:228: 1 18 to 2 18 append sussess
+2022/06/04 23:09:18 raft.go:228: 1 18 to 4 18 append sussess
+  ... Passed --   5.6  7  975   92349    0
+Test (2A): initial election ...
+2022/06/04 23:09:18 raft.go:331: id: 0 term: 1 start requestvote
+2022/06/04 23:09:18 raft.go:331: id: 1 term: 1 start requestvote
+2022/06/04 23:09:18 raft.go:331: id: 2 term: 1 start requestvote
+2022/06/04 23:09:18 raft.go:182: id: 2 term: 1 no vote 0 1
+2022/06/04 23:09:18 raft.go:182: id: 1 term: 1 no vote 0 1
+2022/06/04 23:09:18 raft.go:182: id: 0 term: 1 no vote 1 1
+2022/06/04 23:09:18 raft.go:182: id: 2 term: 1 no vote 1 1
+2022/06/04 23:09:18 raft.go:182: id: 1 term: 1 no vote 2 1
+2022/06/04 23:09:18 raft.go:182: id: 0 term: 1 no vote 2 1
+2022/06/04 23:09:18 raft.go:331: id: 0 term: 2 start requestvote
+2022/06/04 23:09:18 raft.go:331: id: 1 term: 2 start requestvote
+2022/06/04 23:09:18 raft.go:331: id: 2 term: 2 start requestvote
+2022/06/04 23:09:18 raft.go:182: id: 1 term: 2 no vote 0 2
+2022/06/04 23:09:18 raft.go:182: id: 2 term: 2 no vote 0 2
+2022/06/04 23:09:18 raft.go:182: id: 0 term: 2 no vote 1 2
+2022/06/04 23:09:18 raft.go:182: id: 2 term: 2 no vote 1 2
+2022/06/04 23:09:18 raft.go:182: id: 0 term: 2 no vote 2 2
+2022/06/04 23:09:18 raft.go:182: id: 1 term: 2 no vote 2 2
+2022/06/04 23:09:18 raft.go:331: id: 1 term: 3 start requestvote
+2022/06/04 23:09:18 raft.go:176: id: 0 term: 2 vote 1 3
+2022/06/04 23:09:18 raft.go:176: id: 2 term: 2 vote 1 3
+2022/06/04 23:09:18 raft.go:371: id: 1 term 3 be Leader
+2022/06/04 23:09:19 raft.go:331: id: 0 term: 3 start requestvote
+2022/06/04 23:09:19 raft.go:331: id: 2 term: 3 start requestvote
+2022/06/04 23:09:19 raft.go:182: id: 1 term: 3 no vote 0 3
+2022/06/04 23:09:19 raft.go:182: id: 2 term: 3 no vote 0 3
+2022/06/04 23:09:19 raft.go:228: 1 3 to 0 3 append sussess
+2022/06/04 23:09:19 raft.go:228: 1 3 to 2 3 append sussess
+2022/06/04 23:09:19 raft.go:182: id: 0 term: 3 no vote 2 3
+2022/06/04 23:09:19 raft.go:182: id: 1 term: 3 no vote 2 3
+2022/06/04 23:09:19 raft.go:228: 1 3 to 0 3 append sussess
+2022/06/04 23:09:19 raft.go:228: 1 3 to 2 3 append sussess
+2022/06/04 23:09:19 raft.go:228: 1 3 to 2 3 append sussess
+2022/06/04 23:09:19 raft.go:228: 1 3 to 0 3 append sussess
+2022/06/04 23:09:19 raft.go:228: 1 3 to 0 3 append sussess
+2022/06/04 23:09:19 raft.go:228: 1 3 to 2 3 append sussess
+2022/06/04 23:09:19 raft.go:228: 1 3 to 2 3 append sussess
+2022/06/04 23:09:19 raft.go:228: 1 3 to 0 3 append sussess
+2022/06/04 23:09:19 raft.go:228: 1 3 to 2 3 append sussess
+2022/06/04 23:09:19 raft.go:228: 1 3 to 0 3 append sussess
+2022/06/04 23:09:19 raft.go:228: 1 3 to 2 3 append sussess
+2022/06/04 23:09:19 raft.go:228: 1 3 to 0 3 append sussess
+2022/06/04 23:09:19 raft.go:228: 1 3 to 2 3 append sussess
+2022/06/04 23:09:19 raft.go:228: 1 3 to 0 3 append sussess
+2022/06/04 23:09:19 raft.go:228: 1 3 to 2 3 append sussess
+2022/06/04 23:09:19 raft.go:228: 1 3 to 0 3 append sussess
+2022/06/04 23:09:19 raft.go:228: 1 3 to 0 3 append sussess
+2022/06/04 23:09:19 raft.go:228: 1 3 to 2 3 append sussess
+2022/06/04 23:09:20 raft.go:228: 1 3 to 2 3 append sussess
+2022/06/04 23:09:20 raft.go:228: 1 3 to 0 3 append sussess
+2022/06/04 23:09:20 raft.go:228: 1 3 to 2 3 append sussess
+2022/06/04 23:09:20 raft.go:228: 1 3 to 0 3 append sussess
+2022/06/04 23:09:20 raft.go:228: 1 3 to 0 3 append sussess
+2022/06/04 23:09:20 raft.go:228: 1 3 to 2 3 append sussess
+2022/06/04 23:09:20 raft.go:228: 1 3 to 0 3 append sussess
+2022/06/04 23:09:20 raft.go:228: 1 3 to 2 3 append sussess
+2022/06/04 23:09:20 raft.go:228: 1 3 to 0 3 append sussess
+2022/06/04 23:09:20 raft.go:228: 1 3 to 2 3 append sussess
+2022/06/04 23:09:20 raft.go:228: 1 3 to 2 3 append sussess
+2022/06/04 23:09:20 raft.go:228: 1 3 to 0 3 append sussess
+2022/06/04 23:09:20 raft.go:228: 1 3 to 2 3 append sussess
+2022/06/04 23:09:20 raft.go:228: 1 3 to 0 3 append sussess
+2022/06/04 23:09:20 raft.go:228: 1 3 to 0 3 append sussess
+2022/06/04 23:09:20 raft.go:228: 1 3 to 2 3 append sussess
+2022/06/04 23:09:20 raft.go:228: 1 3 to 2 3 append sussess
+2022/06/04 23:09:20 raft.go:228: 1 3 to 0 3 append sussess
+2022/06/04 23:09:20 raft.go:228: 1 3 to 0 3 append sussess
+2022/06/04 23:09:20 raft.go:228: 1 3 to 2 3 append sussess
+2022/06/04 23:09:21 raft.go:228: 1 3 to 2 3 append sussess
+2022/06/04 23:09:21 raft.go:228: 1 3 to 0 3 append sussess
+2022/06/04 23:09:21 raft.go:228: 1 3 to 2 3 append sussess
+2022/06/04 23:09:21 raft.go:228: 1 3 to 0 3 append sussess
+2022/06/04 23:09:21 raft.go:228: 1 3 to 0 3 append sussess
+2022/06/04 23:09:21 raft.go:228: 1 3 to 2 3 append sussess
+2022/06/04 23:09:21 raft.go:228: 1 3 to 2 3 append sussess
+2022/06/04 23:09:21 raft.go:228: 1 3 to 0 3 append sussess
+2022/06/04 23:09:21 raft.go:228: 1 3 to 0 3 append sussess
+2022/06/04 23:09:21 raft.go:228: 1 3 to 2 3 append sussess
+2022/06/04 23:09:21 raft.go:228: 1 3 to 0 3 append sussess
+2022/06/04 23:09:21 raft.go:228: 1 3 to 2 3 append sussess
+2022/06/04 23:09:21 raft.go:228: 1 3 to 0 3 append sussess
+2022/06/04 23:09:21 raft.go:228: 1 3 to 2 3 append sussess
+2022/06/04 23:09:21 raft.go:228: 1 3 to 0 3 append sussess
+2022/06/04 23:09:21 raft.go:228: 1 3 to 2 3 append sussess
+2022/06/04 23:09:21 raft.go:228: 1 3 to 0 3 append sussess
+2022/06/04 23:09:21 raft.go:228: 1 3 to 2 3 append sussess
+  ... Passed --   3.6  3   76   10688    0
+Test (2A): election after network failure ...
+2022/06/04 23:09:22 raft.go:331: id: 0 term: 1 start requestvote
+2022/06/04 23:09:22 raft.go:331: id: 1 term: 1 start requestvote
+2022/06/04 23:09:22 raft.go:331: id: 2 term: 1 start requestvote
+2022/06/04 23:09:22 raft.go:182: id: 1 term: 1 no vote 0 1
+2022/06/04 23:09:22 raft.go:182: id: 2 term: 1 no vote 0 1
+2022/06/04 23:09:22 raft.go:182: id: 0 term: 1 no vote 1 1
+2022/06/04 23:09:22 raft.go:182: id: 0 term: 1 no vote 2 1
+2022/06/04 23:09:22 raft.go:182: id: 1 term: 1 no vote 2 1
+2022/06/04 23:09:22 raft.go:182: id: 2 term: 1 no vote 1 1
+2022/06/04 23:09:22 raft.go:331: id: 1 term: 2 start requestvote
+2022/06/04 23:09:22 raft.go:331: id: 2 term: 2 start requestvote
+2022/06/04 23:09:22 raft.go:176: id: 0 term: 1 vote 1 2
+2022/06/04 23:09:22 raft.go:182: id: 1 term: 2 no vote 2 2
+2022/06/04 23:09:22 raft.go:182: id: 2 term: 2 no vote 1 2
+2022/06/04 23:09:22 raft.go:182: id: 0 term: 1 no vote 2 2
+2022/06/04 23:09:22 raft.go:371: id: 1 term 2 be Leader
+2022/06/04 23:09:22 raft.go:331: id: 0 term: 2 start requestvote
+2022/06/04 23:09:22 raft.go:182: id: 1 term: 2 no vote 0 2
+2022/06/04 23:09:22 raft.go:182: id: 2 term: 2 no vote 0 2
+2022/06/04 23:09:22 raft.go:228: 1 2 to 0 2 append sussess
+2022/06/04 23:09:22 raft.go:228: 1 2 to 2 2 append sussess
+2022/06/04 23:09:22 raft.go:331: id: 0 term: 3 start requestvote
+2022/06/04 23:09:22 raft.go:331: id: 2 term: 3 start requestvote
+2022/06/04 23:09:22 raft.go:182: id: 2 term: 3 no vote 0 3
+2022/06/04 23:09:22 raft.go:182: id: 0 term: 3 no vote 2 3
+2022/06/04 23:09:22 raft.go:331: id: 0 term: 4 start requestvote
+2022/06/04 23:09:22 raft.go:176: id: 2 term: 3 vote 0 4
+2022/06/04 23:09:22 raft.go:371: id: 0 term 4 be Leader
+2022/06/04 23:09:22 raft.go:331: id: 2 term: 4 start requestvote
+2022/06/04 23:09:22 raft.go:228: 0 4 to 2 4 append sussess
+2022/06/04 23:09:22 raft.go:182: id: 0 term: 4 no vote 2 4
+2022/06/04 23:09:22 raft.go:228: 0 4 to 2 4 append sussess
+2022/06/04 23:09:22 raft.go:228: 0 4 to 1 4 append sussess
+2022/06/04 23:09:22 raft.go:228: 0 4 to 2 4 append sussess
+2022/06/04 23:09:23 raft.go:228: 0 4 to 2 4 append sussess
+2022/06/04 23:09:23 raft.go:228: 0 4 to 1 4 append sussess
+2022/06/04 23:09:23 raft.go:228: 0 4 to 1 4 append sussess
+2022/06/04 23:09:23 raft.go:228: 0 4 to 2 4 append sussess
+2022/06/04 23:09:23 raft.go:228: 0 4 to 1 4 append sussess
+2022/06/04 23:09:23 raft.go:228: 0 4 to 2 4 append sussess
+2022/06/04 23:09:23 raft.go:228: 0 4 to 2 4 append sussess
+2022/06/04 23:09:23 raft.go:228: 0 4 to 1 4 append sussess
+2022/06/04 23:09:23 raft.go:331: id: 2 term: 5 start requestvote
+2022/06/04 23:09:23 raft.go:331: id: 1 term: 5 start requestvote
+2022/06/04 23:09:23 raft.go:331: id: 2 term: 6 start requestvote
+2022/06/04 23:09:23 raft.go:331: id: 1 term: 6 start requestvote
+2022/06/04 23:09:24 raft.go:331: id: 1 term: 7 start requestvote
+2022/06/04 23:09:24 raft.go:331: id: 2 term: 7 start requestvote
+2022/06/04 23:09:24 raft.go:331: id: 1 term: 8 start requestvote
+2022/06/04 23:09:24 raft.go:331: id: 2 term: 8 start requestvote
+2022/06/04 23:09:24 raft.go:331: id: 1 term: 9 start requestvote
+2022/06/04 23:09:24 raft.go:331: id: 2 term: 9 start requestvote
+2022/06/04 23:09:24 raft.go:331: id: 1 term: 10 start requestvote
+2022/06/04 23:09:25 raft.go:331: id: 2 term: 10 start requestvote
+2022/06/04 23:09:25 raft.go:331: id: 1 term: 11 start requestvote
+2022/06/04 23:09:25 raft.go:331: id: 2 term: 11 start requestvote
+2022/06/04 23:09:25 raft.go:331: id: 1 term: 12 start requestvote
+2022/06/04 23:09:25 raft.go:188: id: 1 term: 12 no vote 2 7
+2022/06/04 23:09:25 raft.go:331: id: 2 term: 12 start requestvote
+2022/06/04 23:09:25 raft.go:182: id: 1 term: 12 no vote 2 12
+2022/06/04 23:09:25 raft.go:331: id: 1 term: 13 start requestvote
+2022/06/04 23:09:25 raft.go:176: id: 2 term: 12 vote 1 13
+2022/06/04 23:09:25 raft.go:371: id: 1 term 13 be Leader
+2022/06/04 23:09:25 raft.go:188: id: 1 term: 13 no vote 2 9
+2022/06/04 23:09:25 raft.go:228: 1 13 to 2 13 append sussess
+2022/06/04 23:09:25 raft.go:228: 1 13 to 2 13 append sussess
+2022/06/04 23:09:26 raft.go:228: 1 13 to 0 13 append sussess
+2022/06/04 23:09:26 raft.go:228: 1 13 to 2 13 append sussess
+2022/06/04 23:09:26 raft.go:228: 1 13 to 0 13 append sussess
+2022/06/04 23:09:26 raft.go:228: 1 13 to 2 13 append sussess
+2022/06/04 23:09:26 raft.go:228: 1 13 to 0 13 append sussess
+2022/06/04 23:09:26 raft.go:228: 1 13 to 2 13 append sussess
+2022/06/04 23:09:26 raft.go:228: 1 13 to 2 13 append sussess
+2022/06/04 23:09:26 raft.go:228: 1 13 to 0 13 append sussess
+2022/06/04 23:09:26 raft.go:228: 1 13 to 0 13 append sussess
+2022/06/04 23:09:26 raft.go:228: 1 13 to 2 13 append sussess
+  ... Passed --   4.5  3  168   15970    0
+Test (2A): multiple elections ...
+2022/06/04 23:09:26 raft.go:331: id: 0 term: 1 start requestvote
+2022/06/04 23:09:26 raft.go:331: id: 2 term: 1 start requestvote
+2022/06/04 23:09:26 raft.go:331: id: 3 term: 1 start requestvote
+2022/06/04 23:09:26 raft.go:331: id: 4 term: 1 start requestvote
+2022/06/04 23:09:26 raft.go:331: id: 1 term: 1 start requestvote
+2022/06/04 23:09:26 raft.go:331: id: 6 term: 1 start requestvote
+2022/06/04 23:09:26 raft.go:331: id: 5 term: 1 start requestvote
+2022/06/04 23:09:26 raft.go:182: id: 6 term: 1 no vote 0 1
+2022/06/04 23:09:26 raft.go:182: id: 1 term: 1 no vote 0 1
+2022/06/04 23:09:26 raft.go:182: id: 3 term: 1 no vote 2 1
+2022/06/04 23:09:26 raft.go:182: id: 6 term: 1 no vote 4 1
+2022/06/04 23:09:26 raft.go:182: id: 2 term: 1 no vote 0 1
+2022/06/04 23:09:26 raft.go:182: id: 2 term: 1 no vote 3 1
+2022/06/04 23:09:26 raft.go:182: id: 4 term: 1 no vote 3 1
+2022/06/04 23:09:26 raft.go:182: id: 0 term: 1 no vote 3 1
+2022/06/04 23:09:26 raft.go:182: id: 1 term: 1 no vote 3 1
+2022/06/04 23:09:26 raft.go:182: id: 6 term: 1 no vote 1 1
+2022/06/04 23:09:26 raft.go:182: id: 5 term: 1 no vote 3 1
+2022/06/04 23:09:26 raft.go:182: id: 0 term: 1 no vote 2 1
+2022/06/04 23:09:26 raft.go:182: id: 6 term: 1 no vote 3 1
+2022/06/04 23:09:26 raft.go:182: id: 0 term: 1 no vote 1 1
+2022/06/04 23:09:26 raft.go:182: id: 1 term: 1 no vote 2 1
+2022/06/04 23:09:26 raft.go:182: id: 2 term: 1 no vote 6 1
+2022/06/04 23:09:26 raft.go:182: id: 4 term: 1 no vote 0 1
+2022/06/04 23:09:26 raft.go:182: id: 4 term: 1 no vote 2 1
+2022/06/04 23:09:26 raft.go:182: id: 5 term: 1 no vote 0 1
+2022/06/04 23:09:26 raft.go:182: id: 5 term: 1 no vote 1 1
+2022/06/04 23:09:26 raft.go:182: id: 6 term: 1 no vote 2 1
+2022/06/04 23:09:26 raft.go:182: id: 3 term: 1 no vote 0 1
+2022/06/04 23:09:26 raft.go:182: id: 2 term: 1 no vote 1 1
+2022/06/04 23:09:26 raft.go:182: id: 5 term: 1 no vote 2 1
+2022/06/04 23:09:26 raft.go:182: id: 0 term: 1 no vote 4 1
+2022/06/04 23:09:26 raft.go:182: id: 4 term: 1 no vote 1 1
+2022/06/04 23:09:26 raft.go:182: id: 2 term: 1 no vote 4 1
+2022/06/04 23:09:26 raft.go:182: id: 3 term: 1 no vote 1 1
+2022/06/04 23:09:26 raft.go:182: id: 1 term: 1 no vote 6 1
+2022/06/04 23:09:26 raft.go:182: id: 3 term: 1 no vote 6 1
+2022/06/04 23:09:26 raft.go:182: id: 0 term: 1 no vote 6 1
+2022/06/04 23:09:26 raft.go:182: id: 0 term: 1 no vote 5 1
+2022/06/04 23:09:26 raft.go:182: id: 3 term: 1 no vote 4 1
+2022/06/04 23:09:26 raft.go:182: id: 1 term: 1 no vote 4 1
+2022/06/04 23:09:26 raft.go:182: id: 4 term: 1 no vote 6 1
+2022/06/04 23:09:26 raft.go:182: id: 1 term: 1 no vote 5 1
+2022/06/04 23:09:26 raft.go:182: id: 5 term: 1 no vote 6 1
+2022/06/04 23:09:26 raft.go:182: id: 6 term: 1 no vote 5 1
+2022/06/04 23:09:26 raft.go:182: id: 3 term: 1 no vote 5 1
+2022/06/04 23:09:26 raft.go:182: id: 4 term: 1 no vote 5 1
+2022/06/04 23:09:26 raft.go:182: id: 2 term: 1 no vote 5 1
+2022/06/04 23:09:26 raft.go:182: id: 5 term: 1 no vote 4 1
+2022/06/04 23:09:26 raft.go:331: id: 0 term: 2 start requestvote
+2022/06/04 23:09:26 raft.go:331: id: 3 term: 2 start requestvote
+2022/06/04 23:09:26 raft.go:331: id: 6 term: 2 start requestvote
+2022/06/04 23:09:26 raft.go:331: id: 5 term: 2 start requestvote
+2022/06/04 23:09:26 raft.go:182: id: 6 term: 2 no vote 0 2
+2022/06/04 23:09:26 raft.go:176: id: 2 term: 1 vote 0 2
+2022/06/04 23:09:26 raft.go:176: id: 1 term: 1 vote 0 2
+2022/06/04 23:09:26 raft.go:176: id: 4 term: 1 vote 0 2
+2022/06/04 23:09:26 raft.go:182: id: 3 term: 2 no vote 0 2
+2022/06/04 23:09:26 raft.go:182: id: 5 term: 2 no vote 0 2
+2022/06/04 23:09:26 raft.go:182: id: 5 term: 2 no vote 3 2
+2022/06/04 23:09:26 raft.go:182: id: 0 term: 2 no vote 3 2
+2022/06/04 23:09:26 raft.go:182: id: 1 term: 1 no vote 3 2
+2022/06/04 23:09:26 raft.go:182: id: 4 term: 1 no vote 3 2
+2022/06/04 23:09:26 raft.go:182: id: 2 term: 1 no vote 3 2
+2022/06/04 23:09:26 raft.go:182: id: 6 term: 2 no vote 3 2
+2022/06/04 23:09:26 raft.go:182: id: 0 term: 2 no vote 6 2
+2022/06/04 23:09:26 raft.go:182: id: 5 term: 2 no vote 6 2
+2022/06/04 23:09:26 raft.go:182: id: 3 term: 2 no vote 6 2
+2022/06/04 23:09:26 raft.go:182: id: 2 term: 1 no vote 6 2
+2022/06/04 23:09:26 raft.go:182: id: 1 term: 1 no vote 6 2
+2022/06/04 23:09:26 raft.go:182: id: 1 term: 1 no vote 5 2
+2022/06/04 23:09:26 raft.go:182: id: 0 term: 2 no vote 5 2
+2022/06/04 23:09:26 raft.go:182: id: 3 term: 2 no vote 5 2
+2022/06/04 23:09:26 raft.go:182: id: 4 term: 1 no vote 5 2
+2022/06/04 23:09:26 raft.go:182: id: 4 term: 1 no vote 6 2
+2022/06/04 23:09:26 raft.go:182: id: 2 term: 1 no vote 5 2
+2022/06/04 23:09:26 raft.go:182: id: 6 term: 2 no vote 5 2
+2022/06/04 23:09:26 raft.go:371: id: 0 term 2 be Leader
+2022/06/04 23:09:26 raft.go:331: id: 2 term: 2 start requestvote
+2022/06/04 23:09:26 raft.go:331: id: 4 term: 2 start requestvote
+2022/06/04 23:09:26 raft.go:331: id: 1 term: 2 start requestvote
+2022/06/04 23:09:26 raft.go:182: id: 0 term: 2 no vote 2 2
+2022/06/04 23:09:26 raft.go:182: id: 3 term: 2 no vote 2 2
+2022/06/04 23:09:26 raft.go:228: 0 2 to 6 2 append sussess
+2022/06/04 23:09:26 raft.go:228: 0 2 to 3 2 append sussess
+2022/06/04 23:09:26 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:09:26 raft.go:182: id: 1 term: 2 no vote 2 2
+2022/06/04 23:09:26 raft.go:228: 0 2 to 5 2 append sussess
+2022/06/04 23:09:26 raft.go:228: 0 2 to 4 2 append sussess
+2022/06/04 23:09:26 raft.go:182: id: 5 term: 2 no vote 2 2
+2022/06/04 23:09:26 raft.go:182: id: 4 term: 2 no vote 2 2
+2022/06/04 23:09:26 raft.go:182: id: 6 term: 2 no vote 2 2
+2022/06/04 23:09:26 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:09:26 raft.go:182: id: 2 term: 2 no vote 4 2
+2022/06/04 23:09:26 raft.go:182: id: 0 term: 2 no vote 4 2
+2022/06/04 23:09:26 raft.go:182: id: 5 term: 2 no vote 4 2
+2022/06/04 23:09:26 raft.go:182: id: 1 term: 2 no vote 4 2
+2022/06/04 23:09:26 raft.go:182: id: 6 term: 2 no vote 4 2
+2022/06/04 23:09:26 raft.go:182: id: 3 term: 2 no vote 4 2
+2022/06/04 23:09:26 raft.go:182: id: 0 term: 2 no vote 1 2
+2022/06/04 23:09:26 raft.go:182: id: 5 term: 2 no vote 1 2
+2022/06/04 23:09:26 raft.go:182: id: 2 term: 2 no vote 1 2
+2022/06/04 23:09:26 raft.go:182: id: 4 term: 2 no vote 1 2
+2022/06/04 23:09:26 raft.go:182: id: 3 term: 2 no vote 1 2
+2022/06/04 23:09:26 raft.go:182: id: 6 term: 2 no vote 1 2
+2022/06/04 23:09:26 raft.go:228: 0 2 to 1 2 append sussess
+2022/06/04 23:09:26 raft.go:228: 0 2 to 2 2 append sussess
+2022/06/04 23:09:26 raft.go:228: 0 2 to 5 2 append sussess
+2022/06/04 23:09:26 raft.go:228: 0 2 to 6 2 append sussess
+2022/06/04 23:09:26 raft.go:228: 0 2 to 4 2 append sussess
+2022/06/04 23:09:26 raft.go:228: 0 2 to 3 2 append sussess
+2022/06/04 23:09:27 raft.go:228: 0 2 to 6 2 append sussess
+2022/06/04 23:09:27 raft.go:228: 0 2 to 3 2 append sussess
+2022/06/04 23:09:27 raft.go:228: 0 2 to 5 2 append sussess
+2022/06/04 23:09:27 raft.go:331: id: 2 term: 3 start requestvote
+2022/06/04 23:09:27 raft.go:331: id: 4 term: 3 start requestvote
+2022/06/04 23:09:27 raft.go:331: id: 1 term: 3 start requestvote
+2022/06/04 23:09:27 raft.go:228: 0 2 to 5 2 append sussess
+2022/06/04 23:09:27 raft.go:228: 0 2 to 3 2 append sussess
+2022/06/04 23:09:27 raft.go:228: 0 2 to 6 2 append sussess
+2022/06/04 23:09:27 raft.go:228: 0 2 to 3 2 append sussess
+2022/06/04 23:09:27 raft.go:228: 0 2 to 6 2 append sussess
+2022/06/04 23:09:27 raft.go:228: 0 2 to 5 2 append sussess
+2022/06/04 23:09:27 raft.go:228: 0 2 to 6 2 append sussess
+2022/06/04 23:09:27 raft.go:228: 0 2 to 5 2 append sussess
+2022/06/04 23:09:27 raft.go:228: 0 2 to 3 2 append sussess
+2022/06/04 23:09:27 raft.go:331: id: 2 term: 4 start requestvote
+2022/06/04 23:09:27 raft.go:331: id: 4 term: 4 start requestvote
+2022/06/04 23:09:27 raft.go:331: id: 1 term: 4 start requestvote
+2022/06/04 23:09:27 raft.go:182: id: 1 term: 4 no vote 2 4
+2022/06/04 23:09:27 raft.go:176: id: 0 term: 2 vote 2 4
+2022/06/04 23:09:27 raft.go:176: id: 3 term: 2 vote 2 4
+2022/06/04 23:09:27 raft.go:228: 0 2 to 3 2 append sussess
+2022/06/04 23:09:27 raft.go:182: id: 0 term: 2 no vote 1 4
+2022/06/04 23:09:27 raft.go:182: id: 2 term: 4 no vote 1 4
+2022/06/04 23:09:27 raft.go:182: id: 3 term: 2 no vote 1 4
+2022/06/04 23:09:27 raft.go:176: id: 0 term: 2 vote 1 3
+2022/06/04 23:09:27 raft.go:331: id: 6 term: 3 start requestvote
+2022/06/04 23:09:27 raft.go:331: id: 5 term: 3 start requestvote
+2022/06/04 23:09:27 raft.go:228: 0 2 to 3 2 append sussess
+2022/06/04 23:09:27 raft.go:331: id: 2 term: 5 start requestvote
+2022/06/04 23:09:27 raft.go:331: id: 1 term: 5 start requestvote
+2022/06/04 23:09:27 raft.go:176: id: 0 term: 2 vote 2 5
+2022/06/04 23:09:27 raft.go:182: id: 1 term: 5 no vote 2 5
+2022/06/04 23:09:27 raft.go:176: id: 3 term: 2 vote 2 5
+2022/06/04 23:09:27 raft.go:228: 0 2 to 3 2 append sussess
+2022/06/04 23:09:27 raft.go:182: id: 0 term: 2 no vote 1 5
+2022/06/04 23:09:27 raft.go:182: id: 3 term: 2 no vote 1 5
+2022/06/04 23:09:27 raft.go:182: id: 2 term: 5 no vote 1 5
+2022/06/04 23:09:27 raft.go:331: id: 4 term: 5 start requestvote
+2022/06/04 23:09:27 raft.go:228: 0 2 to 3 2 append sussess
+2022/06/04 23:09:27 raft.go:331: id: 6 term: 4 start requestvote
+2022/06/04 23:09:27 raft.go:331: id: 5 term: 4 start requestvote
+2022/06/04 23:09:27 raft.go:188: id: 1 term: 5 no vote 2 3
+2022/06/04 23:09:27 raft.go:228: 0 2 to 3 2 append sussess
+2022/06/04 23:09:27 raft.go:331: id: 2 term: 6 start requestvote
+2022/06/04 23:09:27 raft.go:331: id: 4 term: 6 start requestvote
+2022/06/04 23:09:27 raft.go:331: id: 1 term: 6 start requestvote
+2022/06/04 23:09:28 raft.go:176: id: 6 term: 4 vote 2 6
+2022/06/04 23:09:28 raft.go:182: id: 2 term: 6 no vote 4 6
+2022/06/04 23:09:28 raft.go:182: id: 4 term: 6 no vote 2 6
+2022/06/04 23:09:28 raft.go:176: id: 0 term: 2 vote 2 6
+2022/06/04 23:09:28 raft.go:182: id: 6 term: 4 no vote 4 6
+2022/06/04 23:09:28 raft.go:182: id: 0 term: 2 no vote 4 6
+2022/06/04 23:09:28 raft.go:331: id: 3 term: 3 start requestvote
+2022/06/04 23:09:28 raft.go:331: id: 6 term: 5 start requestvote
+2022/06/04 23:09:28 raft.go:182: id: 0 term: 2 no vote 6 5
+2022/06/04 23:09:28 raft.go:188: id: 4 term: 6 no vote 6 5
+2022/06/04 23:09:28 raft.go:188: id: 2 term: 6 no vote 6 5
+2022/06/04 23:09:28 raft.go:188: id: 6 term: 5 no vote 4 3
+2022/06/04 23:09:28 raft.go:331: id: 6 term: 6 start requestvote
+2022/06/04 23:09:28 raft.go:331: id: 5 term: 5 start requestvote
+2022/06/04 23:09:28 raft.go:331: id: 1 term: 7 start requestvote
+2022/06/04 23:09:28 raft.go:182: id: 2 term: 6 no vote 6 6
+2022/06/04 23:09:28 raft.go:182: id: 0 term: 2 no vote 6 6
+2022/06/04 23:09:28 raft.go:182: id: 4 term: 6 no vote 6 6
+2022/06/04 23:09:28 raft.go:331: id: 3 term: 4 start requestvote
+2022/06/04 23:09:28 raft.go:331: id: 2 term: 7 start requestvote
+2022/06/04 23:09:28 raft.go:331: id: 4 term: 7 start requestvote
+2022/06/04 23:09:28 raft.go:176: id: 0 term: 2 vote 2 7
+2022/06/04 23:09:28 raft.go:182: id: 4 term: 7 no vote 2 7
+2022/06/04 23:09:28 raft.go:176: id: 6 term: 6 vote 2 7
+2022/06/04 23:09:28 raft.go:182: id: 0 term: 2 no vote 4 7
+2022/06/04 23:09:28 raft.go:182: id: 2 term: 7 no vote 4 7
+2022/06/04 23:09:28 raft.go:182: id: 6 term: 6 no vote 4 7
+2022/06/04 23:09:28 raft.go:331: id: 6 term: 7 start requestvote
+2022/06/04 23:09:28 raft.go:331: id: 5 term: 6 start requestvote
+2022/06/04 23:09:28 raft.go:182: id: 0 term: 2 no vote 6 7
+2022/06/04 23:09:28 raft.go:182: id: 2 term: 7 no vote 6 7
+2022/06/04 23:09:28 raft.go:182: id: 4 term: 7 no vote 6 7
+2022/06/04 23:09:28 raft.go:331: id: 2 term: 8 start requestvote
+2022/06/04 23:09:28 raft.go:331: id: 1 term: 8 start requestvote
+2022/06/04 23:09:28 raft.go:182: id: 1 term: 8 no vote 2 8
+2022/06/04 23:09:28 raft.go:176: id: 5 term: 6 vote 2 8
+2022/06/04 23:09:28 raft.go:176: id: 6 term: 7 vote 2 8
+2022/06/04 23:09:28 raft.go:182: id: 2 term: 8 no vote 1 8
+2022/06/04 23:09:28 raft.go:182: id: 6 term: 7 no vote 1 8
+2022/06/04 23:09:28 raft.go:182: id: 5 term: 6 no vote 1 8
+2022/06/04 23:09:28 raft.go:331: id: 3 term: 5 start requestvote
+2022/06/04 23:09:28 raft.go:331: id: 4 term: 8 start requestvote
+2022/06/04 23:09:28 raft.go:331: id: 6 term: 8 start requestvote
+2022/06/04 23:09:28 raft.go:331: id: 5 term: 7 start requestvote
+2022/06/04 23:09:28 raft.go:182: id: 5 term: 7 no vote 6 8
+2022/06/04 23:09:28 raft.go:182: id: 1 term: 8 no vote 6 8
+2022/06/04 23:09:28 raft.go:182: id: 2 term: 8 no vote 6 8
+2022/06/04 23:09:28 raft.go:188: id: 6 term: 8 no vote 5 7
+2022/06/04 23:09:28 raft.go:188: id: 1 term: 8 no vote 5 7
+2022/06/04 23:09:28 raft.go:188: id: 2 term: 8 no vote 5 7
+2022/06/04 23:09:28 raft.go:188: id: 2 term: 8 no vote 6 3
+2022/06/04 23:09:28 raft.go:331: id: 5 term: 8 start requestvote
+2022/06/04 23:09:28 raft.go:331: id: 2 term: 9 start requestvote
+2022/06/04 23:09:28 raft.go:331: id: 1 term: 9 start requestvote
+2022/06/04 23:09:28 raft.go:188: id: 1 term: 9 no vote 5 8
+2022/06/04 23:09:28 raft.go:188: id: 2 term: 9 no vote 5 8
+2022/06/04 23:09:28 raft.go:182: id: 6 term: 8 no vote 5 8
+2022/06/04 23:09:28 raft.go:176: id: 5 term: 8 vote 2 9
+2022/06/04 23:09:28 raft.go:182: id: 1 term: 9 no vote 2 9
+2022/06/04 23:09:28 raft.go:176: id: 6 term: 8 vote 2 9
+2022/06/04 23:09:28 raft.go:182: id: 2 term: 9 no vote 1 9
+2022/06/04 23:09:28 raft.go:182: id: 6 term: 8 no vote 1 9
+2022/06/04 23:09:28 raft.go:182: id: 5 term: 8 no vote 1 9
+2022/06/04 23:09:28 raft.go:331: id: 3 term: 6 start requestvote
+2022/06/04 23:09:28 raft.go:331: id: 6 term: 9 start requestvote
+2022/06/04 23:09:28 raft.go:331: id: 5 term: 9 start requestvote
+2022/06/04 23:09:28 raft.go:331: id: 4 term: 9 start requestvote
+2022/06/04 23:09:28 raft.go:182: id: 5 term: 9 no vote 6 9
+2022/06/04 23:09:28 raft.go:182: id: 2 term: 9 no vote 6 9
+2022/06/04 23:09:28 raft.go:182: id: 1 term: 9 no vote 6 9
+2022/06/04 23:09:28 raft.go:182: id: 1 term: 9 no vote 5 9
+2022/06/04 23:09:28 raft.go:182: id: 2 term: 9 no vote 5 9
+2022/06/04 23:09:28 raft.go:182: id: 6 term: 9 no vote 5 9
+2022/06/04 23:09:28 raft.go:331: id: 2 term: 10 start requestvote
+2022/06/04 23:09:29 raft.go:176: id: 1 term: 9 vote 2 10
+2022/06/04 23:09:29 raft.go:176: id: 6 term: 9 vote 2 10
+2022/06/04 23:09:29 raft.go:176: id: 5 term: 9 vote 2 10
+2022/06/04 23:09:29 raft.go:371: id: 2 term 10 be Leader
+2022/06/04 23:09:29 raft.go:331: id: 3 term: 7 start requestvote
+2022/06/04 23:09:29 raft.go:331: id: 5 term: 10 start requestvote
+2022/06/04 23:09:29 raft.go:331: id: 1 term: 10 start requestvote
+2022/06/04 23:09:29 raft.go:182: id: 2 term: 10 no vote 5 10
+2022/06/04 23:09:29 raft.go:182: id: 6 term: 9 no vote 5 10
+2022/06/04 23:09:29 raft.go:182: id: 1 term: 10 no vote 5 10
+2022/06/04 23:09:29 raft.go:228: 2 10 to 1 10 append sussess
+2022/06/04 23:09:29 raft.go:228: 2 10 to 6 10 append sussess
+2022/06/04 23:09:29 raft.go:228: 2 10 to 5 10 append sussess
+2022/06/04 23:09:29 raft.go:182: id: 5 term: 10 no vote 1 10
+2022/06/04 23:09:29 raft.go:182: id: 6 term: 10 no vote 1 10
+2022/06/04 23:09:29 raft.go:182: id: 2 term: 10 no vote 1 10
+2022/06/04 23:09:29 raft.go:331: id: 4 term: 10 start requestvote
+2022/06/04 23:09:29 raft.go:228: 2 10 to 1 10 append sussess
+2022/06/04 23:09:29 raft.go:228: 2 10 to 6 10 append sussess
+2022/06/04 23:09:29 raft.go:228: 2 10 to 5 10 append sussess
+2022/06/04 23:09:29 raft.go:228: 2 10 to 1 10 append sussess
+2022/06/04 23:09:29 raft.go:228: 2 10 to 6 10 append sussess
+2022/06/04 23:09:29 raft.go:228: 2 10 to 5 10 append sussess
+2022/06/04 23:09:29 raft.go:331: id: 3 term: 8 start requestvote
+2022/06/04 23:09:29 raft.go:331: id: 4 term: 11 start requestvote
+2022/06/04 23:09:29 raft.go:228: 2 10 to 1 10 append sussess
+2022/06/04 23:09:29 raft.go:228: 2 10 to 6 10 append sussess
+2022/06/04 23:09:29 raft.go:228: 2 10 to 5 10 append sussess
+2022/06/04 23:09:29 raft.go:228: 2 10 to 5 10 append sussess
+2022/06/04 23:09:29 raft.go:228: 2 10 to 6 10 append sussess
+2022/06/04 23:09:29 raft.go:228: 2 10 to 3 10 append sussess
+2022/06/04 23:09:29 raft.go:331: id: 1 term: 11 start requestvote
+2022/06/04 23:09:29 raft.go:228: 2 10 to 5 10 append sussess
+2022/06/04 23:09:29 raft.go:228: 2 10 to 3 10 append sussess
+2022/06/04 23:09:29 raft.go:228: 2 10 to 6 10 append sussess
+2022/06/04 23:09:29 raft.go:331: id: 4 term: 12 start requestvote
+2022/06/04 23:09:29 raft.go:228: 2 10 to 3 10 append sussess
+2022/06/04 23:09:29 raft.go:228: 2 10 to 5 10 append sussess
+2022/06/04 23:09:29 raft.go:228: 2 10 to 6 10 append sussess
+2022/06/04 23:09:29 raft.go:331: id: 1 term: 12 start requestvote
+2022/06/04 23:09:29 raft.go:228: 2 10 to 5 10 append sussess
+2022/06/04 23:09:29 raft.go:228: 2 10 to 3 10 append sussess
+2022/06/04 23:09:29 raft.go:228: 2 10 to 6 10 append sussess
+2022/06/04 23:09:29 raft.go:228: 2 10 to 6 10 append sussess
+2022/06/04 23:09:29 raft.go:228: 2 10 to 3 10 append sussess
+2022/06/04 23:09:29 raft.go:228: 2 10 to 5 10 append sussess
+2022/06/04 23:09:29 raft.go:228: 2 10 to 3 10 append sussess
+2022/06/04 23:09:29 raft.go:331: id: 4 term: 13 start requestvote
+2022/06/04 23:09:30 raft.go:176: id: 0 term: 2 vote 4 13
+2022/06/04 23:09:30 raft.go:176: id: 1 term: 12 vote 4 13
+2022/06/04 23:09:30 raft.go:176: id: 6 term: 10 vote 4 13
+2022/06/04 23:09:30 raft.go:371: id: 4 term 13 be Leader
+2022/06/04 23:09:30 raft.go:331: id: 3 term: 11 start requestvote
+2022/06/04 23:09:30 raft.go:331: id: 6 term: 11 start requestvote
+2022/06/04 23:09:30 raft.go:331: id: 5 term: 11 start requestvote
+2022/06/04 23:09:30 raft.go:176: id: 0 term: 2 vote 6 11
+2022/06/04 23:09:30 raft.go:188: id: 1 term: 12 no vote 6 11
+2022/06/04 23:09:30 raft.go:188: id: 4 term: 13 no vote 6 11
+2022/06/04 23:09:30 raft.go:331: id: 1 term: 13 start requestvote
+2022/06/04 23:09:30 raft.go:228: 4 13 to 0 13 append sussess
+2022/06/04 23:09:30 raft.go:228: 4 13 to 6 13 append sussess
+2022/06/04 23:09:30 raft.go:228: 4 13 to 1 13 append sussess
+2022/06/04 23:09:30 raft.go:182: id: 0 term: 13 no vote 1 13
+2022/06/04 23:09:30 raft.go:182: id: 6 term: 13 no vote 1 13
+2022/06/04 23:09:30 raft.go:182: id: 4 term: 13 no vote 1 13
+2022/06/04 23:09:30 raft.go:228: 4 13 to 1 13 append sussess
+2022/06/04 23:09:30 raft.go:228: 4 13 to 0 13 append sussess
+2022/06/04 23:09:30 raft.go:228: 4 13 to 6 13 append sussess
+2022/06/04 23:09:30 raft.go:228: 4 13 to 1 13 append sussess
+2022/06/04 23:09:30 raft.go:228: 4 13 to 6 13 append sussess
+2022/06/04 23:09:30 raft.go:228: 4 13 to 0 13 append sussess
+2022/06/04 23:09:30 raft.go:331: id: 3 term: 12 start requestvote
+2022/06/04 23:09:30 raft.go:331: id: 5 term: 12 start requestvote
+2022/06/04 23:09:30 raft.go:228: 4 13 to 1 13 append sussess
+2022/06/04 23:09:30 raft.go:228: 4 13 to 0 13 append sussess
+2022/06/04 23:09:30 raft.go:228: 4 13 to 6 13 append sussess
+2022/06/04 23:09:30 raft.go:228: 4 13 to 1 13 append sussess
+2022/06/04 23:09:30 raft.go:228: 4 13 to 3 13 append sussess
+2022/06/04 23:09:30 raft.go:228: 4 13 to 6 13 append sussess
+2022/06/04 23:09:30 raft.go:331: id: 0 term: 14 start requestvote
+2022/06/04 23:09:30 raft.go:331: id: 5 term: 13 start requestvote
+2022/06/04 23:09:30 raft.go:228: 4 13 to 3 13 append sussess
+2022/06/04 23:09:30 raft.go:228: 4 13 to 6 13 append sussess
+2022/06/04 23:09:30 raft.go:228: 4 13 to 1 13 append sussess
+2022/06/04 23:09:30 raft.go:228: 4 13 to 1 13 append sussess
+2022/06/04 23:09:30 raft.go:228: 4 13 to 6 13 append sussess
+2022/06/04 23:09:30 raft.go:228: 4 13 to 3 13 append sussess
+2022/06/04 23:09:30 raft.go:331: id: 0 term: 15 start requestvote
+2022/06/04 23:09:30 raft.go:331: id: 5 term: 14 start requestvote
+2022/06/04 23:09:30 raft.go:228: 4 13 to 1 13 append sussess
+2022/06/04 23:09:30 raft.go:228: 4 13 to 3 13 append sussess
+2022/06/04 23:09:30 raft.go:228: 4 13 to 6 13 append sussess
+2022/06/04 23:09:30 raft.go:228: 4 13 to 1 13 append sussess
+2022/06/04 23:09:30 raft.go:228: 4 13 to 3 13 append sussess
+2022/06/04 23:09:30 raft.go:228: 4 13 to 6 13 append sussess
+2022/06/04 23:09:30 raft.go:176: id: 5 term: 14 vote 0 15
+2022/06/04 23:09:31 raft.go:331: id: 5 term: 15 start requestvote
+2022/06/04 23:09:31 raft.go:182: id: 0 term: 15 no vote 5 15
+2022/06/04 23:09:31 raft.go:176: id: 6 term: 13 vote 5 15
+2022/06/04 23:09:31 raft.go:176: id: 3 term: 13 vote 5 15
+2022/06/04 23:09:31 raft.go:331: id: 3 term: 14 start requestvote
+2022/06/04 23:09:31 raft.go:188: id: 0 term: 15 no vote 3 14
+2022/06/04 23:09:31 raft.go:188: id: 5 term: 15 no vote 3 14
+2022/06/04 23:09:31 raft.go:176: id: 6 term: 13 vote 3 14
+2022/06/04 23:09:31 raft.go:331: id: 6 term: 14 start requestvote
+2022/06/04 23:09:31 raft.go:331: id: 0 term: 16 start requestvote
+2022/06/04 23:09:31 raft.go:188: id: 6 term: 14 no vote 3 8
+2022/06/04 23:09:31 raft.go:188: id: 0 term: 16 no vote 6 14
+2022/06/04 23:09:31 raft.go:182: id: 3 term: 14 no vote 6 14
+2022/06/04 23:09:31 raft.go:188: id: 5 term: 15 no vote 6 14
+2022/06/04 23:09:31 raft.go:176: id: 3 term: 14 vote 0 16
+2022/06/04 23:09:31 raft.go:176: id: 5 term: 15 vote 0 16
+2022/06/04 23:09:31 raft.go:176: id: 6 term: 14 vote 0 16
+2022/06/04 23:09:31 raft.go:331: id: 1 term: 14 start requestvote
+2022/06/04 23:09:31 raft.go:188: id: 3 term: 14 no vote 5 6
+2022/06/04 23:09:31 raft.go:371: id: 0 term 16 be Leader
+2022/06/04 23:09:31 raft.go:188: id: 3 term: 14 no vote 5 3
+2022/06/04 23:09:31 raft.go:331: id: 3 term: 15 start requestvote
+2022/06/04 23:09:31 raft.go:182: id: 5 term: 15 no vote 3 15
+2022/06/04 23:09:31 raft.go:182: id: 6 term: 14 no vote 3 15
+2022/06/04 23:09:31 raft.go:188: id: 0 term: 16 no vote 3 15
+2022/06/04 23:09:31 raft.go:331: id: 6 term: 15 start requestvote
+2022/06/04 23:09:31 raft.go:188: id: 0 term: 16 no vote 6 15
+2022/06/04 23:09:31 raft.go:182: id: 3 term: 15 no vote 6 15
+2022/06/04 23:09:31 raft.go:228: 0 16 to 3 16 append sussess
+2022/06/04 23:09:31 raft.go:182: id: 5 term: 15 no vote 6 15
+2022/06/04 23:09:31 raft.go:228: 0 16 to 5 16 append sussess
+2022/06/04 23:09:31 raft.go:228: 0 16 to 6 16 append sussess
+2022/06/04 23:09:31 raft.go:228: 0 16 to 6 16 append sussess
+2022/06/04 23:09:31 raft.go:228: 0 16 to 5 16 append sussess
+2022/06/04 23:09:31 raft.go:228: 0 16 to 3 16 append sussess
+2022/06/04 23:09:31 raft.go:331: id: 1 term: 15 start requestvote
+2022/06/04 23:09:31 raft.go:228: 0 16 to 5 16 append sussess
+2022/06/04 23:09:31 raft.go:228: 0 16 to 3 16 append sussess
+2022/06/04 23:09:31 raft.go:228: 0 16 to 6 16 append sussess
+2022/06/04 23:09:31 raft.go:331: id: 1 term: 16 start requestvote
+2022/06/04 23:09:31 raft.go:176: id: 4 term: 13 vote 1 16
+2022/06/04 23:09:31 raft.go:182: id: 5 term: 16 no vote 1 16
+2022/06/04 23:09:31 raft.go:182: id: 6 term: 16 no vote 1 16
+2022/06/04 23:09:31 raft.go:331: id: 3 term: 17 start requestvote
+2022/06/04 23:09:31 raft.go:331: id: 6 term: 17 start requestvote
+2022/06/04 23:09:31 raft.go:331: id: 5 term: 17 start requestvote
+2022/06/04 23:09:31 raft.go:176: id: 4 term: 13 vote 6 17
+2022/06/04 23:09:31 raft.go:176: id: 1 term: 16 vote 6 17
+2022/06/04 23:09:31 raft.go:182: id: 5 term: 17 no vote 6 17
+2022/06/04 23:09:31 raft.go:182: id: 1 term: 16 no vote 5 17
+2022/06/04 23:09:31 raft.go:182: id: 6 term: 17 no vote 5 17
+2022/06/04 23:09:31 raft.go:182: id: 4 term: 13 no vote 5 17
+2022/06/04 23:09:31 raft.go:188: id: 6 term: 17 no vote 1 14
+2022/06/04 23:09:31 raft.go:331: id: 1 term: 17 start requestvote
+2022/06/04 23:09:31 raft.go:182: id: 6 term: 17 no vote 1 17
+2022/06/04 23:09:31 raft.go:182: id: 4 term: 13 no vote 1 17
+2022/06/04 23:09:31 raft.go:182: id: 5 term: 17 no vote 1 17
+2022/06/04 23:09:31 raft.go:331: id: 3 term: 18 start requestvote
+2022/06/04 23:09:31 raft.go:331: id: 6 term: 18 start requestvote
+2022/06/04 23:09:31 raft.go:331: id: 5 term: 18 start requestvote
+2022/06/04 23:09:31 raft.go:176: id: 1 term: 17 vote 6 18
+2022/06/04 23:09:31 raft.go:176: id: 4 term: 13 vote 6 18
+2022/06/04 23:09:31 raft.go:182: id: 5 term: 18 no vote 6 18
+2022/06/04 23:09:31 raft.go:182: id: 6 term: 18 no vote 5 18
+2022/06/04 23:09:31 raft.go:182: id: 4 term: 13 no vote 5 18
+2022/06/04 23:09:31 raft.go:182: id: 1 term: 17 no vote 5 18
+2022/06/04 23:09:31 raft.go:188: id: 1 term: 17 no vote 6 7
+2022/06/04 23:09:32 raft.go:188: id: 5 term: 18 no vote 6 4
+2022/06/04 23:09:32 raft.go:188: id: 0 term: 16 no vote 3 8
+2022/06/04 23:09:32 raft.go:188: id: 1 term: 17 no vote 6 15
+2022/06/04 23:09:32 raft.go:228: 4 13 to 2 13 append sussess
+2022/06/04 23:09:32 raft.go:228: 0 16 to 2 16 append sussess
+2022/06/04 23:09:32 raft.go:228: 0 16 to 4 16 append sussess
+2022/06/04 23:09:32 raft.go:331: id: 5 term: 19 start requestvote
+2022/06/04 23:09:32 raft.go:228: 0 16 to 2 16 append sussess
+2022/06/04 23:09:32 raft.go:331: id: 1 term: 18 start requestvote
+2022/06/04 23:09:32 raft.go:188: id: 4 term: 16 no vote 5 10
+2022/06/04 23:09:32 raft.go:188: id: 3 term: 18 no vote 6 4
+2022/06/04 23:09:32 raft.go:188: id: 4 term: 16 no vote 3 6
+2022/06/04 23:09:32 raft.go:188: id: 6 term: 18 no vote 3 17
+2022/06/04 23:09:32 raft.go:176: id: 1 term: 18 vote 5 19
+2022/06/04 23:09:32 raft.go:176: id: 2 term: 16 vote 5 19
+2022/06/04 23:09:32 raft.go:176: id: 0 term: 16 vote 5 19
+2022/06/04 23:09:32 raft.go:176: id: 3 term: 18 vote 5 19
+2022/06/04 23:09:32 raft.go:188: id: 1 term: 18 no vote 5 12
+2022/06/04 23:09:32 raft.go:331: id: 6 term: 19 start requestvote
+2022/06/04 23:09:32 raft.go:331: id: 4 term: 17 start requestvote
+2022/06/04 23:09:32 raft.go:331: id: 3 term: 19 start requestvote
+2022/06/04 23:09:32 raft.go:331: id: 2 term: 17 start requestvote
+2022/06/04 23:09:32 raft.go:182: id: 6 term: 19 no vote 5 19
+2022/06/04 23:09:32 raft.go:176: id: 4 term: 17 vote 5 19
+2022/06/04 23:09:32 raft.go:176: id: 0 term: 16 vote 1 18
+2022/06/04 23:09:32 raft.go:176: id: 2 term: 17 vote 1 18
+2022/06/04 23:09:32 raft.go:188: id: 3 term: 19 no vote 1 18
+2022/06/04 23:09:32 raft.go:188: id: 5 term: 19 no vote 1 18
+2022/06/04 23:09:32 raft.go:182: id: 4 term: 17 no vote 1 18
+2022/06/04 23:09:32 raft.go:188: id: 6 term: 19 no vote 1 18
+2022/06/04 23:09:32 raft.go:188: id: 5 term: 19 no vote 3 11
+2022/06/04 23:09:32 raft.go:331: id: 5 term: 20 start requestvote
+2022/06/04 23:09:32 raft.go:188: id: 3 term: 19 no vote 5 11
+2022/06/04 23:09:32 raft.go:371: id: 5 term 20 be Leader
+2022/06/04 23:09:32 raft.go:182: id: 1 term: 18 no vote 6 19
+2022/06/04 23:09:32 raft.go:182: id: 2 term: 17 no vote 3 19
+2022/06/04 23:09:32 raft.go:188: id: 3 term: 19 no vote 4 17
+2022/06/04 23:09:32 raft.go:188: id: 5 term: 20 no vote 3 19
+2022/06/04 23:09:32 raft.go:182: id: 0 term: 16 no vote 6 19
+2022/06/04 23:09:32 raft.go:182: id: 2 term: 17 no vote 6 19
+2022/06/04 23:09:32 raft.go:182: id: 0 term: 16 no vote 3 19
+2022/06/04 23:09:32 raft.go:182: id: 3 term: 19 no vote 6 19
+2022/06/04 23:09:32 raft.go:182: id: 4 term: 17 no vote 3 19
+2022/06/04 23:09:32 raft.go:188: id: 5 term: 20 no vote 4 17
+2022/06/04 23:09:32 raft.go:182: id: 2 term: 17 no vote 4 17
+2022/06/04 23:09:32 raft.go:182: id: 6 term: 19 no vote 3 19
+2022/06/04 23:09:32 raft.go:182: id: 4 term: 17 no vote 6 19
+2022/06/04 23:09:32 raft.go:188: id: 5 term: 20 no vote 6 19
+2022/06/04 23:09:32 raft.go:188: id: 3 term: 19 no vote 2 17
+2022/06/04 23:09:32 raft.go:182: id: 1 term: 18 no vote 3 19
+2022/06/04 23:09:32 raft.go:188: id: 1 term: 18 no vote 4 17
+2022/06/04 23:09:32 raft.go:188: id: 1 term: 18 no vote 2 17
+2022/06/04 23:09:32 raft.go:188: id: 5 term: 20 no vote 2 17
+2022/06/04 23:09:32 raft.go:176: id: 0 term: 16 vote 4 17
+2022/06/04 23:09:32 raft.go:182: id: 0 term: 16 no vote 2 17
+2022/06/04 23:09:32 raft.go:182: id: 4 term: 17 no vote 2 17
+2022/06/04 23:09:32 raft.go:188: id: 6 term: 19 no vote 4 17
+2022/06/04 23:09:32 raft.go:188: id: 1 term: 18 no vote 3 12
+2022/06/04 23:09:32 raft.go:188: id: 6 term: 19 no vote 2 17
+2022/06/04 23:09:32 raft.go:331: id: 1 term: 19 start requestvote
+2022/06/04 23:09:32 raft.go:176: id: 6 term: 19 vote 5 20
+2022/06/04 23:09:32 raft.go:188: id: 0 term: 16 no vote 5 14
+2022/06/04 23:09:32 raft.go:176: id: 3 term: 19 vote 5 20
+2022/06/04 23:09:32 raft.go:176: id: 4 term: 17 vote 5 20
+2022/06/04 23:09:32 raft.go:176: id: 1 term: 19 vote 5 20
+2022/06/04 23:09:32 raft.go:176: id: 2 term: 17 vote 5 20
+2022/06/04 23:09:32 raft.go:176: id: 0 term: 16 vote 5 20
+  ... Passed --   6.0  7 1327  125501    0
+Test (2A): initial election ...
+2022/06/04 23:09:32 raft.go:331: id: 4 term: 18 start requestvote
+2022/06/04 23:09:32 raft.go:331: id: 3 term: 20 start requestvote
+2022/06/04 23:09:32 raft.go:331: id: 6 term: 20 start requestvote
+2022/06/04 23:09:32 raft.go:331: id: 2 term: 18 start requestvote
+2022/06/04 23:09:32 raft.go:188: id: 3 term: 20 no vote 4 3
+2022/06/04 23:09:32 raft.go:331: id: 1 term: 1 start requestvote
+2022/06/04 23:09:32 raft.go:331: id: 0 term: 1 start requestvote
+2022/06/04 23:09:32 raft.go:331: id: 2 term: 1 start requestvote
+2022/06/04 23:09:32 raft.go:182: id: 2 term: 1 no vote 1 1
+2022/06/04 23:09:32 raft.go:182: id: 0 term: 1 no vote 1 1
+2022/06/04 23:09:32 raft.go:182: id: 2 term: 1 no vote 0 1
+2022/06/04 23:09:32 raft.go:182: id: 1 term: 1 no vote 0 1
+2022/06/04 23:09:32 raft.go:182: id: 0 term: 1 no vote 2 1
+2022/06/04 23:09:32 raft.go:182: id: 1 term: 1 no vote 2 1
+2022/06/04 23:09:32 raft.go:331: id: 1 term: 2 start requestvote
+2022/06/04 23:09:32 raft.go:331: id: 0 term: 2 start requestvote
+2022/06/04 23:09:32 raft.go:331: id: 2 term: 2 start requestvote
+2022/06/04 23:09:32 raft.go:182: id: 2 term: 2 no vote 1 2
+2022/06/04 23:09:32 raft.go:182: id: 0 term: 2 no vote 1 2
+2022/06/04 23:09:32 raft.go:182: id: 2 term: 2 no vote 0 2
+2022/06/04 23:09:32 raft.go:182: id: 1 term: 2 no vote 0 2
+2022/06/04 23:09:32 raft.go:182: id: 1 term: 2 no vote 2 2
+2022/06/04 23:09:32 raft.go:182: id: 0 term: 2 no vote 2 2
+2022/06/04 23:09:33 raft.go:331: id: 2 term: 3 start requestvote
+2022/06/04 23:09:33 raft.go:176: id: 1 term: 2 vote 2 3
+2022/06/04 23:09:33 raft.go:176: id: 0 term: 2 vote 2 3
+2022/06/04 23:09:33 raft.go:371: id: 2 term 3 be Leader
+2022/06/04 23:09:33 raft.go:331: id: 1 term: 3 start requestvote
+2022/06/04 23:09:33 raft.go:331: id: 0 term: 3 start requestvote
+2022/06/04 23:09:33 raft.go:182: id: 2 term: 3 no vote 1 3
+2022/06/04 23:09:33 raft.go:182: id: 0 term: 3 no vote 1 3
+2022/06/04 23:09:33 raft.go:182: id: 2 term: 3 no vote 0 3
+2022/06/04 23:09:33 raft.go:182: id: 1 term: 3 no vote 0 3
+2022/06/04 23:09:33 raft.go:228: 2 3 to 1 3 append sussess
+2022/06/04 23:09:33 raft.go:228: 2 3 to 0 3 append sussess
+2022/06/04 23:09:33 raft.go:228: 2 3 to 1 3 append sussess
+2022/06/04 23:09:33 raft.go:228: 2 3 to 0 3 append sussess
+2022/06/04 23:09:33 raft.go:228: 2 3 to 1 3 append sussess
+2022/06/04 23:09:33 raft.go:228: 2 3 to 0 3 append sussess
+2022/06/04 23:09:33 raft.go:228: 2 3 to 1 3 append sussess
+2022/06/04 23:09:33 raft.go:228: 2 3 to 0 3 append sussess
+2022/06/04 23:09:33 raft.go:228: 2 3 to 1 3 append sussess
+2022/06/04 23:09:33 raft.go:228: 2 3 to 0 3 append sussess
+2022/06/04 23:09:33 raft.go:228: 2 3 to 1 3 append sussess
+2022/06/04 23:09:33 raft.go:228: 2 3 to 0 3 append sussess
+2022/06/04 23:09:33 raft.go:228: 2 3 to 1 3 append sussess
+2022/06/04 23:09:33 raft.go:228: 2 3 to 0 3 append sussess
+2022/06/04 23:09:33 raft.go:228: 2 3 to 1 3 append sussess
+2022/06/04 23:09:33 raft.go:228: 2 3 to 0 3 append sussess
+2022/06/04 23:09:34 raft.go:228: 2 3 to 0 3 append sussess
+2022/06/04 23:09:34 raft.go:228: 2 3 to 1 3 append sussess
+2022/06/04 23:09:34 raft.go:228: 2 3 to 1 3 append sussess
+2022/06/04 23:09:34 raft.go:228: 2 3 to 0 3 append sussess
+2022/06/04 23:09:34 raft.go:228: 2 3 to 1 3 append sussess
+2022/06/04 23:09:34 raft.go:228: 2 3 to 0 3 append sussess
+2022/06/04 23:09:34 raft.go:228: 2 3 to 1 3 append sussess
+2022/06/04 23:09:34 raft.go:228: 2 3 to 0 3 append sussess
+2022/06/04 23:09:34 raft.go:228: 2 3 to 1 3 append sussess
+2022/06/04 23:09:34 raft.go:228: 2 3 to 0 3 append sussess
+2022/06/04 23:09:34 raft.go:228: 2 3 to 1 3 append sussess
+2022/06/04 23:09:34 raft.go:228: 2 3 to 0 3 append sussess
+2022/06/04 23:09:34 raft.go:228: 2 3 to 1 3 append sussess
+2022/06/04 23:09:34 raft.go:228: 2 3 to 0 3 append sussess
+2022/06/04 23:09:34 raft.go:228: 2 3 to 0 3 append sussess
+2022/06/04 23:09:34 raft.go:228: 2 3 to 1 3 append sussess
+2022/06/04 23:09:34 raft.go:228: 2 3 to 0 3 append sussess
+2022/06/04 23:09:34 raft.go:228: 2 3 to 1 3 append sussess
+2022/06/04 23:09:34 raft.go:228: 2 3 to 0 3 append sussess
+2022/06/04 23:09:34 raft.go:228: 2 3 to 1 3 append sussess
+2022/06/04 23:09:35 raft.go:228: 2 3 to 0 3 append sussess
+2022/06/04 23:09:35 raft.go:228: 2 3 to 1 3 append sussess
+2022/06/04 23:09:35 raft.go:228: 2 3 to 0 3 append sussess
+2022/06/04 23:09:35 raft.go:228: 2 3 to 1 3 append sussess
+2022/06/04 23:09:35 raft.go:228: 2 3 to 1 3 append sussess
+2022/06/04 23:09:35 raft.go:228: 2 3 to 0 3 append sussess
+2022/06/04 23:09:35 raft.go:228: 2 3 to 1 3 append sussess
+2022/06/04 23:09:35 raft.go:228: 2 3 to 0 3 append sussess
+2022/06/04 23:09:35 raft.go:228: 2 3 to 0 3 append sussess
+2022/06/04 23:09:35 raft.go:228: 2 3 to 1 3 append sussess
+2022/06/04 23:09:35 raft.go:228: 2 3 to 0 3 append sussess
+2022/06/04 23:09:35 raft.go:228: 2 3 to 1 3 append sussess
+2022/06/04 23:09:35 raft.go:228: 2 3 to 1 3 append sussess
+2022/06/04 23:09:35 raft.go:228: 2 3 to 0 3 append sussess
+2022/06/04 23:09:35 raft.go:228: 2 3 to 0 3 append sussess
+2022/06/04 23:09:35 raft.go:228: 2 3 to 1 3 append sussess
+2022/06/04 23:09:35 raft.go:228: 2 3 to 1 3 append sussess
+2022/06/04 23:09:35 raft.go:228: 2 3 to 0 3 append sussess
+2022/06/04 23:09:35 raft.go:228: 2 3 to 1 3 append sussess
+2022/06/04 23:09:35 raft.go:228: 2 3 to 0 3 append sussess
+  ... Passed --   3.5  3   76   10688    0
+Test (2A): election after network failure ...
+2022/06/04 23:09:36 raft.go:228: 2 3 to 0 3 append sussess
+2022/06/04 23:09:36 raft.go:228: 2 3 to 1 3 append sussess
+2022/06/04 23:09:36 raft.go:331: id: 0 term: 1 start requestvote
+2022/06/04 23:09:36 raft.go:331: id: 1 term: 1 start requestvote
+2022/06/04 23:09:36 raft.go:331: id: 2 term: 1 start requestvote
+2022/06/04 23:09:36 raft.go:182: id: 1 term: 1 no vote 0 1
+2022/06/04 23:09:36 raft.go:182: id: 2 term: 1 no vote 0 1
+2022/06/04 23:09:36 raft.go:182: id: 0 term: 1 no vote 1 1
+2022/06/04 23:09:36 raft.go:182: id: 2 term: 1 no vote 1 1
+2022/06/04 23:09:36 raft.go:182: id: 0 term: 1 no vote 2 1
+2022/06/04 23:09:36 raft.go:182: id: 1 term: 1 no vote 2 1
+2022/06/04 23:09:36 raft.go:331: id: 0 term: 2 start requestvote
+2022/06/04 23:09:36 raft.go:331: id: 2 term: 2 start requestvote
+2022/06/04 23:09:36 raft.go:331: id: 1 term: 2 start requestvote
+2022/06/04 23:09:36 raft.go:182: id: 2 term: 2 no vote 0 2
+2022/06/04 23:09:36 raft.go:182: id: 1 term: 2 no vote 0 2
+2022/06/04 23:09:36 raft.go:182: id: 0 term: 2 no vote 2 2
+2022/06/04 23:09:36 raft.go:182: id: 1 term: 2 no vote 2 2
+2022/06/04 23:09:36 raft.go:182: id: 0 term: 2 no vote 1 2
+2022/06/04 23:09:36 raft.go:182: id: 2 term: 2 no vote 1 2
+2022/06/04 23:09:36 raft.go:331: id: 0 term: 3 start requestvote
+2022/06/04 23:09:36 raft.go:331: id: 1 term: 3 start requestvote
+2022/06/04 23:09:36 raft.go:331: id: 2 term: 3 start requestvote
+2022/06/04 23:09:36 raft.go:182: id: 1 term: 3 no vote 0 3
+2022/06/04 23:09:36 raft.go:182: id: 2 term: 3 no vote 0 3
+2022/06/04 23:09:36 raft.go:331: id: 0 term: 4 start requestvote
+2022/06/04 23:09:36 raft.go:188: id: 0 term: 4 no vote 1 3
+2022/06/04 23:09:36 raft.go:182: id: 2 term: 3 no vote 1 3
+2022/06/04 23:09:36 raft.go:182: id: 1 term: 3 no vote 2 3
+2022/06/04 23:09:36 raft.go:331: id: 1 term: 4 start requestvote
+2022/06/04 23:09:36 raft.go:188: id: 0 term: 4 no vote 2 3
+2022/06/04 23:09:36 raft.go:331: id: 2 term: 4 start requestvote
+2022/06/04 23:09:37 raft.go:182: id: 1 term: 4 no vote 0 4
+2022/06/04 23:09:37 raft.go:182: id: 2 term: 4 no vote 0 4
+2022/06/04 23:09:37 raft.go:182: id: 2 term: 4 no vote 1 4
+2022/06/04 23:09:37 raft.go:331: id: 0 term: 5 start requestvote
+2022/06/04 23:09:37 raft.go:188: id: 0 term: 5 no vote 1 4
+2022/06/04 23:09:37 raft.go:188: id: 0 term: 5 no vote 2 4
+2022/06/04 23:09:37 raft.go:182: id: 1 term: 4 no vote 2 4
+2022/06/04 23:09:37 raft.go:331: id: 1 term: 5 start requestvote
+2022/06/04 23:09:37 raft.go:331: id: 2 term: 5 start requestvote
+2022/06/04 23:09:37 raft.go:182: id: 2 term: 5 no vote 0 5
+2022/06/04 23:09:37 raft.go:182: id: 1 term: 5 no vote 0 5
+2022/06/04 23:09:37 raft.go:331: id: 0 term: 6 start requestvote
+2022/06/04 23:09:37 raft.go:188: id: 0 term: 6 no vote 1 5
+2022/06/04 23:09:37 raft.go:182: id: 2 term: 5 no vote 1 5
+2022/06/04 23:09:37 raft.go:331: id: 1 term: 6 start requestvote
+2022/06/04 23:09:37 raft.go:188: id: 0 term: 6 no vote 2 5
+2022/06/04 23:09:37 raft.go:188: id: 1 term: 6 no vote 2 5
+2022/06/04 23:09:37 raft.go:331: id: 2 term: 6 start requestvote
+2022/06/04 23:09:37 raft.go:331: id: 0 term: 7 start requestvote
+2022/06/04 23:09:37 raft.go:331: id: 2 term: 7 start requestvote
+2022/06/04 23:09:37 raft.go:188: id: 2 term: 7 no vote 0 6
+2022/06/04 23:09:37 raft.go:182: id: 1 term: 6 no vote 0 6
+2022/06/04 23:09:37 raft.go:188: id: 0 term: 7 no vote 1 6
+2022/06/04 23:09:37 raft.go:188: id: 2 term: 7 no vote 1 6
+2022/06/04 23:09:37 raft.go:188: id: 0 term: 7 no vote 2 6
+2022/06/04 23:09:37 raft.go:182: id: 1 term: 6 no vote 2 6
+2022/06/04 23:09:37 raft.go:331: id: 1 term: 7 start requestvote
+2022/06/04 23:09:37 raft.go:331: id: 0 term: 8 start requestvote
+2022/06/04 23:09:37 raft.go:182: id: 2 term: 7 no vote 0 7
+2022/06/04 23:09:37 raft.go:182: id: 1 term: 7 no vote 0 7
+2022/06/04 23:09:37 raft.go:188: id: 0 term: 8 no vote 2 7
+2022/06/04 23:09:37 raft.go:182: id: 1 term: 7 no vote 2 7
+2022/06/04 23:09:37 raft.go:331: id: 1 term: 8 start requestvote
+2022/06/04 23:09:37 raft.go:331: id: 2 term: 8 start requestvote
+2022/06/04 23:09:37 raft.go:188: id: 0 term: 8 no vote 1 7
+2022/06/04 23:09:38 raft.go:188: id: 2 term: 8 no vote 1 7
+2022/06/04 23:09:38 raft.go:182: id: 1 term: 8 no vote 0 8
+2022/06/04 23:09:38 raft.go:182: id: 2 term: 8 no vote 0 8
+2022/06/04 23:09:38 raft.go:331: id: 0 term: 9 start requestvote
+2022/06/04 23:09:38 raft.go:182: id: 2 term: 8 no vote 1 8
+2022/06/04 23:09:38 raft.go:188: id: 0 term: 9 no vote 1 8
+2022/06/04 23:09:38 raft.go:182: id: 1 term: 8 no vote 2 8
+2022/06/04 23:09:38 raft.go:188: id: 0 term: 9 no vote 2 8
+2022/06/04 23:09:38 raft.go:331: id: 1 term: 9 start requestvote
+2022/06/04 23:09:38 raft.go:331: id: 2 term: 9 start requestvote
+2022/06/04 23:09:38 raft.go:182: id: 2 term: 9 no vote 0 9
+2022/06/04 23:09:38 raft.go:182: id: 1 term: 9 no vote 0 9
+2022/06/04 23:09:38 raft.go:331: id: 0 term: 10 start requestvote
+2022/06/04 23:09:38 raft.go:182: id: 2 term: 9 no vote 1 9
+2022/06/04 23:09:38 raft.go:188: id: 0 term: 10 no vote 1 9
+2022/06/04 23:09:38 raft.go:182: id: 1 term: 9 no vote 2 9
+2022/06/04 23:09:38 raft.go:188: id: 0 term: 10 no vote 2 9
+2022/06/04 23:09:38 raft.go:176: id: 1 term: 9 vote 0 10
+2022/06/04 23:09:38 raft.go:176: id: 2 term: 9 vote 0 10
+2022/06/04 23:09:38 raft.go:331: id: 1 term: 10 start requestvote
+2022/06/04 23:09:38 raft.go:331: id: 2 term: 10 start requestvote
+2022/06/04 23:09:38 raft.go:331: id: 0 term: 11 start requestvote
+2022/06/04 23:09:38 raft.go:371: id: 0 term 11 be Leader
+2022/06/04 23:09:38 raft.go:188: id: 0 term: 11 no vote 1 10
+2022/06/04 23:09:38 raft.go:182: id: 2 term: 10 no vote 1 10
+2022/06/04 23:09:38 raft.go:182: id: 1 term: 10 no vote 2 10
+2022/06/04 23:09:38 raft.go:188: id: 0 term: 11 no vote 2 10
+2022/06/04 23:09:38 raft.go:176: id: 2 term: 10 vote 0 11
+2022/06/04 23:09:38 raft.go:176: id: 1 term: 10 vote 0 11
+2022/06/04 23:09:38 raft.go:331: id: 1 term: 11 start requestvote
+2022/06/04 23:09:38 raft.go:331: id: 2 term: 11 start requestvote
+2022/06/04 23:09:38 raft.go:228: 0 11 to 1 11 append sussess
+2022/06/04 23:09:38 raft.go:228: 0 11 to 2 11 append sussess
+2022/06/04 23:09:38 raft.go:331: id: 1 term: 12 start requestvote
+2022/06/04 23:09:39 raft.go:331: id: 2 term: 12 start requestvote
+2022/06/04 23:09:39 raft.go:182: id: 0 term: 11 no vote 1 11
+2022/06/04 23:09:39 raft.go:188: id: 2 term: 12 no vote 1 11
+2022/06/04 23:09:39 raft.go:182: id: 0 term: 11 no vote 2 11
+2022/06/04 23:09:39 raft.go:188: id: 1 term: 12 no vote 2 11
+2022/06/04 23:09:39 raft.go:331: id: 1 term: 13 start requestvote
+2022/06/04 23:09:39 raft.go:331: id: 2 term: 13 start requestvote
+2022/06/04 23:09:39 raft.go:188: id: 2 term: 13 no vote 1 12
+2022/06/04 23:09:39 raft.go:176: id: 0 term: 11 vote 1 12
+2022/06/04 23:09:39 raft.go:182: id: 0 term: 11 no vote 2 12
+2022/06/04 23:09:39 raft.go:188: id: 1 term: 13 no vote 2 12
+2022/06/04 23:09:39 raft.go:182: id: 2 term: 13 no vote 1 13
+2022/06/04 23:09:39 raft.go:182: id: 1 term: 13 no vote 2 13
+2022/06/04 23:09:39 raft.go:331: id: 1 term: 14 start requestvote
+2022/06/04 23:09:39 raft.go:331: id: 2 term: 14 start requestvote
+2022/06/04 23:09:39 raft.go:182: id: 2 term: 14 no vote 1 14
+2022/06/04 23:09:39 raft.go:182: id: 1 term: 14 no vote 2 14
+2022/06/04 23:09:39 raft.go:331: id: 1 term: 15 start requestvote
+2022/06/04 23:09:39 raft.go:331: id: 2 term: 15 start requestvote
+2022/06/04 23:09:39 raft.go:182: id: 2 term: 15 no vote 1 15
+2022/06/04 23:09:39 raft.go:182: id: 1 term: 15 no vote 2 15
+2022/06/04 23:09:39 raft.go:331: id: 1 term: 16 start requestvote
+2022/06/04 23:09:39 raft.go:331: id: 2 term: 16 start requestvote
+2022/06/04 23:09:39 raft.go:182: id: 2 term: 16 no vote 1 16
+2022/06/04 23:09:39 raft.go:182: id: 1 term: 16 no vote 2 16
+2022/06/04 23:09:39 raft.go:331: id: 2 term: 17 start requestvote
+2022/06/04 23:09:39 raft.go:176: id: 1 term: 16 vote 2 17
+2022/06/04 23:09:39 raft.go:371: id: 2 term 17 be Leader
+2022/06/04 23:09:39 raft.go:228: 2 17 to 1 17 append sussess
+2022/06/04 23:09:39 raft.go:228: 2 17 to 1 17 append sussess
+2022/06/04 23:09:40 raft.go:228: 2 17 to 1 17 append sussess
+2022/06/04 23:09:40 raft.go:228: 2 17 to 0 17 append sussess
+2022/06/04 23:09:40 raft.go:228: 2 17 to 1 17 append sussess
+2022/06/04 23:09:40 raft.go:228: 2 17 to 0 17 append sussess
+2022/06/04 23:09:40 raft.go:228: 2 17 to 1 17 append sussess
+2022/06/04 23:09:40 raft.go:228: 2 17 to 0 17 append sussess
+2022/06/04 23:09:40 raft.go:228: 2 17 to 1 17 append sussess
+2022/06/04 23:09:40 raft.go:228: 2 17 to 1 17 append sussess
+2022/06/04 23:09:40 raft.go:228: 2 17 to 0 17 append sussess
+2022/06/04 23:09:40 raft.go:331: id: 1 term: 18 start requestvote
+2022/06/04 23:09:40 raft.go:331: id: 0 term: 18 start requestvote
+2022/06/04 23:09:40 raft.go:331: id: 1 term: 19 start requestvote
+2022/06/04 23:09:40 raft.go:331: id: 0 term: 19 start requestvote
+2022/06/04 23:09:41 raft.go:331: id: 0 term: 20 start requestvote
+2022/06/04 23:09:41 raft.go:331: id: 1 term: 20 start requestvote
+2022/06/04 23:09:41 raft.go:331: id: 0 term: 21 start requestvote
+2022/06/04 23:09:41 raft.go:331: id: 1 term: 21 start requestvote
+2022/06/04 23:09:41 raft.go:331: id: 0 term: 22 start requestvote
+2022/06/04 23:09:41 raft.go:331: id: 1 term: 22 start requestvote
+2022/06/04 23:09:41 raft.go:331: id: 0 term: 23 start requestvote
+2022/06/04 23:09:42 raft.go:331: id: 1 term: 23 start requestvote
+2022/06/04 23:09:42 raft.go:331: id: 0 term: 24 start requestvote
+2022/06/04 23:09:42 raft.go:331: id: 1 term: 24 start requestvote
+2022/06/04 23:09:42 raft.go:331: id: 0 term: 25 start requestvote
+2022/06/04 23:09:42 raft.go:331: id: 1 term: 25 start requestvote
+2022/06/04 23:09:42 raft.go:182: id: 0 term: 25 no vote 1 25
+2022/06/04 23:09:42 raft.go:188: id: 0 term: 25 no vote 1 21
+2022/06/04 23:09:42 raft.go:188: id: 0 term: 25 no vote 1 14
+2022/06/04 23:09:42 raft.go:331: id: 1 term: 26 start requestvote
+2022/06/04 23:09:42 raft.go:331: id: 0 term: 26 start requestvote
+2022/06/04 23:09:42 raft.go:182: id: 0 term: 26 no vote 1 26
+2022/06/04 23:09:42 raft.go:182: id: 1 term: 26 no vote 0 26
+2022/06/04 23:09:42 raft.go:331: id: 1 term: 27 start requestvote
+2022/06/04 23:09:42 raft.go:176: id: 0 term: 26 vote 1 27
+2022/06/04 23:09:42 raft.go:371: id: 1 term 27 be Leader
+2022/06/04 23:09:43 raft.go:331: id: 0 term: 27 start requestvote
+2022/06/04 23:09:43 raft.go:176: id: 2 term: 17 vote 0 27
+2022/06/04 23:09:43 raft.go:182: id: 1 term: 27 no vote 0 27
+2022/06/04 23:09:43 raft.go:228: 1 27 to 2 27 append sussess
+2022/06/04 23:09:43 raft.go:228: 1 27 to 0 27 append sussess
+2022/06/04 23:09:43 raft.go:228: 1 27 to 2 27 append sussess
+2022/06/04 23:09:43 raft.go:228: 1 27 to 0 27 append sussess
+2022/06/04 23:09:43 raft.go:228: 1 27 to 0 27 append sussess
+2022/06/04 23:09:43 raft.go:228: 1 27 to 2 27 append sussess
+2022/06/04 23:09:43 raft.go:228: 1 27 to 2 27 append sussess
+2022/06/04 23:09:43 raft.go:228: 1 27 to 0 27 append sussess
+2022/06/04 23:09:43 raft.go:228: 1 27 to 0 27 append sussess
+2022/06/04 23:09:43 raft.go:228: 1 27 to 2 27 append sussess
+  ... Passed --   7.5  3  262   26132    0
+Test (2A): multiple elections ...
+2022/06/04 23:09:43 raft.go:228: 1 27 to 2 27 append sussess
+2022/06/04 23:09:43 raft.go:228: 1 27 to 0 27 append sussess
+2022/06/04 23:09:43 raft.go:331: id: 0 term: 1 start requestvote
+2022/06/04 23:09:43 raft.go:331: id: 1 term: 1 start requestvote
+2022/06/04 23:09:43 raft.go:331: id: 2 term: 1 start requestvote
+2022/06/04 23:09:43 raft.go:331: id: 3 term: 1 start requestvote
+2022/06/04 23:09:43 raft.go:331: id: 5 term: 1 start requestvote
+2022/06/04 23:09:43 raft.go:331: id: 4 term: 1 start requestvote
+2022/06/04 23:09:43 raft.go:331: id: 6 term: 1 start requestvote
+2022/06/04 23:09:43 raft.go:182: id: 6 term: 1 no vote 0 1
+2022/06/04 23:09:43 raft.go:182: id: 3 term: 1 no vote 0 1
+2022/06/04 23:09:43 raft.go:182: id: 2 term: 1 no vote 0 1
+2022/06/04 23:09:43 raft.go:182: id: 4 term: 1 no vote 0 1
+2022/06/04 23:09:43 raft.go:182: id: 5 term: 1 no vote 0 1
+2022/06/04 23:09:43 raft.go:182: id: 1 term: 1 no vote 0 1
+2022/06/04 23:09:43 raft.go:182: id: 2 term: 1 no vote 1 1
+2022/06/04 23:09:43 raft.go:182: id: 0 term: 1 no vote 1 1
+2022/06/04 23:09:43 raft.go:182: id: 6 term: 1 no vote 1 1
+2022/06/04 23:09:43 raft.go:182: id: 4 term: 1 no vote 1 1
+2022/06/04 23:09:43 raft.go:182: id: 3 term: 1 no vote 1 1
+2022/06/04 23:09:43 raft.go:182: id: 3 term: 1 no vote 2 1
+2022/06/04 23:09:43 raft.go:182: id: 0 term: 1 no vote 2 1
+2022/06/04 23:09:43 raft.go:182: id: 1 term: 1 no vote 2 1
+2022/06/04 23:09:43 raft.go:182: id: 5 term: 1 no vote 1 1
+2022/06/04 23:09:43 raft.go:182: id: 6 term: 1 no vote 2 1
+2022/06/04 23:09:43 raft.go:182: id: 4 term: 1 no vote 2 1
+2022/06/04 23:09:43 raft.go:182: id: 5 term: 1 no vote 2 1
+2022/06/04 23:09:43 raft.go:182: id: 0 term: 1 no vote 3 1
+2022/06/04 23:09:43 raft.go:182: id: 6 term: 1 no vote 3 1
+2022/06/04 23:09:43 raft.go:182: id: 2 term: 1 no vote 3 1
+2022/06/04 23:09:43 raft.go:182: id: 4 term: 1 no vote 3 1
+2022/06/04 23:09:43 raft.go:182: id: 5 term: 1 no vote 3 1
+2022/06/04 23:09:43 raft.go:182: id: 1 term: 1 no vote 3 1
+2022/06/04 23:09:43 raft.go:182: id: 2 term: 1 no vote 5 1
+2022/06/04 23:09:43 raft.go:182: id: 3 term: 1 no vote 4 1
+2022/06/04 23:09:43 raft.go:182: id: 0 term: 1 no vote 5 1
+2022/06/04 23:09:43 raft.go:182: id: 5 term: 1 no vote 6 1
+2022/06/04 23:09:43 raft.go:182: id: 1 term: 1 no vote 5 1
+2022/06/04 23:09:43 raft.go:182: id: 1 term: 1 no vote 6 1
+2022/06/04 23:09:43 raft.go:182: id: 4 term: 1 no vote 5 1
+2022/06/04 23:09:43 raft.go:182: id: 3 term: 1 no vote 5 1
+2022/06/04 23:09:43 raft.go:182: id: 2 term: 1 no vote 6 1
+2022/06/04 23:09:43 raft.go:182: id: 0 term: 1 no vote 6 1
+2022/06/04 23:09:43 raft.go:182: id: 0 term: 1 no vote 4 1
+2022/06/04 23:09:43 raft.go:182: id: 3 term: 1 no vote 6 1
+2022/06/04 23:09:43 raft.go:182: id: 1 term: 1 no vote 4 1
+2022/06/04 23:09:43 raft.go:182: id: 4 term: 1 no vote 6 1
+2022/06/04 23:09:43 raft.go:182: id: 6 term: 1 no vote 4 1
+2022/06/04 23:09:43 raft.go:182: id: 2 term: 1 no vote 4 1
+2022/06/04 23:09:43 raft.go:182: id: 6 term: 1 no vote 5 1
+2022/06/04 23:09:43 raft.go:182: id: 5 term: 1 no vote 4 1
+2022/06/04 23:09:43 raft.go:331: id: 1 term: 2 start requestvote
+2022/06/04 23:09:43 raft.go:176: id: 0 term: 1 vote 1 2
+2022/06/04 23:09:43 raft.go:176: id: 5 term: 1 vote 1 2
+2022/06/04 23:09:43 raft.go:176: id: 3 term: 1 vote 1 2
+2022/06/04 23:09:43 raft.go:176: id: 2 term: 1 vote 1 2
+2022/06/04 23:09:43 raft.go:176: id: 6 term: 1 vote 1 2
+2022/06/04 23:09:43 raft.go:176: id: 4 term: 1 vote 1 2
+2022/06/04 23:09:43 raft.go:371: id: 1 term 2 be Leader
+2022/06/04 23:09:43 raft.go:331: id: 0 term: 2 start requestvote
+2022/06/04 23:09:43 raft.go:331: id: 2 term: 2 start requestvote
+2022/06/04 23:09:43 raft.go:331: id: 3 term: 2 start requestvote
+2022/06/04 23:09:43 raft.go:331: id: 5 term: 2 start requestvote
+2022/06/04 23:09:43 raft.go:331: id: 4 term: 2 start requestvote
+2022/06/04 23:09:43 raft.go:331: id: 6 term: 2 start requestvote
+2022/06/04 23:09:43 raft.go:182: id: 1 term: 2 no vote 0 2
+2022/06/04 23:09:43 raft.go:182: id: 4 term: 2 no vote 0 2
+2022/06/04 23:09:43 raft.go:182: id: 3 term: 2 no vote 0 2
+2022/06/04 23:09:43 raft.go:182: id: 5 term: 2 no vote 0 2
+2022/06/04 23:09:43 raft.go:182: id: 6 term: 2 no vote 0 2
+2022/06/04 23:09:43 raft.go:182: id: 2 term: 2 no vote 0 2
+2022/06/04 23:09:43 raft.go:228: 1 2 to 2 2 append sussess
+2022/06/04 23:09:43 raft.go:228: 1 2 to 4 2 append sussess
+2022/06/04 23:09:43 raft.go:228: 1 2 to 3 2 append sussess
+2022/06/04 23:09:43 raft.go:182: id: 1 term: 2 no vote 2 2
+2022/06/04 23:09:43 raft.go:228: 1 2 to 5 2 append sussess
+2022/06/04 23:09:43 raft.go:228: 1 2 to 0 2 append sussess
+2022/06/04 23:09:43 raft.go:182: id: 3 term: 2 no vote 2 2
+2022/06/04 23:09:43 raft.go:182: id: 4 term: 2 no vote 2 2
+2022/06/04 23:09:43 raft.go:228: 1 2 to 6 2 append sussess
+2022/06/04 23:09:43 raft.go:182: id: 0 term: 2 no vote 2 2
+2022/06/04 23:09:43 raft.go:182: id: 5 term: 2 no vote 2 2
+2022/06/04 23:09:43 raft.go:182: id: 0 term: 2 no vote 3 2
+2022/06/04 23:09:43 raft.go:182: id: 5 term: 2 no vote 3 2
+2022/06/04 23:09:43 raft.go:182: id: 1 term: 2 no vote 3 2
+2022/06/04 23:09:43 raft.go:182: id: 4 term: 2 no vote 3 2
+2022/06/04 23:09:43 raft.go:182: id: 2 term: 2 no vote 3 2
+2022/06/04 23:09:43 raft.go:182: id: 6 term: 2 no vote 3 2
+2022/06/04 23:09:43 raft.go:182: id: 2 term: 2 no vote 5 2
+2022/06/04 23:09:43 raft.go:182: id: 0 term: 2 no vote 5 2
+2022/06/04 23:09:43 raft.go:182: id: 1 term: 2 no vote 5 2
+2022/06/04 23:09:43 raft.go:182: id: 5 term: 2 no vote 4 2
+2022/06/04 23:09:43 raft.go:182: id: 4 term: 2 no vote 5 2
+2022/06/04 23:09:43 raft.go:182: id: 3 term: 2 no vote 4 2
+2022/06/04 23:09:43 raft.go:182: id: 3 term: 2 no vote 5 2
+2022/06/04 23:09:43 raft.go:182: id: 1 term: 2 no vote 6 2
+2022/06/04 23:09:43 raft.go:182: id: 6 term: 2 no vote 2 2
+2022/06/04 23:09:43 raft.go:182: id: 6 term: 2 no vote 5 2
+2022/06/04 23:09:43 raft.go:182: id: 0 term: 2 no vote 6 2
+2022/06/04 23:09:43 raft.go:182: id: 2 term: 2 no vote 6 2
+2022/06/04 23:09:43 raft.go:182: id: 1 term: 2 no vote 4 2
+2022/06/04 23:09:43 raft.go:182: id: 6 term: 2 no vote 4 2
+2022/06/04 23:09:43 raft.go:182: id: 4 term: 2 no vote 6 2
+2022/06/04 23:09:43 raft.go:182: id: 0 term: 2 no vote 4 2
+2022/06/04 23:09:43 raft.go:182: id: 5 term: 2 no vote 6 2
+2022/06/04 23:09:43 raft.go:182: id: 2 term: 2 no vote 4 2
+2022/06/04 23:09:43 raft.go:182: id: 3 term: 2 no vote 6 2
+2022/06/04 23:09:44 raft.go:228: 1 2 to 0 2 append sussess
+2022/06/04 23:09:44 raft.go:228: 1 2 to 4 2 append sussess
+2022/06/04 23:09:44 raft.go:228: 1 2 to 6 2 append sussess
+2022/06/04 23:09:44 raft.go:228: 1 2 to 2 2 append sussess
+2022/06/04 23:09:44 raft.go:331: id: 3 term: 3 start requestvote
+2022/06/04 23:09:44 raft.go:331: id: 5 term: 3 start requestvote
+2022/06/04 23:09:44 raft.go:228: 1 2 to 0 2 append sussess
+2022/06/04 23:09:44 raft.go:228: 1 2 to 6 2 append sussess
+2022/06/04 23:09:44 raft.go:228: 1 2 to 2 2 append sussess
+2022/06/04 23:09:44 raft.go:228: 1 2 to 4 2 append sussess
+2022/06/04 23:09:44 raft.go:331: id: 3 term: 4 start requestvote
+2022/06/04 23:09:44 raft.go:331: id: 5 term: 4 start requestvote
+2022/06/04 23:09:44 raft.go:228: 1 2 to 0 2 append sussess
+2022/06/04 23:09:44 raft.go:228: 1 2 to 4 2 append sussess
+2022/06/04 23:09:44 raft.go:228: 1 2 to 2 2 append sussess
+2022/06/04 23:09:44 raft.go:228: 1 2 to 6 2 append sussess
+2022/06/04 23:09:44 raft.go:228: 1 2 to 0 2 append sussess
+2022/06/04 23:09:44 raft.go:228: 1 2 to 6 2 append sussess
+2022/06/04 23:09:44 raft.go:228: 1 2 to 4 2 append sussess
+2022/06/04 23:09:44 raft.go:228: 1 2 to 2 2 append sussess
+2022/06/04 23:09:44 raft.go:331: id: 3 term: 5 start requestvote
+2022/06/04 23:09:44 raft.go:331: id: 5 term: 5 start requestvote
+2022/06/04 23:09:44 raft.go:228: 1 2 to 0 2 append sussess
+2022/06/04 23:09:44 raft.go:228: 1 2 to 6 2 append sussess
+2022/06/04 23:09:44 raft.go:228: 1 2 to 2 2 append sussess
+2022/06/04 23:09:44 raft.go:228: 1 2 to 4 2 append sussess
+2022/06/04 23:09:44 raft.go:331: id: 3 term: 6 start requestvote
+2022/06/04 23:09:44 raft.go:331: id: 5 term: 6 start requestvote
+2022/06/04 23:09:44 raft.go:228: 1 2 to 2 2 append sussess
+2022/06/04 23:09:44 raft.go:228: 1 2 to 4 2 append sussess
+2022/06/04 23:09:44 raft.go:176: id: 1 term: 2 vote 3 6
+2022/06/04 23:09:44 raft.go:182: id: 5 term: 6 no vote 3 6
+2022/06/04 23:09:44 raft.go:176: id: 2 term: 2 vote 3 6
+2022/06/04 23:09:44 raft.go:176: id: 4 term: 2 vote 3 6
+2022/06/04 23:09:44 raft.go:182: id: 1 term: 2 no vote 5 6
+2022/06/04 23:09:44 raft.go:182: id: 2 term: 2 no vote 5 6
+2022/06/04 23:09:44 raft.go:182: id: 3 term: 6 no vote 5 6
+2022/06/04 23:09:44 raft.go:182: id: 4 term: 2 no vote 5 6
+2022/06/04 23:09:44 raft.go:371: id: 3 term 6 be Leader
+2022/06/04 23:09:44 raft.go:176: id: 1 term: 2 vote 5 5
+2022/06/04 23:09:44 raft.go:331: id: 0 term: 3 start requestvote
+2022/06/04 23:09:44 raft.go:331: id: 6 term: 3 start requestvote
+2022/06/04 23:09:44 raft.go:228: 1 2 to 2 2 append sussess
+2022/06/04 23:09:44 raft.go:228: 1 2 to 4 2 append sussess
+2022/06/04 23:09:44 raft.go:228: 3 6 to 2 6 append sussess
+2022/06/04 23:09:44 raft.go:228: 3 6 to 1 6 append sussess
+2022/06/04 23:09:44 raft.go:228: 3 6 to 5 6 append sussess
+2022/06/04 23:09:44 raft.go:228: 3 6 to 4 6 append sussess
+2022/06/04 23:09:44 raft.go:228: 3 6 to 1 6 append sussess
+2022/06/04 23:09:44 raft.go:228: 3 6 to 2 6 append sussess
+2022/06/04 23:09:44 raft.go:228: 3 6 to 5 6 append sussess
+2022/06/04 23:09:44 raft.go:228: 3 6 to 4 6 append sussess
+2022/06/04 23:09:44 raft.go:228: 3 6 to 1 6 append sussess
+2022/06/04 23:09:44 raft.go:228: 3 6 to 2 6 append sussess
+2022/06/04 23:09:44 raft.go:228: 3 6 to 5 6 append sussess
+2022/06/04 23:09:44 raft.go:228: 3 6 to 4 6 append sussess
+2022/06/04 23:09:44 raft.go:331: id: 0 term: 4 start requestvote
+2022/06/04 23:09:44 raft.go:331: id: 6 term: 4 start requestvote
+2022/06/04 23:09:44 raft.go:228: 3 6 to 1 6 append sussess
+2022/06/04 23:09:44 raft.go:228: 3 6 to 4 6 append sussess
+2022/06/04 23:09:44 raft.go:228: 3 6 to 2 6 append sussess
+2022/06/04 23:09:44 raft.go:228: 3 6 to 5 6 append sussess
+2022/06/04 23:09:45 raft.go:228: 3 6 to 0 6 append sussess
+2022/06/04 23:09:45 raft.go:228: 3 6 to 4 6 append sussess
+2022/06/04 23:09:45 raft.go:228: 3 6 to 1 6 append sussess
+2022/06/04 23:09:45 raft.go:228: 3 6 to 6 6 append sussess
+2022/06/04 23:09:45 raft.go:331: id: 2 term: 7 start requestvote
+2022/06/04 23:09:45 raft.go:331: id: 5 term: 7 start requestvote
+2022/06/04 23:09:45 raft.go:228: 3 6 to 1 6 append sussess
+2022/06/04 23:09:45 raft.go:228: 3 6 to 0 6 append sussess
+2022/06/04 23:09:45 raft.go:228: 3 6 to 6 6 append sussess
+2022/06/04 23:09:45 raft.go:228: 3 6 to 4 6 append sussess
+2022/06/04 23:09:45 raft.go:228: 3 6 to 1 6 append sussess
+2022/06/04 23:09:45 raft.go:228: 3 6 to 0 6 append sussess
+2022/06/04 23:09:45 raft.go:228: 3 6 to 4 6 append sussess
+2022/06/04 23:09:45 raft.go:228: 3 6 to 6 6 append sussess
+2022/06/04 23:09:45 raft.go:228: 3 6 to 0 6 append sussess
+2022/06/04 23:09:45 raft.go:228: 3 6 to 4 6 append sussess
+2022/06/04 23:09:45 raft.go:228: 3 6 to 1 6 append sussess
+2022/06/04 23:09:45 raft.go:228: 3 6 to 6 6 append sussess
+2022/06/04 23:09:45 raft.go:331: id: 2 term: 8 start requestvote
+2022/06/04 23:09:45 raft.go:331: id: 5 term: 8 start requestvote
+2022/06/04 23:09:45 raft.go:228: 3 6 to 1 6 append sussess
+2022/06/04 23:09:45 raft.go:228: 3 6 to 0 6 append sussess
+2022/06/04 23:09:45 raft.go:228: 3 6 to 4 6 append sussess
+2022/06/04 23:09:45 raft.go:228: 3 6 to 6 6 append sussess
+2022/06/04 23:09:45 raft.go:331: id: 0 term: 7 start requestvote
+2022/06/04 23:09:45 raft.go:331: id: 4 term: 7 start requestvote
+2022/06/04 23:09:45 raft.go:331: id: 1 term: 7 start requestvote
+2022/06/04 23:09:45 raft.go:331: id: 6 term: 7 start requestvote
+2022/06/04 23:09:45 raft.go:188: id: 2 term: 8 no vote 4 7
+2022/06/04 23:09:45 raft.go:188: id: 5 term: 8 no vote 4 7
+2022/06/04 23:09:45 raft.go:182: id: 1 term: 7 no vote 4 7
+2022/06/04 23:09:45 raft.go:188: id: 2 term: 8 no vote 1 7
+2022/06/04 23:09:45 raft.go:188: id: 5 term: 8 no vote 1 7
+2022/06/04 23:09:45 raft.go:182: id: 4 term: 7 no vote 1 7
+2022/06/04 23:09:45 raft.go:331: id: 2 term: 9 start requestvote
+2022/06/04 23:09:45 raft.go:331: id: 4 term: 8 start requestvote
+2022/06/04 23:09:45 raft.go:331: id: 1 term: 8 start requestvote
+2022/06/04 23:09:45 raft.go:331: id: 5 term: 9 start requestvote
+2022/06/04 23:09:45 raft.go:182: id: 5 term: 9 no vote 2 9
+2022/06/04 23:09:45 raft.go:176: id: 4 term: 8 vote 2 9
+2022/06/04 23:09:45 raft.go:176: id: 1 term: 8 vote 2 9
+2022/06/04 23:09:45 raft.go:182: id: 1 term: 8 no vote 4 8
+2022/06/04 23:09:45 raft.go:188: id: 2 term: 9 no vote 4 8
+2022/06/04 23:09:45 raft.go:188: id: 5 term: 9 no vote 4 8
+2022/06/04 23:09:45 raft.go:188: id: 2 term: 9 no vote 1 8
+2022/06/04 23:09:45 raft.go:182: id: 4 term: 8 no vote 1 8
+2022/06/04 23:09:45 raft.go:188: id: 5 term: 9 no vote 1 8
+2022/06/04 23:09:45 raft.go:182: id: 1 term: 8 no vote 5 9
+2022/06/04 23:09:45 raft.go:182: id: 4 term: 8 no vote 5 9
+2022/06/04 23:09:45 raft.go:182: id: 2 term: 9 no vote 5 9
+2022/06/04 23:09:45 raft.go:331: id: 4 term: 9 start requestvote
+2022/06/04 23:09:45 raft.go:331: id: 1 term: 9 start requestvote
+2022/06/04 23:09:45 raft.go:331: id: 6 term: 8 start requestvote
+2022/06/04 23:09:45 raft.go:182: id: 1 term: 9 no vote 4 9
+2022/06/04 23:09:45 raft.go:182: id: 2 term: 9 no vote 4 9
+2022/06/04 23:09:45 raft.go:182: id: 5 term: 9 no vote 4 9
+2022/06/04 23:09:45 raft.go:182: id: 2 term: 9 no vote 1 9
+2022/06/04 23:09:45 raft.go:182: id: 5 term: 9 no vote 1 9
+2022/06/04 23:09:45 raft.go:182: id: 4 term: 9 no vote 1 9
+2022/06/04 23:09:45 raft.go:331: id: 2 term: 10 start requestvote
+2022/06/04 23:09:45 raft.go:331: id: 0 term: 8 start requestvote
+2022/06/04 23:09:45 raft.go:331: id: 4 term: 10 start requestvote
+2022/06/04 23:09:45 raft.go:331: id: 1 term: 10 start requestvote
+2022/06/04 23:09:45 raft.go:331: id: 5 term: 10 start requestvote
+2022/06/04 23:09:45 raft.go:182: id: 5 term: 10 no vote 2 10
+2022/06/04 23:09:45 raft.go:182: id: 1 term: 10 no vote 2 10
+2022/06/04 23:09:45 raft.go:182: id: 4 term: 10 no vote 2 10
+2022/06/04 23:09:45 raft.go:182: id: 1 term: 10 no vote 4 10
+2022/06/04 23:09:45 raft.go:182: id: 5 term: 10 no vote 4 10
+2022/06/04 23:09:45 raft.go:182: id: 2 term: 10 no vote 4 10
+2022/06/04 23:09:45 raft.go:182: id: 2 term: 10 no vote 1 10
+2022/06/04 23:09:45 raft.go:182: id: 5 term: 10 no vote 1 10
+2022/06/04 23:09:45 raft.go:182: id: 4 term: 10 no vote 1 10
+2022/06/04 23:09:45 raft.go:182: id: 1 term: 10 no vote 5 10
+2022/06/04 23:09:45 raft.go:182: id: 2 term: 10 no vote 5 10
+2022/06/04 23:09:45 raft.go:182: id: 4 term: 10 no vote 5 10
+2022/06/04 23:09:46 raft.go:331: id: 4 term: 11 start requestvote
+2022/06/04 23:09:46 raft.go:176: id: 5 term: 10 vote 4 11
+2022/06/04 23:09:46 raft.go:176: id: 1 term: 10 vote 4 11
+2022/06/04 23:09:46 raft.go:176: id: 2 term: 10 vote 4 11
+2022/06/04 23:09:46 raft.go:188: id: 2 term: 10 no vote 5 7
+2022/06/04 23:09:46 raft.go:331: id: 2 term: 11 start requestvote
+2022/06/04 23:09:46 raft.go:331: id: 4 term: 12 start requestvote
+2022/06/04 23:09:46 raft.go:331: id: 1 term: 11 start requestvote
+2022/06/04 23:09:46 raft.go:331: id: 6 term: 9 start requestvote
+2022/06/04 23:09:46 raft.go:182: id: 5 term: 10 no vote 2 11
+2022/06/04 23:09:46 raft.go:182: id: 1 term: 11 no vote 2 11
+2022/06/04 23:09:46 raft.go:188: id: 4 term: 12 no vote 2 11
+2022/06/04 23:09:46 raft.go:176: id: 2 term: 11 vote 4 12
+2022/06/04 23:09:46 raft.go:176: id: 1 term: 11 vote 4 12
+2022/06/04 23:09:46 raft.go:176: id: 5 term: 10 vote 4 12
+2022/06/04 23:09:46 raft.go:182: id: 2 term: 11 no vote 1 11
+2022/06/04 23:09:46 raft.go:188: id: 4 term: 12 no vote 1 11
+2022/06/04 23:09:46 raft.go:182: id: 5 term: 10 no vote 1 11
+2022/06/04 23:09:46 raft.go:331: id: 2 term: 12 start requestvote
+2022/06/04 23:09:46 raft.go:331: id: 0 term: 9 start requestvote
+2022/06/04 23:09:46 raft.go:331: id: 4 term: 13 start requestvote
+2022/06/04 23:09:46 raft.go:331: id: 1 term: 12 start requestvote
+2022/06/04 23:09:46 raft.go:331: id: 5 term: 11 start requestvote
+2022/06/04 23:09:46 raft.go:182: id: 5 term: 11 no vote 2 12
+2022/06/04 23:09:46 raft.go:188: id: 4 term: 13 no vote 2 12
+2022/06/04 23:09:46 raft.go:182: id: 1 term: 12 no vote 2 12
+2022/06/04 23:09:46 raft.go:176: id: 1 term: 12 vote 4 13
+2022/06/04 23:09:46 raft.go:176: id: 2 term: 12 vote 4 13
+2022/06/04 23:09:46 raft.go:176: id: 5 term: 11 vote 4 13
+2022/06/04 23:09:46 raft.go:182: id: 2 term: 12 no vote 1 12
+2022/06/04 23:09:46 raft.go:188: id: 4 term: 13 no vote 1 12
+2022/06/04 23:09:46 raft.go:182: id: 5 term: 11 no vote 1 12
+2022/06/04 23:09:46 raft.go:188: id: 1 term: 12 no vote 5 11
+2022/06/04 23:09:46 raft.go:188: id: 4 term: 13 no vote 5 11
+2022/06/04 23:09:46 raft.go:188: id: 2 term: 12 no vote 5 11
+2022/06/04 23:09:46 raft.go:371: id: 4 term 13 be Leader
+2022/06/04 23:09:46 raft.go:331: id: 2 term: 13 start requestvote
+2022/06/04 23:09:46 raft.go:331: id: 1 term: 13 start requestvote
+2022/06/04 23:09:46 raft.go:331: id: 5 term: 12 start requestvote
+2022/06/04 23:09:46 raft.go:182: id: 1 term: 13 no vote 2 13
+2022/06/04 23:09:46 raft.go:182: id: 4 term: 13 no vote 2 13
+2022/06/04 23:09:46 raft.go:182: id: 5 term: 12 no vote 2 13
+2022/06/04 23:09:46 raft.go:228: 4 13 to 2 13 append sussess
+2022/06/04 23:09:46 raft.go:228: 4 13 to 5 13 append sussess
+2022/06/04 23:09:46 raft.go:228: 4 13 to 1 13 append sussess
+2022/06/04 23:09:46 raft.go:182: id: 4 term: 13 no vote 1 13
+2022/06/04 23:09:46 raft.go:182: id: 2 term: 13 no vote 1 13
+2022/06/04 23:09:46 raft.go:182: id: 5 term: 13 no vote 1 13
+2022/06/04 23:09:46 raft.go:188: id: 2 term: 13 no vote 5 12
+2022/06/04 23:09:46 raft.go:188: id: 1 term: 13 no vote 5 12
+2022/06/04 23:09:46 raft.go:188: id: 4 term: 13 no vote 5 12
+2022/06/04 23:09:46 raft.go:331: id: 6 term: 10 start requestvote
+2022/06/04 23:09:46 raft.go:228: 4 13 to 2 13 append sussess
+2022/06/04 23:09:46 raft.go:228: 4 13 to 1 13 append sussess
+2022/06/04 23:09:46 raft.go:228: 4 13 to 5 13 append sussess
+2022/06/04 23:09:46 raft.go:331: id: 0 term: 10 start requestvote
+2022/06/04 23:09:46 raft.go:228: 4 13 to 2 13 append sussess
+2022/06/04 23:09:46 raft.go:228: 4 13 to 3 13 append sussess
+2022/06/04 23:09:46 raft.go:228: 4 13 to 1 13 append sussess
+2022/06/04 23:09:46 raft.go:228: 4 13 to 6 13 append sussess
+2022/06/04 23:09:46 raft.go:331: id: 5 term: 14 start requestvote
+2022/06/04 23:09:46 raft.go:228: 4 13 to 1 13 append sussess
+2022/06/04 23:09:46 raft.go:228: 4 13 to 2 13 append sussess
+2022/06/04 23:09:46 raft.go:228: 4 13 to 6 13 append sussess
+2022/06/04 23:09:46 raft.go:228: 4 13 to 3 13 append sussess
+2022/06/04 23:09:46 raft.go:228: 4 13 to 3 13 append sussess
+2022/06/04 23:09:46 raft.go:228: 4 13 to 1 13 append sussess
+2022/06/04 23:09:46 raft.go:228: 4 13 to 6 13 append sussess
+2022/06/04 23:09:46 raft.go:228: 4 13 to 2 13 append sussess
+2022/06/04 23:09:46 raft.go:331: id: 0 term: 11 start requestvote
+2022/06/04 23:09:46 raft.go:331: id: 5 term: 15 start requestvote
+2022/06/04 23:09:46 raft.go:228: 4 13 to 6 13 append sussess
+2022/06/04 23:09:46 raft.go:228: 4 13 to 3 13 append sussess
+2022/06/04 23:09:46 raft.go:228: 4 13 to 2 13 append sussess
+2022/06/04 23:09:46 raft.go:228: 4 13 to 1 13 append sussess
+2022/06/04 23:09:46 raft.go:228: 4 13 to 2 13 append sussess
+2022/06/04 23:09:46 raft.go:228: 4 13 to 1 13 append sussess
+2022/06/04 23:09:46 raft.go:228: 4 13 to 3 13 append sussess
+2022/06/04 23:09:46 raft.go:228: 4 13 to 6 13 append sussess
+2022/06/04 23:09:47 raft.go:331: id: 5 term: 16 start requestvote
+2022/06/04 23:09:47 raft.go:228: 4 13 to 2 13 append sussess
+2022/06/04 23:09:47 raft.go:228: 4 13 to 3 13 append sussess
+2022/06/04 23:09:47 raft.go:176: id: 4 term: 13 vote 5 16
+2022/06/04 23:09:47 raft.go:176: id: 2 term: 13 vote 5 16
+2022/06/04 23:09:47 raft.go:176: id: 3 term: 13 vote 5 16
+2022/06/04 23:09:47 raft.go:371: id: 5 term 16 be Leader
+2022/06/04 23:09:47 raft.go:331: id: 0 term: 12 start requestvote
+2022/06/04 23:09:47 raft.go:331: id: 1 term: 14 start requestvote
+2022/06/04 23:09:47 raft.go:331: id: 6 term: 14 start requestvote
+2022/06/04 23:09:47 raft.go:228: 4 13 to 3 13 append sussess
+2022/06/04 23:09:47 raft.go:228: 4 13 to 2 13 append sussess
+2022/06/04 23:09:47 raft.go:228: 5 16 to 2 16 append sussess
+2022/06/04 23:09:47 raft.go:228: 5 16 to 3 16 append sussess
+2022/06/04 23:09:47 raft.go:228: 5 16 to 4 16 append sussess
+2022/06/04 23:09:47 raft.go:228: 5 16 to 2 16 append sussess
+2022/06/04 23:09:47 raft.go:228: 5 16 to 3 16 append sussess
+2022/06/04 23:09:47 raft.go:228: 5 16 to 4 16 append sussess
+2022/06/04 23:09:47 raft.go:228: 5 16 to 3 16 append sussess
+2022/06/04 23:09:47 raft.go:228: 5 16 to 2 16 append sussess
+2022/06/04 23:09:47 raft.go:228: 5 16 to 4 16 append sussess
+2022/06/04 23:09:47 raft.go:331: id: 0 term: 13 start requestvote
+2022/06/04 23:09:47 raft.go:331: id: 1 term: 15 start requestvote
+2022/06/04 23:09:47 raft.go:331: id: 6 term: 15 start requestvote
+2022/06/04 23:09:47 raft.go:228: 5 16 to 3 16 append sussess
+2022/06/04 23:09:47 raft.go:228: 5 16 to 2 16 append sussess
+2022/06/04 23:09:47 raft.go:228: 5 16 to 4 16 append sussess
+2022/06/04 23:09:47 raft.go:331: id: 2 term: 17 start requestvote
+2022/06/04 23:09:47 raft.go:331: id: 0 term: 14 start requestvote
+2022/06/04 23:09:47 raft.go:331: id: 4 term: 17 start requestvote
+2022/06/04 23:09:47 raft.go:331: id: 6 term: 16 start requestvote
+2022/06/04 23:09:47 raft.go:331: id: 3 term: 17 start requestvote
+2022/06/04 23:09:47 raft.go:176: id: 1 term: 15 vote 2 17
+2022/06/04 23:09:47 raft.go:176: id: 0 term: 14 vote 2 17
+2022/06/04 23:09:47 raft.go:188: id: 1 term: 15 no vote 0 14
+2022/06/04 23:09:47 raft.go:188: id: 2 term: 17 no vote 0 14
+2022/06/04 23:09:47 raft.go:182: id: 3 term: 17 no vote 2 17
+2022/06/04 23:09:47 raft.go:188: id: 3 term: 17 no vote 0 14
+2022/06/04 23:09:47 raft.go:182: id: 0 term: 14 no vote 3 17
+2022/06/04 23:09:47 raft.go:182: id: 2 term: 17 no vote 3 17
+2022/06/04 23:09:47 raft.go:182: id: 1 term: 15 no vote 3 17
+2022/06/04 23:09:47 raft.go:331: id: 0 term: 15 start requestvote
+2022/06/04 23:09:47 raft.go:331: id: 1 term: 16 start requestvote
+2022/06/04 23:09:47 raft.go:188: id: 1 term: 16 no vote 0 15
+2022/06/04 23:09:47 raft.go:188: id: 2 term: 17 no vote 0 15
+2022/06/04 23:09:47 raft.go:188: id: 3 term: 17 no vote 0 15
+2022/06/04 23:09:47 raft.go:188: id: 2 term: 17 no vote 1 16
+2022/06/04 23:09:47 raft.go:176: id: 0 term: 15 vote 1 16
+2022/06/04 23:09:47 raft.go:188: id: 3 term: 17 no vote 1 16
+2022/06/04 23:09:47 raft.go:331: id: 0 term: 16 start requestvote
+2022/06/04 23:09:47 raft.go:331: id: 1 term: 17 start requestvote
+2022/06/04 23:09:47 raft.go:331: id: 6 term: 17 start requestvote
+2022/06/04 23:09:47 raft.go:331: id: 3 term: 18 start requestvote
+2022/06/04 23:09:47 raft.go:188: id: 3 term: 18 no vote 0 16
+2022/06/04 23:09:47 raft.go:188: id: 2 term: 17 no vote 0 16
+2022/06/04 23:09:47 raft.go:188: id: 1 term: 17 no vote 0 16
+2022/06/04 23:09:47 raft.go:182: id: 0 term: 16 no vote 1 17
+2022/06/04 23:09:47 raft.go:182: id: 2 term: 17 no vote 1 17
+2022/06/04 23:09:47 raft.go:188: id: 3 term: 18 no vote 1 17
+2022/06/04 23:09:47 raft.go:176: id: 1 term: 17 vote 3 18
+2022/06/04 23:09:47 raft.go:176: id: 0 term: 16 vote 3 18
+2022/06/04 23:09:47 raft.go:176: id: 2 term: 17 vote 3 18
+2022/06/04 23:09:47 raft.go:371: id: 3 term 18 be Leader
+2022/06/04 23:09:47 raft.go:331: id: 2 term: 18 start requestvote
+2022/06/04 23:09:47 raft.go:331: id: 0 term: 17 start requestvote
+2022/06/04 23:09:47 raft.go:331: id: 4 term: 18 start requestvote
+2022/06/04 23:09:47 raft.go:331: id: 1 term: 18 start requestvote
+2022/06/04 23:09:47 raft.go:188: id: 1 term: 18 no vote 0 17
+2022/06/04 23:09:47 raft.go:176: id: 5 term: 16 vote 0 17
+2022/06/04 23:09:47 raft.go:188: id: 3 term: 18 no vote 0 17
+2022/06/04 23:09:47 raft.go:176: id: 5 term: 16 vote 1 18
+2022/06/04 23:09:47 raft.go:182: id: 0 term: 17 no vote 1 18
+2022/06/04 23:09:47 raft.go:182: id: 3 term: 18 no vote 1 18
+2022/06/04 23:09:47 raft.go:228: 3 18 to 0 18 append sussess
+2022/06/04 23:09:47 raft.go:228: 3 18 to 1 18 append sussess
+2022/06/04 23:09:47 raft.go:228: 3 18 to 5 18 append sussess
+2022/06/04 23:09:48 raft.go:228: 3 18 to 0 18 append sussess
+2022/06/04 23:09:48 raft.go:228: 3 18 to 1 18 append sussess
+2022/06/04 23:09:48 raft.go:228: 3 18 to 5 18 append sussess
+2022/06/04 23:09:48 raft.go:331: id: 6 term: 18 start requestvote
+2022/06/04 23:09:48 raft.go:228: 3 18 to 0 18 append sussess
+2022/06/04 23:09:48 raft.go:228: 3 18 to 1 18 append sussess
+2022/06/04 23:09:48 raft.go:228: 3 18 to 5 18 append sussess
+2022/06/04 23:09:48 raft.go:331: id: 2 term: 19 start requestvote
+2022/06/04 23:09:48 raft.go:331: id: 4 term: 19 start requestvote
+2022/06/04 23:09:48 raft.go:228: 3 18 to 1 18 append sussess
+2022/06/04 23:09:48 raft.go:228: 3 18 to 5 18 append sussess
+2022/06/04 23:09:48 raft.go:228: 3 18 to 0 18 append sussess
+2022/06/04 23:09:48 raft.go:331: id: 6 term: 19 start requestvote
+2022/06/04 23:09:48 raft.go:228: 3 18 to 1 18 append sussess
+2022/06/04 23:09:48 raft.go:228: 3 18 to 0 18 append sussess
+2022/06/04 23:09:48 raft.go:228: 3 18 to 5 18 append sussess
+2022/06/04 23:09:48 raft.go:331: id: 4 term: 20 start requestvote
+2022/06/04 23:09:48 raft.go:176: id: 5 term: 18 vote 4 20
+2022/06/04 23:09:48 raft.go:176: id: 3 term: 18 vote 4 20
+2022/06/04 23:09:48 raft.go:176: id: 0 term: 18 vote 4 20
+2022/06/04 23:09:48 raft.go:228: 3 18 to 0 18 append sussess
+2022/06/04 23:09:48 raft.go:228: 3 18 to 5 18 append sussess
+2022/06/04 23:09:48 raft.go:371: id: 4 term 20 be Leader
+2022/06/04 23:09:48 raft.go:331: id: 2 term: 20 start requestvote
+2022/06/04 23:09:48 raft.go:331: id: 1 term: 19 start requestvote
+2022/06/04 23:09:48 raft.go:331: id: 6 term: 20 start requestvote
+2022/06/04 23:09:48 raft.go:228: 4 20 to 0 20 append sussess
+2022/06/04 23:09:48 raft.go:228: 4 20 to 3 20 append sussess
+2022/06/04 23:09:48 raft.go:228: 4 20 to 5 20 append sussess
+2022/06/04 23:09:48 raft.go:228: 4 20 to 0 20 append sussess
+2022/06/04 23:09:48 raft.go:228: 4 20 to 3 20 append sussess
+2022/06/04 23:09:48 raft.go:228: 4 20 to 5 20 append sussess
+2022/06/04 23:09:48 raft.go:228: 4 20 to 0 20 append sussess
+2022/06/04 23:09:48 raft.go:228: 4 20 to 5 20 append sussess
+2022/06/04 23:09:48 raft.go:228: 4 20 to 3 20 append sussess
+2022/06/04 23:09:48 raft.go:331: id: 2 term: 21 start requestvote
+2022/06/04 23:09:48 raft.go:331: id: 1 term: 20 start requestvote
+2022/06/04 23:09:48 raft.go:331: id: 6 term: 21 start requestvote
+2022/06/04 23:09:48 raft.go:228: 4 20 to 3 20 append sussess
+2022/06/04 23:09:48 raft.go:228: 4 20 to 0 20 append sussess
+2022/06/04 23:09:48 raft.go:228: 4 20 to 5 20 append sussess
+2022/06/04 23:09:48 raft.go:188: id: 3 term: 20 no vote 1 8
+2022/06/04 23:09:48 raft.go:188: id: 0 term: 20 no vote 2 19
+2022/06/04 23:09:48 raft.go:188: id: 4 term: 20 no vote 6 4
+2022/06/04 23:09:48 raft.go:188: id: 5 term: 20 no vote 2 18
+2022/06/04 23:09:48 raft.go:228: 4 20 to 5 20 append sussess
+2022/06/04 23:09:48 raft.go:228: 4 20 to 1 20 append sussess
+2022/06/04 23:09:48 raft.go:228: 4 20 to 3 20 append sussess
+2022/06/04 23:09:48 raft.go:228: 4 20 to 0 20 append sussess
+2022/06/04 23:09:48 raft.go:188: id: 0 term: 20 no vote 6 14
+2022/06/04 23:09:49 raft.go:331: id: 2 term: 22 start requestvote
+2022/06/04 23:09:49 raft.go:331: id: 6 term: 22 start requestvote
+2022/06/04 23:09:49 raft.go:176: id: 1 term: 20 vote 2 22
+2022/06/04 23:09:49 raft.go:176: id: 5 term: 20 vote 2 22
+2022/06/04 23:09:49 raft.go:176: id: 3 term: 20 vote 2 22
+2022/06/04 23:09:49 raft.go:176: id: 4 term: 20 vote 2 22
+2022/06/04 23:09:49 raft.go:182: id: 6 term: 22 no vote 2 22
+2022/06/04 23:09:49 raft.go:176: id: 0 term: 20 vote 2 22
+2022/06/04 23:09:49 raft.go:228: 4 20 to 0 20 append sussess
+2022/06/04 23:09:49 raft.go:228: 4 20 to 3 20 append sussess
+2022/06/04 23:09:49 raft.go:228: 4 20 to 5 20 append sussess
+2022/06/04 23:09:49 raft.go:228: 4 20 to 1 20 append sussess
+2022/06/04 23:09:49 raft.go:182: id: 4 term: 20 no vote 6 22
+2022/06/04 23:09:49 raft.go:182: id: 3 term: 20 no vote 6 22
+2022/06/04 23:09:49 raft.go:182: id: 2 term: 22 no vote 6 22
+2022/06/04 23:09:49 raft.go:182: id: 1 term: 20 no vote 6 22
+2022/06/04 23:09:49 raft.go:182: id: 5 term: 20 no vote 6 22
+2022/06/04 23:09:49 raft.go:182: id: 0 term: 20 no vote 6 22
+2022/06/04 23:09:49 raft.go:371: id: 2 term 22 be Leader
+2022/06/04 23:09:49 raft.go:188: id: 4 term: 20 no vote 2 7
+2022/06/04 23:09:49 raft.go:228: 2 22 to 0 22 append sussess
+2022/06/04 23:09:49 raft.go:228: 2 22 to 5 22 append sussess
+2022/06/04 23:09:49 raft.go:228: 2 22 to 1 22 append sussess
+2022/06/04 23:09:49 raft.go:228: 2 22 to 4 22 append sussess
+2022/06/04 23:09:49 raft.go:228: 2 22 to 6 22 append sussess
+2022/06/04 23:09:49 raft.go:228: 2 22 to 3 22 append sussess
+2022/06/04 23:09:49 raft.go:228: 2 22 to 3 22 append sussess
+2022/06/04 23:09:49 raft.go:228: 2 22 to 5 22 append sussess
+2022/06/04 23:09:49 raft.go:228: 2 22 to 1 22 append sussess
+2022/06/04 23:09:49 raft.go:228: 2 22 to 0 22 append sussess
+2022/06/04 23:09:49 raft.go:228: 2 22 to 6 22 append sussess
+2022/06/04 23:09:49 raft.go:228: 2 22 to 4 22 append sussess
+2022/06/04 23:09:49 raft.go:228: 2 22 to 0 22 append sussess
+2022/06/04 23:09:49 raft.go:228: 2 22 to 6 22 append sussess
+2022/06/04 23:09:49 raft.go:228: 2 22 to 1 22 append sussess
+2022/06/04 23:09:49 raft.go:228: 2 22 to 4 22 append sussess
+2022/06/04 23:09:49 raft.go:228: 2 22 to 3 22 append sussess
+2022/06/04 23:09:49 raft.go:228: 2 22 to 5 22 append sussess
+  ... Passed --   5.9  7 1042   99842    0
+Test (2A): initial election ...
+2022/06/04 23:09:49 raft.go:331: id: 0 term: 1 start requestvote
+2022/06/04 23:09:49 raft.go:331: id: 1 term: 1 start requestvote
+2022/06/04 23:09:49 raft.go:331: id: 2 term: 1 start requestvote
+2022/06/04 23:09:49 raft.go:182: id: 1 term: 1 no vote 0 1
+2022/06/04 23:09:49 raft.go:182: id: 2 term: 1 no vote 1 1
+2022/06/04 23:09:49 raft.go:182: id: 0 term: 1 no vote 1 1
+2022/06/04 23:09:49 raft.go:182: id: 0 term: 1 no vote 2 1
+2022/06/04 23:09:49 raft.go:182: id: 1 term: 1 no vote 2 1
+2022/06/04 23:09:49 raft.go:182: id: 2 term: 1 no vote 0 1
+2022/06/04 23:09:49 raft.go:331: id: 2 term: 2 start requestvote
+2022/06/04 23:09:49 raft.go:176: id: 1 term: 1 vote 2 2
+2022/06/04 23:09:49 raft.go:176: id: 0 term: 1 vote 2 2
+2022/06/04 23:09:49 raft.go:371: id: 2 term 2 be Leader
+2022/06/04 23:09:49 raft.go:331: id: 1 term: 2 start requestvote
+2022/06/04 23:09:49 raft.go:331: id: 0 term: 2 start requestvote
+2022/06/04 23:09:49 raft.go:182: id: 0 term: 2 no vote 1 2
+2022/06/04 23:09:49 raft.go:182: id: 2 term: 2 no vote 1 2
+2022/06/04 23:09:49 raft.go:182: id: 1 term: 2 no vote 0 2
+2022/06/04 23:09:49 raft.go:182: id: 2 term: 2 no vote 0 2
+2022/06/04 23:09:49 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:49 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:49 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:49 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:50 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:50 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:50 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:50 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:50 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:50 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:50 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:50 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:50 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:50 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:50 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:50 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:50 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:50 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:50 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:50 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:50 raft.go:228: 2 2 to 0 2 append sussess
+2022/06/04 23:09:50 raft.go:228: 2 2 to 1 2 append sussess
+2022/06/04 23:09:50 raft.go:331: id: 1 term: 3 start requestvote
+2022/06/04 23:09:51 raft.go:331: id: 0 term: 3 start requestvote
+2022/06/04 23:09:51 raft.go:176: id: 2 term: 2 vote 1 3
+2022/06/04 23:09:51 raft.go:182: id: 0 term: 3 no vote 1 3
+2022/06/04 23:09:51 raft.go:182: id: 2 term: 2 no vote 0 3
+2022/06/04 23:09:51 raft.go:182: id: 1 term: 3 no vote 0 3
+2022/06/04 23:09:51 raft.go:331: id: 1 term: 4 start requestvote
+signal: interrupt
+FAIL	6.824/raft	59.959s

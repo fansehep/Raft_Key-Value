@@ -52,9 +52,6 @@ type ApplyMsg struct {
 	SnapshotIndex int
 }
 
-//
-// A Go object implementing a single Raft peer.
-//
 const (
 	Leader    = 1
 	Follower  = 2
@@ -70,9 +67,9 @@ type Raft struct {
 
 	job         int64          //* 服务器当前角色，Leader or Follower
 	term        int64          //* term 当前集群的任期
-	lastreserve int64        //* uint64 -> time.Now().UnixMicro()
+	lastreserve int64          //* uint64 -> time.Now().UnixMicro()
 	Leader_id   int64          //* 当前集群的Leader ID
-	Log         []int        //* 表示当前的日志条数
+	Log         []int          //* 表示当前的日志条数
 	Vote_map    map[int64]bool //* 每次只会给一个任期中的一次发起选举投票
 	// Your data here (2A, 2B, 2C).
 	// Look at the paper's Figure 2 for a description of what
@@ -83,7 +80,7 @@ type Raft struct {
 // believes it is the leader.
 func (rf *Raft) GetState() (int, bool) {
 	rf.mu.Lock()
-	var term int = rf.term
+	var term int = (int)(rf.term)
 	var IsLeaader bool = (rf.job == Leader)
 	rf.mu.Unlock()
 	return term, IsLeaader
@@ -155,16 +152,16 @@ func (rf *Raft) Snapshot(index int, snapshot []byte) {
 type RequestVoteArgs struct {
 	// Your data here (2A, 2B).
 	Term        int64 //* Candidate 的任期
-	CandidateID int //* candidate 的ID
+	CandidateID int64 //* candidate 的ID
 
 }
 
 type RequestVoteReply struct {
-	Term    int64  //* 被调用 rpc 方的 任期
-	Success bool //* ture 为被调用方投，false则反之
+	Term    int64 //* 被调用 rpc 方的 任期
+	Success bool  //* ture 为被调用方投，false则反之
 }
 
-func (rf *Raft) SendRequestVote(server int, args *RequestVoteArgs, reply *RequestVoteReply) bool {
+func (rf *Raft) SendRequestVote(server int32, args *RequestVoteArgs, reply *RequestVoteReply) bool {
 	ok := rf.peers[server].Call("Raft.RequestVote", args, reply)
 	return ok
 }
@@ -172,38 +169,40 @@ func (rf *Raft) SendRequestVote(server int, args *RequestVoteArgs, reply *Reques
 //* 一次投票过程中，只能给一个任期中的一名发起者，投一次票
 func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 	rf.mu.Lock()
-	defer rf.mu.Unlock()
-	reply.Term = atomic.LoadInt64(&rf.term)
-	if args.Term >= atomic.LoadInt64(&rf.term) {
-		if atomic.Load(&rf.Vote_map[args.Term]) == false {	
+	reply.Term = rf.term
+	if args.Term >= rf.term {
+		if !rf.Vote_map[args.Term] {
 			reply.Success = true
 			log.Printf("id: %d term: %d vote %d %d", rf.me, rf.term, args.CandidateID, args.Term)
 			rf.Vote_map[args.Term] = true
+			rf.mu.Unlock()
 			return
 		} else {
 			reply.Success = false
 			log.Printf("id: %d term: %d no vote %d %d", rf.me, rf.term, args.CandidateID, args.Term)
+			rf.mu.Unlock()
 			return
 		}
 	} else {
 		reply.Success = false
 		log.Printf("id: %d term: %d no vote %d %d", rf.me, rf.term, args.CandidateID, args.Term)
+		rf.mu.Unlock()
 		return
 	}
 }
 
 type AppendEntriesArgs struct {
-	Term         int64   //* Leader 的任期
-	LeaderID     int64   //* Leader ID
+	Term         int64 //* Leader 的任期
+	LeaderID     int64 //* Leader ID
 	Heartbeatime int64 //* 心跳，用来更新时间
 }
 
 type AppendEntriesReply struct {
-	Term    int64  //* 回复者的任期
-	Sussess bool //*
+	Term    int64 //* 回复者的任期
+	Sussess bool  //*
 }
 
-func (rf *Raft) SendAppendEntries(i int, args *AppendEntriesArgs, reply *AppendEntriesReply) bool {
+func (rf *Raft) SendAppendEntries(i int32, args *AppendEntriesArgs, reply *AppendEntriesReply) bool {
 	er := rf.peers[i].Call("Raft.AppendEntries", args, reply)
 	return er
 }
@@ -214,19 +213,21 @@ func (rf *Raft) SendAppendEntries(i int, args *AppendEntriesArgs, reply *AppendE
 //* 如果不同，心跳失败
 func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply) {
 	rf.mu.Lock()
-	defer rf.mu.Unlock()
 	if args.Term < rf.term {
-		reply.Term = rf.term
+		reply.Term = atomic.LoadInt64(&rf.term)
 		reply.Sussess = false
+		rf.mu.Unlock()
+		return
 	}
 	//* 中途受到高 term 的 Leader 心跳
 	//* 则变为Follower
-	rf.job = Follower
-	rf.lastreserve = args.Heartbeatime
-	rf.term = args.Term
+	atomic.SwapInt64(&rf.job, Follower)
+	atomic.SwapInt64(&rf.lastreserve, args.Heartbeatime)
+	atomic.SwapInt64(&rf.term, args.Term)
 	reply.Term = rf.term
 	log.Printf("%d %d to %d %d append sussess", args.LeaderID, args.Term, rf.me, rf.term)
 	reply.Sussess = true
+	rf.mu.Unlock()
 }
 
 //
@@ -308,114 +309,107 @@ func (rf *Raft) killed() bool {
 // heartsbeats recently.
 func (rf *Raft) ticker() {
 	//* FIXME
-	for rf.killed() == false {
+	for !rf.killed() {
 		time.Sleep(time.Duration(100) * time.Millisecond)
 		//* Leader 不用判断超时，只有 Follower 需要判断当前心跳是否正常
 		//* 不正常则发起选举
-		t_beforeVote := time.Now().UnixMilli()
-		if rf.job == Follower {
-			if (time.Now().UnixMilli() - rf.lastreserve) > 130 {
+		if atomic.LoadInt64(&rf.job) == Follower {
+			if (time.Now().UnixMilli() - atomic.LoadInt64(&rf.lastreserve)) > 130 {
+				//* 随机选举超时时间
+				election := (int64)(rand.Intn(150) + 150)
 				//* 我给我自己投一票
 				var votes_tome int32 = 1
-				rf.term++
 				//* 成为候选者
-				rf.job = Candidate
-				args := RequestVoteArgs{}
+				rf.mu.Lock()
+				rf.term++
+				atomic.SwapInt64(&rf.job, Candidate)
 				rf.Vote_map[rf.term] = true
+				args := RequestVoteArgs{}
 				//* 且自己的任期 + 1
 				args.Term = rf.term
-				args.CandidateID = rf.me
+				args.CandidateID = (int64)(rf.me)
 				log.Printf("id: %d term: %d start requestvote", rf.me, rf.term)
-				//* 随机选举超时时间
-				election := rand.Intn(150) + 150
-				var istime_out uint64 = 0
-				go func(beforetime int64, t_election int) {
-					for rf.job == Candidate {
-						if time.Now().UnixMilli()-beforetime > (int64)(t_election) {
-							atomic.SwapUint64(&istime_out, 1)
-							break
-						}
-						if rf.job == Leader {
-							break
-						}
+				rf.mu.Unlock()
+				//* 随机选举超时时间，一旦超时，立即变为 Follower, 等待下一轮选举
+				time.AfterFunc(time.Duration(election)*time.Millisecond, func() {
+					rf.mu.Lock()
+					if rf.job == Candidate {
+						atomic.SwapInt64(&rf.job, Follower)
 					}
-				}(t_beforeVote, election)
-
-				for i := range rf.peers {
-					//* 在发起投票的过程中
-					//* 自己可能会变为 Follower or Leader
-					//* 此时终止投票
-
-					if rf.me == i {
+					rf.mu.Unlock()
+				})
+				var i int32 = 0
+				n := len(rf.peers)
+				for ; i < (int32)(n) && atomic.LoadInt64(&rf.job) == Candidate; i++ {
+					if rf.me == (int)(i) {
 						continue
 					}
-					if rf.job == Candidate {
-						go func(ServerNumber int) {
+					if atomic.LoadInt64(&rf.job) == Candidate {
+						go func(ServerNumber int32) {
 							reply := RequestVoteReply{}
-							if rf.job == Candidate {
-								for rf.job == Candidate {
+							if atomic.LoadInt64(&rf.job) == Candidate {
+								for atomic.LoadInt64(&rf.job) == Candidate {
 									ok := rf.SendRequestVote(ServerNumber, &args, &reply)
 									if ok {
 										break
 									}
 								}
+								rf.mu.Lock()
 								//* 当有client 的任期大于当前服务器的任期时
 								//* 自己变为 Follower
-								if reply.Term > rf.term && rf.job == Candidate {
-									rf.job = Follower
-								}
 								//* 如果投票成功，则票数 + 1
-								if reply.Success == true && rf.job == Candidate {
+								if reply.Success && rf.job == Candidate {
 									atomic.AddInt32(&votes_tome, 1)
+								}
+								if reply.Term > rf.term && rf.job == Candidate {
+									atomic.SwapInt64(&rf.job, Follower)
 								}
 								//* 如果当前获得集群的 1 / 2 投票
 								//* 自己则成为当前集群的 Leader
 								//* 并且给其他的 Follower 发送心跳
-								rf.mu.Lock()
-								defer rf.mu.Unlock()
-								if votes_tome > (int32)(len(rf.peers))/2 && rf.job == Candidate {
+								if atomic.LoadInt32(&votes_tome) > (int32)(len(rf.peers))/2 && rf.job == Candidate {
 									log.Printf("id: %d term %d be Leader", rf.me, rf.term)
-									rf.job = Leader
+									atomic.SwapInt64(&rf.job, Leader)
 								}
-								if atomic.LoadUint64(&istime_out) == 1 {
-									rf.job = Follower
-								}
+								rf.mu.Unlock()
 							}
-						}(i)
+						}(int32(atomic.LoadInt32(&i)))
 					}
 					//* 如果选举成功，立即跳出并开始给 Follower 发起心跳
+					rf.mu.Lock()
 					if rf.job == Leader {
-						break
-					} else if atomic.LoadUint64(&istime_out) == 1 {
-						rf.job = Follower
-						atomic.SwapUint64(&istime_out, 0)
+						rf.mu.Unlock()
 						break
 					}
+					rf.mu.Unlock()
 				}
 			}
 		}
 
 		//* Leader 需要向其他 Follower 发送心跳
-		if rf.job == Leader {
-			for i := range rf.peers {
-				if i == rf.me {
+		if atomic.LoadInt64(&rf.job) == Leader {
+			var i int32 = 0
+			for ; i < (int32)(len(rf.peers)); i++ {
+				if i == (int32)(rf.me) {
 					continue
 				}
-				if rf.job == Leader {
-					go func(ServerNumber int) {
+				if atomic.LoadInt64(&rf.job) == Leader {
+					go func(ServerNumber int32) {
 						args := AppendEntriesArgs{}
-						args.LeaderID = rf.me
+						rf.mu.Lock()
+						args.LeaderID = (int64)(rf.me)
 						args.Term = rf.term
+						rf.mu.Unlock()
 						reply := AppendEntriesReply{}
 						//* 不断重试 RPC, 发送心跳
-						for rf.job == Leader {
+						for atomic.LoadInt64(&rf.job) == Leader {
 							args.Heartbeatime = time.Now().UnixMilli()
 							ref := rf.SendAppendEntries(ServerNumber, &args, &reply)
 							if ref {
 								break
 							}
 						}
-					}(i)
+					}(int32(atomic.LoadInt32(&i)))
 				}
 			}
 		}
@@ -445,12 +439,13 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	rf.job = Follower
 	rf.term = 0
 	rf.lastreserve = 0
-	rf.Vote_map = make(map[int]bool)
+	rf.Vote_map = make(map[int64]bool)
 	// initialize from state persisted before a crash
 	rf.readPersist(persister.ReadRaftState())
 
 	// start ticker goroutine to start elections
+	rf.mu.Lock()
 	go rf.ticker()
-
+	rf.mu.Unlock()
 	return rf
 }
