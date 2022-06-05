@@ -182,7 +182,7 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 			log.Printf("id: %d term: %d no vote %d %d", rf.me, rf.term, args.CandidateID, args.Term)
 			rf.mu.Unlock()
 			return
-		}
+		} 
 	} else {
 		reply.Success = false
 		log.Printf("id: %d term: %d no vote %d %d", rf.me, rf.term, args.CandidateID, args.Term)
@@ -226,8 +226,8 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	atomic.SwapInt64(&rf.term, args.Term)
 	reply.Term = rf.term
 	log.Printf("%d %d to %d %d append sussess", args.LeaderID, args.Term, rf.me, rf.term)
-	reply.Sussess = true
 	rf.mu.Unlock()
+	reply.Sussess = true
 }
 
 //
@@ -260,7 +260,7 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 // the struct itself.
 //
 
-//
+
 // the service using Raft (e.g. a k/v server) wants to start
 // agreement on the next command to be appended to Raft's log. if this
 // server isn't the leader, returns false. otherwise start the
@@ -268,20 +268,20 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 // command will ever be committed to the Raft log, since the leader
 // may fail or lose an election. even if the Raft instance has been killed,
 // this function should return gracefully.
-//
+
 // the first return value is the index that the command will appear at
 // if it's ever committed. the second return value is the current
 // term. the third return value is true if this server believes it is
 // the leader.
-//
+
 func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	index := -1
-	term := -1
-	IsLeaader := true
+	term := rf.term
+	IsLeader := (rf.job == Leader)
 
 	// Your code here (2B).
 
-	return index, term, IsLeaader
+	return index, (int)(term), IsLeader
 }
 
 //
@@ -309,29 +309,30 @@ func (rf *Raft) killed() bool {
 // heartsbeats recently.
 func (rf *Raft) ticker() {
 	//* FIXME
+	rand.Seed(time.Now().Unix())
 	for !rf.killed() {
-		time.Sleep(time.Duration(100) * time.Millisecond)
+		time.Sleep(time.Duration(rand.Intn(130)) * time.Millisecond)
 		//* Leader 不用判断超时，只有 Follower 需要判断当前心跳是否正常
 		//* 不正常则发起选举
 		if atomic.LoadInt64(&rf.job) == Follower {
-			if (time.Now().UnixMilli() - atomic.LoadInt64(&rf.lastreserve)) > 130 {
+			//* 随机超时时间，尽量避免同时发起选举
+			if (time.Now().UnixMilli() - atomic.LoadInt64(&rf.lastreserve)) >= (int64)(rand.Intn(70) + 140) {
 				//* 随机选举超时时间
-				election := (int64)(rand.Intn(150) + 150)
 				//* 我给我自己投一票
 				var votes_tome int32 = 1
 				//* 成为候选者
+				//* 且自己的任期 + 1
 				rf.mu.Lock()
 				rf.term++
 				atomic.SwapInt64(&rf.job, Candidate)
 				rf.Vote_map[rf.term] = true
 				args := RequestVoteArgs{}
-				//* 且自己的任期 + 1
 				args.Term = rf.term
 				args.CandidateID = (int64)(rf.me)
 				log.Printf("id: %d term: %d start requestvote", rf.me, rf.term)
 				rf.mu.Unlock()
 				//* 随机选举超时时间，一旦超时，立即变为 Follower, 等待下一轮选举
-				time.AfterFunc(time.Duration(election)*time.Millisecond, func() {
+				time.AfterFunc(time.Duration(300)*time.Millisecond, func() {
 					rf.mu.Lock()
 					if rf.job == Candidate {
 						atomic.SwapInt64(&rf.job, Follower)
@@ -359,7 +360,7 @@ func (rf *Raft) ticker() {
 								//* 自己变为 Follower
 								//* 如果投票成功，则票数 + 1
 								if reply.Success && rf.job == Candidate {
-									atomic.AddInt32(&votes_tome, 1)
+									votes_tome++
 								}
 								if reply.Term > rf.term && rf.job == Candidate {
 									atomic.SwapInt64(&rf.job, Follower)
@@ -367,7 +368,7 @@ func (rf *Raft) ticker() {
 								//* 如果当前获得集群的 1 / 2 投票
 								//* 自己则成为当前集群的 Leader
 								//* 并且给其他的 Follower 发送心跳
-								if atomic.LoadInt32(&votes_tome) > (int32)(len(rf.peers))/2 && rf.job == Candidate {
+								if votes_tome >= ((int32)(len(rf.peers))/2 + 1) && rf.job == Candidate {
 									log.Printf("id: %d term %d be Leader", rf.me, rf.term)
 									atomic.SwapInt64(&rf.job, Leader)
 								}
@@ -379,6 +380,7 @@ func (rf *Raft) ticker() {
 					rf.mu.Lock()
 					if rf.job == Leader {
 						rf.mu.Unlock()
+						rf.job = Leader
 						break
 					}
 					rf.mu.Unlock()
