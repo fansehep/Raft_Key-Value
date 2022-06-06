@@ -175,6 +175,8 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 	if args.Term >= rf.term {
 		if rf.Vote_map[args.Term] == -1 || rf.Vote_map[args.Term] == (int)(args.CandidateID) {
 			reply.Success = true
+			atomic.SwapInt64(&rf.term, args.Term)
+			atomic.SwapInt64(&rf.lastreserve, time.Now().UnixMilli())
 			log.Printf("id: %d term: %d vote %d %d", rf.me, rf.term, args.CandidateID, args.Term)
 			rf.Vote_map[args.Term] = (int)(args.CandidateID)
 			rf.mu.Unlock()
@@ -221,12 +223,13 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 		rf.mu.Unlock()
 		return
 	}
+	atomic.SwapInt32(&rf.ReaptVote, 0)
 	atomic.SwapInt64(&rf.job, Follower)
 	atomic.SwapInt64(&rf.lastreserve, args.Heartbeatime)
-	atomic.SwapInt64(&rf.term, args.Term)
 	reply.Term = rf.term
-	rf.Vote_map[args.Term] = (int)(args.LeaderID)
-	log.Printf("%d %d to %d %d append sussess", args.LeaderID, args.Term, rf.me, rf.term)
+	atomic.SwapInt64(&rf.term, args.Term)
+  rf.Vote_map[args.Term] = (int)(args.LeaderID)
+	log.Printf("%d %d to %d %d append ok", args.LeaderID, args.Term, rf.me, rf.term)
 	rf.mu.Unlock()
 	reply.Success = true
 }
@@ -310,7 +313,7 @@ func (rf *Raft) killed() bool {
 // heartsbeats recently.
 func (rf *Raft) ticker() {
 	n := len(rf.peers)
-	RequestVoteTime := time.NewTimer(180  * time.Millisecond)
+	RequestVoteTime := time.NewTimer(250  * time.Millisecond)
 	HeartBeatTime := time.NewTimer(100 * time.Millisecond)
 	for !rf.killed() {
 		select {
@@ -333,6 +336,12 @@ func (rf *Raft) ticker() {
 								args.Heartbeatime = time.Now().UnixMilli()
 								ref := rf.SendAppendEntries(ServerNumber, &args, &reply)
 								if ref {
+									rf.mu.Lock()
+									if reply.Term > atomic.LoadInt64(&rf.term) {
+										atomic.SwapInt64(&rf.job, Follower)
+										atomic.SwapInt64(&rf.job, args.Term)
+									}
+									rf.mu.Unlock()
 									break
 								}
 							}
@@ -341,26 +350,35 @@ func (rf *Raft) ticker() {
 			}
 			HeartBeatTime.Reset(100 * time.Millisecond)
 		case <- RequestVoteTime.C:
-			if atomic.LoadInt64(&rf.job) == Follower || atomic.LoadInt64(&rf.job) == Candidate {
+			if atomic.LoadInt64(&rf.job) == Follower || atomic.LoadInt32(&rf.ReaptVote) == 1 {
 				//* 随机超时时间，尽量避免同时发起选举
-				time.AfterFunc(time.Duration(rand.Intn(300) + 300)*time.Millisecond, func() {
-					rf.mu.Lock()
-					if atomic.LoadInt64(&rf.job) == Candidate {
-						rf.ReaptVote = 1
-						RequestVoteTime.Reset(0)
-					} else {
-						rf.ReaptVote = 0
-						RequestVoteTime.Reset(180 * time.Millisecond)
-					}
-					rf.mu.Unlock()
-				})
-				if (time.Now().UnixMilli() - atomic.LoadInt64(&rf.lastreserve)) >= (int64)(rand.Intn(300) + 300) || atomic.L {
+				m := sync.Mutex{}
+				voteok_cond := sync.NewCond(&(m))
+				var t_afterfunc int32 = 0
+				if (time.Now().UnixMilli() - atomic.LoadInt64(&rf.lastreserve)) >= (int64)(300 + rand.Intn(300)) || atomic.LoadInt32(&rf.ReaptVote) == 1 {
+					time.AfterFunc(time.Duration(rand.Intn(300) + 300)*time.Millisecond, func() {
+						rf.mu.Lock()
+						if atomic.LoadInt64(&rf.job) == Candidate {
+							atomic.SwapInt32(&rf.ReaptVote, 1)
+							atomic.SwapInt32(&t_afterfunc, 1)
+							voteok_cond.Signal()
+							RequestVoteTime.Reset(0)
+						} else {
+							atomic.SwapInt32(&t_afterfunc, 1)
+							atomic.SwapInt32(&rf.ReaptVote, 0)
+							RequestVoteTime.Reset(250 * time.Millisecond)
+						}
+						rf.mu.Unlock()
+					})
 					//* 随机选举超时时间
 					//* 我给我自己投一票
 					var votes_tome int32 = 1
 					//* 成为候选者
 					//* 且自己的任期 + 1
 					rf.mu.Lock()
+					if atomic.LoadInt32(&rf.ReaptVote) == 1 {
+						atomic.SwapInt32(&rf.ReaptVote, 0)
+					}
 					rf.lastreserve = time.Now().UnixMilli()
 					rf.term++
 					atomic.SwapInt64(&rf.job, Candidate)
@@ -371,8 +389,6 @@ func (rf *Raft) ticker() {
 					log.Printf("id: %d term: %d start requestvote", rf.me, rf.term)
 					rf.mu.Unlock()
 					var i int32 = 0
-					m := sync.Mutex{}
-					voteok_cond := sync.NewCond(&(m))
 					//* 其他节点不投我的票数
 					var vote_fail int32 = 0
 					for ; i < (int32)(n) && atomic.LoadInt64(&rf.job) == Candidate; i++ {
@@ -399,6 +415,8 @@ func (rf *Raft) ticker() {
 										atomic.AddInt32(&vote_fail, 1)
 									}
 									if reply.Term > rf.term && rf.job == Candidate {
+										rf.term = reply.Term
+										//FIXME
 										atomic.SwapInt64(&rf.job, Follower)
 										voteok_cond.Signal()
 									}
@@ -408,10 +426,15 @@ func (rf *Raft) ticker() {
 									if votes_tome >= ((int32)(n/2 + 1)) && rf.job == Candidate {
 										log.Printf("id: %d term %d be Leader", rf.me, rf.term)
 										atomic.SwapInt64(&rf.job, Leader)
-										voteok_cond.Signal()
+										atomic.SwapInt32(&t_afterfunc, 1)
+									  voteok_cond.Signal()
 									}
 									if atomic.LoadInt32(&vote_fail) > (int32)(n/2) && rf.job == Candidate {
 										atomic.SwapInt64(&rf.job, Follower)
+										atomic.SwapInt32(&t_afterfunc, 1)
+										voteok_cond.Signal()
+									}
+									if atomic.LoadInt64(&rf.job) == Follower {
 										voteok_cond.Signal()
 									}
 									rf.mu.Unlock()
@@ -419,9 +442,8 @@ func (rf *Raft) ticker() {
 							}(int32(atomic.LoadInt32(&i)))
 						}
 						rf.mu.Lock()
-						if atomic.LoadInt64(&rf.job) == Leader {
+						if atomic.LoadInt64(&rf.job) == Leader || atomic.LoadInt64(&rf.job) == Follower{
 							rf.mu.Unlock()
-							
 							break
 						} else {
 							rf.mu.Unlock()
@@ -430,7 +452,7 @@ func (rf *Raft) ticker() {
 					}
 					//* 如果还没有选出 Leader, 那么就等待
 					m.Lock()
-					for atomic.LoadInt64(&rf.job) == Candidate {
+					for atomic.LoadInt64(&rf.job) == Candidate && atomic.LoadInt32(&t_afterfunc) == 0 {
 						voteok_cond.Wait()
 					}
 					m.Unlock()
@@ -466,7 +488,7 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	rf.term = 0
 	rf.lastreserve = 0
 	rf.Vote_map = make(map[int64]int)
-	rf.ReaptVote = false
+	rf.ReaptVote = 0
 	for i := 0; i < 1024; i++ {
 		rf.Vote_map[(int64)(i)] = -1
 	} 
