@@ -74,6 +74,12 @@ type Raft struct {
 	// Look at the paper's Figure 2 for a description of what
 	// state a Raft server must maintain.
 	Lognums []LogEntry
+
+	CommitIndex int64 //* 已经提交的最后的一条日志的索引
+	LastApplied int64 //* 已应用到服务器本地的最后一条日志条目的索引
+
+	NextIndex  []int64
+	MatchIndex []int64
 }
 
 type LogEntry struct {
@@ -156,8 +162,10 @@ func (rf *Raft) Snapshot(index int, snapshot []byte) {
 
 type RequestVoteArgs struct {
 	// Your data here (2A, 2B).
-	Term        int64 //* Candidate 的任期
-	CandidateID int64 //* candidate 的ID
+	Term         int64 //* Candidate 的任期
+	CandidateID  int64 //* Candidate 的ID
+	LastLogIndex int64 //* Candidate 最后的日志条目的索引值
+	LastLogTerm  int64 //* Candidate 最后的日志条目的 term
 }
 
 type RequestVoteReply struct {
@@ -199,18 +207,28 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 }
 
 type AppendEntriesArgs struct {
-	Term         int64 //* Leader 的任期
-	LeaderID     int64 //* Leader ID
-	Heartbeatime int64 //* 心跳，用来更新时间
+	Term              int64      //* Leader 的任期
+	LeaderID          int64      //* Leader ID
+	Heartbeatime      int64      //* 心跳，用来更新时间
+	PrevLogIndex      int64      //* 上一条日志记录的 index
+	PrevLogTerm       int64      //* 上一条日志记录的 term
+	ToSaveEntries     []LogEntry //* 需要被保存的日志条目
+	LeaderCommitIndex int64      //* 领导人的已知的已提交的最高的日志的索引
 }
 
 type AppendEntriesReply struct {
 	Term    int64 //* 回复者的任期
-	Success bool  //*
+	Success bool  //* 是否成功
 }
 
 func (rf *Raft) SendAppendEntries(i int32, args *AppendEntriesArgs, reply *AppendEntriesReply) bool {
 	er := rf.peers[i].Call("Raft.AppendEntries", args, reply)
+	rf.mu.Lock()
+	defer rf.mu.Unlock()
+	if rf.job != Leader {
+		return er
+	}
+
 	return er
 }
 
@@ -226,6 +244,34 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 		rf.mu.Unlock()
 		return
 	}
+	//* prelogindex 和 prevlogterm 都需要匹配
+	if args.PrevLogIndex != (int64)(len(rf.Lognums)-1) ||
+		args.PrevLogTerm != (int64)(rf.Lognums[len(rf.Lognums)-1].Term) {
+		reply.Success = false
+		log.Printf("%d %d to %d %d append is not feet", args.LeaderID, args.Term, rf.me, rf.term)
+		rf.mu.Unlock()
+		return
+	}
+	//* 逐一对比要附加的日志 entries[] 是否和自己 prelogindex 之后的日志是否冲突
+	/*
+	 *  Lognums | 0 | 1 | 2 |
+	 *  entries     | 0 | 1 | 2 |
+	 *  i = 1 error =>
+	 */
+	j := 0
+	for i := args.PrevLogIndex; i < (int64)(len(rf.Lognums)) && j < len(args.ToSaveEntries); i++ {
+		if rf.Lognums[i].Term != args.ToSaveEntries[j].Term {
+			//* 如果entries 日志中有位置发生冲突, 就将冲突之后的日志进行截断
+			rf.Lognums = rf.Lognums[:(len(rf.Lognums) - (int)(i))]
+			append_logentries := args.ToSaveEntries[:(len(args.ToSaveEntries) - (int)(j))]
+			rf.Lognums = append(rf.Lognums)
+			break
+		}
+		j++
+	}
+	//* 此时如果 j == len(args.ToSaveEntries) 表明所有的日志都已被匹配
+	//*  1. 可能是重复的附加日志 RPC
+	//*  2.
 	rf.job = Follower
 	rf.lastreserve = args.Heartbeatime
 	rf.term = args.Term
@@ -286,9 +332,11 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	rf.mu.Unlock()
 	//* 如果是 Follower
 	if !IsLeader {
-		return -1, -1, false
+		return -1, (int)(term), false
 	}
-	return index + 1, (int)(term), IsLeader
+	index = len(rf.Lognums) - 1
+	rf.Lognums = append(rf.Lognums, LogEntry{command, term})
+	return index, (int)(term), IsLeader
 }
 
 //
@@ -310,6 +358,11 @@ func (rf *Raft) Kill() {
 func (rf *Raft) killed() bool {
 	z := atomic.LoadInt32(&rf.dead)
 	return z == 1
+}
+
+func (rf *Raft) getPrevLogEntry(prevlogindex *int64, prevlogterm *int64) {
+	*prevlogindex = (int64)(len(rf.Lognums) - 1)
+	*prevlogterm = (int64)(rf.Lognums[*prevlogindex].Term)
 }
 
 func (rf *Raft) ticker() {
@@ -342,8 +395,14 @@ func (rf *Raft) ticker() {
 							return
 						}
 						args.LeaderID = (int64)(rf.me)
-						args.Term = rf.term
+						rf.getPrevLogEntry(&args.PrevLogIndex, &args.PrevLogTerm)
+						args.LeaderCommitIndex = rf.CommitIndex
+						entries := rf.Lognums[rf.NextIndex[ServerNumber]:]
+						//*  获取所需的复制的日志
+						args.ToSaveEntries = make([]LogEntry, len(entries))
+						copy(args.ToSaveEntries, entries)
 						rf.mu.Unlock()
+
 						reply := AppendEntriesReply{}
 						args.Heartbeatime = time.Now().UnixMilli()
 						ref := rf.SendAppendEntries(ServerNumber, &args, &reply)
@@ -449,7 +508,7 @@ func (rf *Raft) ticker() {
 						rf.mu.Unlock()
 					}(i)
 				}
-				RequestVoteTimer.Reset((time.Duration((rand.Intn(330)))) * time.Millisecond)
+				RequestVoteTimer.Reset((time.Duration((rand.Intn(250) + 130))) * time.Millisecond)
 			}()
 		}
 	}
@@ -481,9 +540,15 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	rf.term = 0
 	rf.lastreserve = 0
 	rf.Vote_map = make(map[int64]int)
-	for i := 0; i < 1024; i++ {
+	for i := 0; i < 2048; i++ {
 		rf.Vote_map[(int64)(i)] = -1
 	}
+	rf.CommitIndex = 0
+	rf.LastApplied = 0
+	rf.Lognums = make([]LogEntry, 1)
+	rf.Lognums[0].Term = 0
+	rf.NextIndex = make([]int64, len(rf.peers))
+	rf.MatchIndex = make([]int64, len(rf.peers))
 	// initialize from state persisted before a crash
 	rf.readPersist(persister.ReadRaftState())
 
