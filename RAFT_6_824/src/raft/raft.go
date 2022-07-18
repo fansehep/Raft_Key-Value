@@ -136,7 +136,7 @@ func (rf *Raft) readPersist(data []byte) {
 }
 
 func (rf *Raft) ApplyLog() {
-	for rf.killed() == false {
+	for !rf.killed() {
 		time.Sleep(time.Duration(10) * time.Millisecond)
 		rf.mu.Lock()
 		for i := rf.LastApplied; i < rf.LeaderCommitIndex; i++ {
@@ -207,6 +207,7 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 	}
 	if args.Term > rf.term {
 		reply.Success = true
+		rf.term = args.Term
 		rf.job = Follower
 		rf.lastreserve = time.Now().UnixMilli()
 	}
@@ -224,10 +225,10 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 	if len(rf.LogNums) == 0 {
 		uptodate = true
 	}
-	if args.LastLogTerm > rf.LogNums[len(rf.LogNums)-1].Term {
+	if len(rf.LogNums) > 0 && args.LastLogTerm > rf.LogNums[len(rf.LogNums)-1].Term {
 		uptodate = true
 	}
-	if rf.LogNums[len(rf.LogNums)-1].Term == args.LastLogTerm &&
+	if len(rf.LogNums) > 0 && rf.LogNums[len(rf.LogNums)-1].Term == args.LastLogTerm &&
 		args.LastLogIndex >= (int64)(len(rf.LogNums)-1) {
 		uptodate = true
 	}
@@ -307,29 +308,34 @@ func (rf *Raft) SendAppendEntries(i int32, args *AppendEntriesArgs, reply *Appen
 func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply) {
 	rf.mu.Lock()
 	reply.Term = rf.term
+	reply.Success = false
 	if args.Term < rf.term {
-		reply.Success = false
 		log.Printf("%d %d to %d %d append fail", args.LeaderID, args.Term, rf.me, rf.term)
 		rf.mu.Unlock()
 		return
 	}
 	//* args.Term > rf.term
 	//* 那么就要变为 Follower
-	if args.Term > rf.term || rf.job == Candidate {
+	if args.Term > rf.term {
 		rf.term = args.Term
 		rf.lastreserve = time.Now().UnixMilli()
 		rf.job = Follower
+		//* 所传日志 len = 0, 此时直接返回即可
+		if len(args.ToSaveLogEntries) == 0 {
+			reply.Success = true
+			log.Printf("%d %d to %d %d append ok", args.LeaderID, args.Term, rf.me, rf.term)
+			rf.mu.Unlock()
+			return
+		}
 	}
 	rf.lastreserve = time.Now().UnixMilli()
 	CurLogLength := (int64)(len(rf.LogNums))
-	//* Leader 的MatchIndex[ServerNumber] >= CurLogLength
-	if args.PreLogIndex >= CurLogLength {
+	if args.PreLogIndex > CurLogLength {
 		reply.Success = false
 		log.Printf("%d %d to %d %d append fail", args.LeaderID, args.Term, rf.me, rf.term)
 		rf.mu.Unlock()
 		return
 	}
-	//* 日志条目不匹配, 那么返回 false
 	CurLogTerm := rf.LogNums[args.PreLogIndex].Term
 	if CurLogTerm != args.PreLogTerm {
 		reply.Success = false
@@ -429,10 +435,13 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	IsLeader := (rf.job == Leader)
 	//* 如果是 Follower
 	if !IsLeader {
-		return -1, (int)(term), false
+		return index, (int)(term), false
 	}
 	rf.LogNums = append(rf.LogNums, LogEntry{command, rf.term})
-	return index, (int)(term), true
+	index = len(rf.LogNums) - 1
+	rf.MatchIndex[rf.me] = (int64)(len(rf.LogNums) - 1)
+	rf.NextIndex[rf.me] = (int64)(len(rf.LogNums))
+	return index + 1, (int)(term), true
 }
 
 //
@@ -492,6 +501,7 @@ func (rf *Raft) ticker() {
 						args.LeaderID = (int64)(rf.me)
 						args.Term = rf.term
 						args.PreLogIndex = rf.NextIndex[ServerNumber] - 1
+						//* 开始选举的时候 args.PreLogIndex = 0
 						if args.PreLogIndex > 0 {
 							args.PreLogTerm = rf.LogNums[args.PreLogIndex].Term
 						}
@@ -559,9 +569,14 @@ func (rf *Raft) ticker() {
 				rf.lastreserve = time.Now().UnixMilli()
 				args := RequestVoteArgs{}
 				args.Term = rf.term
+				/*
+				* 在第一次发起选举的时候
+				*		args.LastLogIndex = -1
+				*		args.LastLogTerm = 0
+				 */
 				args.CandidateID = (int64)(rf.me)
 				args.LastLogIndex = (int64)(len(rf.LogNums) - 1)
-				args.LastLogTerm = -1
+				args.LastLogTerm = 0
 				if args.LastLogIndex >= 0 {
 					args.LastLogTerm = (int64)(rf.LogNums[args.LastLogIndex].Term)
 				}
@@ -611,7 +626,7 @@ func (rf *Raft) ticker() {
 							CurLogNumsLength := len(rf.LogNums)
 							for k := 0; k < n; k++ {
 								rf.NextIndex[k] = (int64)(CurLogNumsLength)
-								rf.MatchIndex[k] = 0
+								rf.MatchIndex[k] = -1
 							}
 							rf.mu.Unlock()
 							return
@@ -650,7 +665,7 @@ func (rf *Raft) ticker() {
 //* 有一个服务用于启动服务器
 func Make(peers []*labrpc.ClientEnd, me int,
 	persister *Persister, applyCh chan ApplyMsg) *Raft {
-	log.SetFlags(log.Lshortfile | log.LstdFlags | log.Ltime)
+	log.SetFlags(log.LstdFlags | log.Ltime)
 	rf := &Raft{}
 	rf.peers = peers
 	rf.persister = persister
@@ -662,16 +677,14 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	rf.Vote_map = make(map[int64]int)
 	rf.MatchIndex = make([]int64, len(peers))
 	rf.NextIndex = make([]int64, len(peers))
-	rf.LogNums = make([]LogEntry, 1)
-	rf.LogNums[0].Command = nil
-	rf.LogNums[0].Term = 0
+	rf.LogNums = make([]LogEntry, 0)
 	rf.LastApplied = 1
-	rf.LeaderCommitIndex = 0
+	rf.LeaderCommitIndex = -1
 	rf.ApplyChan = applyCh
 	for i := 0; i < 1024; i++ {
 		rf.Vote_map[(int64)(i)] = -1
 	}
-	//
+	//* 默认NextIndex[i] = 1
 	for i := 0; i < len(peers); i++ {
 		rf.NextIndex[i] = 1
 	}
