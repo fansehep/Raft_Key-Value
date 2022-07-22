@@ -117,7 +117,6 @@ func (rf *Raft) persist() {
 	data_t.Encode(rf.me)
 	data_t.Encode(rf.job)
 	data_t.Encode(rf.term)
-	data_t.Encode(rf.lastreserve)
 	data_t.Encode(rf.Vote_map)
 	data_t.Encode(rf.LogNums)
 	data_t.Encode(rf.MatchIndex)
@@ -159,7 +158,6 @@ func (rf *Raft) readPersist(data []byte) {
 	if d.Decode(&(raft_t.me)) != nil ||
 		d.Decode(&(raft_t.job)) != nil ||
 		d.Decode(&(raft_t.term)) != nil ||
-		d.Decode(&(raft_t.lastreserve)) != nil ||
 		d.Decode(&(raft_t.Vote_map)) != nil ||
 		d.Decode(&(raft_t.LogNums)) != nil ||
 		d.Decode(&(raft_t.MatchIndex)) != nil ||
@@ -177,6 +175,7 @@ func (rf *Raft) readPersist(data []byte) {
 		rf.NextIndex = raft_t.NextIndex
 		rf.LastApplied = raft_t.LastApplied
 		rf.LeaderCommitIndex = raft_t.LeaderCommitIndex
+		rf.LogNums = raft_t.LogNums
 	}
 }
 
@@ -216,7 +215,6 @@ type RequestVoteArgs struct {
 type RequestVoteReply struct {
 	Term    int64 //* 被调用 rpc 方的 任期
 	Success bool  //* ture 为被调用方投，false则反之
-
 }
 
 func (rf *Raft) SendRequestVote(server int32, args *RequestVoteArgs, reply *RequestVoteReply) bool {
@@ -229,35 +227,63 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 	rf.mu.Lock()
 	reply.Term = rf.term
 	reply.Success = false
+	log.Printf("%d %d requestvote %d %d lastlogindex : %v lastlogterm %v", args.CandidateID, args.Term, rf.me, rf.term, args.LastLogIndex, args.LastLogTerm)
 	if args.Term < rf.term {
-		log.Printf("id: %d term: %d no vote %d %d", rf.me, rf.term, args.CandidateID, args.Term)
+		log.Printf("id: %d term: %d %v  no vote %d %d", rf.me, rf.term, rf.job, args.CandidateID, args.Term)
 		rf.mu.Unlock()
 		return
 	}
-	if args.Term > rf.term &&
-		((args.LastLogTerm) >= rf.LogNums[len(rf.LogNums)-1].Term) &&
-		(args.LastLogIndex) >= (int64)(len(rf.LogNums)) {
+	if args.Term > rf.term {
+		rf.term = args.Term
+		rf.job = Follower
+		rf.lastreserve = time.Now().UnixMilli()
+		rf.persist()
+	}
+	if args.LastLogIndex == (int64)(len(rf.LogNums)-1) && args.LastLogTerm == (int64)(rf.LogNums[len(rf.LogNums)-1].Term) {
+		rf.job = Follower
+		rf.lastreserve = time.Now().UnixMilli()
+		reply.Success = true
+		rf.Vote_map[args.Term] = int(args.CandidateID)
+		rf.persist()
+		log.Printf("fun0 id: %d term: %d %v  vote %d %d curloglength %v curlogterm %v",
+			rf.me, rf.term, rf.job, args.CandidateID, args.Term, len(rf.LogNums), rf.LogNums[len(rf.LogNums)-1].Term)
+		rf.mu.Unlock()
+		return
+	} else if args.LastLogIndex < (int64)(len(rf.LogNums)-1) && args.LastLogTerm == (int64)(rf.LogNums[args.LastLogIndex].Term) {
+		reply.Success = false
+		log.Printf("fun1 id: %d term: %d no vote %d %d %v  curloglength %v curlogterm %v",
+			rf.me, rf.term, rf.job, args.CandidateID, args.Term, len(rf.LogNums), rf.LogNums[len(rf.LogNums)-1].Term)
+		rf.mu.Unlock()
+		return
+	}
+	if (args.LastLogTerm) >= rf.LogNums[len(rf.LogNums)-1].Term {
+		rf.term = args.Term
+		rf.job = Follower
+		rf.lastreserve = time.Now().UnixMilli()
+		reply.Success = true
+		rf.Vote_map[args.Term] = int(args.CandidateID)
+		rf.persist()
+		log.Printf("fun2 id: %d term: %d %v  vote %d %d curloglength %v curlogterm %v",
+			rf.me, rf.term, rf.job, args.CandidateID, args.Term, len(rf.LogNums), rf.LogNums[len(rf.LogNums)-1].Term)
+		rf.mu.Unlock()
+		return
+	}
+	if (rf.Vote_map[args.Term] == -1 || rf.Vote_map[args.Term] == int(args.CandidateID)) && (((args.LastLogTerm) >= rf.LogNums[len(rf.LogNums)-1].Term) &&
+		(args.LastLogIndex) >= (int64)(len(rf.LogNums)-1)) {
 		rf.job = Follower
 		rf.term = args.Term
 		reply.Success = true
 		rf.lastreserve = time.Now().UnixMilli()
-		log.Printf("id: %d term: %d vote %d %d", rf.me, rf.term, args.CandidateID, args.Term)
+		rf.Vote_map[rf.term] = int(args.CandidateID)
 		rf.persist()
+		log.Printf("fun3 id: %d term: %d %v  vote %d %d curloglength %v curlogterm %v",
+			rf.me, rf.term, rf.job, args.CandidateID, args.Term, len(rf.LogNums), rf.LogNums[len(rf.LogNums)-1].Term)
 		rf.mu.Unlock()
 		return
 	}
-
-	//* (((投票为空 || 当前是候选人)) && (候选者和我当前的日志一样新)） ||
-	//*  重复投票
-	if (rf.Vote_map[args.Term] == -1 || rf.job == Candidate) &&
-		((args.LastLogTerm) >= rf.LogNums[len(rf.LogNums)-1].Term) || (rf.Vote_map[args.Term] == (int)(args.CandidateID)) {
-		rf.Vote_map[args.Term] = (int)(args.CandidateID)
-		rf.lastreserve = time.Now().UnixMilli()
-		rf.job = Follower
-		rf.term = args.Term
-		reply.Success = true
-		rf.persist()
-		log.Printf("id: %d term: %d vote %d %d", rf.me, rf.term, args.CandidateID, args.Term)
+	if !reply.Success {
+		log.Printf("fun4 id: %d term: %d no vote %d %d %v  curloglength %v curlogterm %v",
+			rf.me, rf.term, rf.job, args.CandidateID, args.Term, len(rf.LogNums), rf.LogNums[len(rf.LogNums)-1].Term)
 	}
 	rf.mu.Unlock()
 }
@@ -314,6 +340,7 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	rf.job = Follower
 	curloglength := (int64)(len(rf.LogNums))
 	reply.Success = true
+	rf.persist()
 	/*
 	 * 2. 0 >= 1 || 0 != 0
 	 *
@@ -390,6 +417,7 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	// 	//* 2 - 1 = 1
 	// 	rf.LeaderCommitIndex = args.CommitIndex
 	//*
+	rf.persist()
 	if args.CommitIndex > rf.LastApplied {
 		if args.PreLogIndex > args.CommitIndex {
 			rf.LeaderCommitIndex = args.CommitIndex
@@ -466,6 +494,7 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 		return -1, (int)(term), false
 	}
 	rf.LogNums = append(rf.LogNums, LogEntry{command, rf.term})
+	rf.persist()
 	index := len(rf.LogNums) - 1
 	return index, (int)(term), true
 }
@@ -516,7 +545,6 @@ func (rf *Raft) ticker() {
 						//*2. 2 1
 						rf.NextIndex[rf.me] = (int64)(len(rf.LogNums))
 						rf.MatchIndex[rf.me] = (int64)(rf.NextIndex[rf.me]) - 1
-						rf.persist()
 						rf.mu.Unlock()
 						continue
 					}
@@ -593,11 +621,13 @@ func (rf *Raft) ticker() {
 								//*    2 - 1 = 1
 								rf.MatchIndex[ServerNumber] =
 									rf.NextIndex[ServerNumber] - 1
+								rf.persist()
 								//* 获取 MatchIndex 中的中位数
 								//* 然后应用到状态机中
 								newcommitindex := rf.getMedianIndex()
 								if newcommitindex > rf.LeaderCommitIndex {
 									rf.LeaderCommitIndex = newcommitindex
+									rf.persist()
 									k := rf.LastApplied
 									for k < rf.LeaderCommitIndex {
 										msg := ApplyMsg{}
@@ -613,19 +643,18 @@ func (rf *Raft) ticker() {
 									rf.me, rf.term, rf.LeaderCommitIndex, rf.NextIndex[ServerNumber],
 									rf.MatchIndex[ServerNumber])
 							} else {
-								rf.NextIndex[ServerNumber]--
-								if rf.NextIndex[ServerNumber] == 0 {
+								rf.NextIndex[ServerNumber] -= 2
+								if rf.NextIndex[ServerNumber] <= 0 {
 									rf.NextIndex[ServerNumber] = 1
 								}
 								rf.MatchIndex[ServerNumber] = 0
 							}
-							rf.persist()
 							rf.mu.Unlock()
 							return
 						}
 					}(i)
 				}
-				HeartBeatTimer.Reset(70 * time.Millisecond)
+				HeartBeatTimer.Reset(120 * time.Millisecond)
 			}()
 		case <-RequestVoteTimer.C:
 			go func() {
@@ -652,14 +681,7 @@ func (rf *Raft) ticker() {
 				rf.job = Candidate
 				rf.Vote_map[rf.term] = rf.me
 				rf.lastreserve = time.Now().UnixMilli()
-				args := RequestVoteArgs{}
-				args.Term = rf.term
-				args.CandidateID = (int64)(rf.me)
-				/*
-				 * 1. 0 0
-				 */
-				args.LastLogIndex = (int64)(len(rf.LogNums) - 1)
-				args.LastLogTerm = (int64)(rf.LogNums[args.LastLogIndex].Term)
+				rf.persist()
 				log.Printf("id: %d term: %d start request vote", rf.me, rf.term)
 				rf.mu.Unlock()
 				var i int32 = 0
@@ -675,25 +697,29 @@ func (rf *Raft) ticker() {
 					}
 					rf.mu.Unlock()
 					go func(ServerNumber int32) {
+						rf.mu.Lock()
+						args := RequestVoteArgs{}
+						args.Term = rf.term
+						args.CandidateID = (int64)(rf.me)
+						/*
+						 * 1. 0 0
+						 */
+						args.LastLogIndex = (int64)(len(rf.LogNums) - 1)
+						args.LastLogTerm = (int64)(rf.LogNums[args.LastLogIndex].Term)
+						rf.mu.Unlock()
 						reply := RequestVoteReply{}
-						ok := rf.SendRequestVote(ServerNumber, &args, &reply)
-						if !ok {
-							reply.Success = false
-						}
+						rf.SendRequestVote(ServerNumber, &args, &reply)
 						if reply.Success {
 							atomic.AddInt32(&vote_to_me, 1)
-						} else {
+						} else if !reply.Success {
 							atomic.AddInt32(&no_vote_to_me, 1)
 						}
 						rf.mu.Lock()
-						if rf.job != Candidate {
-							rf.mu.Unlock()
-							return
-						}
 						if reply.Term > rf.term {
 							rf.job = Follower
 							rf.term = reply.Term
 							rf.lastreserve = time.Now().UnixMilli()
+							rf.persist()
 							rf.mu.Unlock()
 							return
 						}
@@ -718,18 +744,15 @@ func (rf *Raft) ticker() {
 						//* 如果不投我的票数 > (n/2), 则立即变为 follower
 						if atomic.LoadInt32(&no_vote_to_me) > (int32)(n/2) {
 							rf.job = Follower
-							//* 避免重复发起选举
-							rf.lastreserve = time.Now().UnixMilli()
 							//* 有变化
-							rf.persist()
-							log.Printf("id: %d term: %d be follower", rf.me, rf.term)
+							log.Printf("id: %d term: %d be follower novote %v", rf.me, rf.term, atomic.LoadInt32(&no_vote_to_me))
 							rf.mu.Unlock()
 							return
 						}
 						rf.mu.Unlock()
 					}(i)
 				}
-				RequestVoteTimer.Reset((time.Duration((rand.Intn(200) + 40))) * time.Millisecond)
+				RequestVoteTimer.Reset((time.Duration((rand.Intn(200) + 100))) * time.Millisecond)
 			}()
 		}
 	}
@@ -773,6 +796,8 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	}
 	// initialize from state persisted before a crash
 	rf.readPersist(persister.ReadRaftState())
+	rf.job = Follower
+	log.Printf("hi new raft! id : %v term : %v loglen : %d", rf.me, rf.term, len(rf.LogNums))
 	// start ticker goroutine to start elections
 	rf.mu.Lock()
 	go rf.ticker()
