@@ -167,13 +167,16 @@ func (rf *Raft) readPersist(data []byte) {
 	} else {
 		rf.me = raft_t.me
 		rf.term = raft_t.term
-		rf.lastreserve = raft_t.lastreserve
 		rf.Vote_map = raft_t.Vote_map
 		rf.MatchIndex = raft_t.MatchIndex
 		rf.NextIndex = raft_t.NextIndex
 		rf.LastApplied = raft_t.LastApplied
-		rf.LeaderCommitIndex = raft_t.LeaderCommitIndex
 		rf.LogNums = raft_t.LogNums
+		rf.job = Follower
+		rf.LeaderCommitIndex = raft_t.LeaderCommitIndex
+		for i := 0; i < peers_n; i++ {
+			rf.MatchIndex[i] = 0
+		}
 	}
 }
 
@@ -204,10 +207,11 @@ func (rf *Raft) Snapshot(index int, snapshot []byte) {
 
 type RequestVoteArgs struct {
 	// Your data here (2A, 2B).
-	Term         int64 //* Candidate 的任期
-	CandidateID  int64 //* Candidate
-	LastLogIndex int64 //* Candidate 的日志的最后下标
-	LastLogTerm  int64 //* LastLogTerm LastLogIndex 所对应的日志的term
+	Term           int64 //* Candidate 的任期
+	CandidateID    int64 //* Candidate
+	LastLogIndex   int64 //* Candidate 的日志的最后下标
+	LastLogTerm    int64 //* LastLogTerm LastLogIndex 所对应的日志的term
+	LastLogCommand interface{}
 }
 
 type RequestVoteReply struct {
@@ -223,59 +227,47 @@ func (rf *Raft) SendRequestVote(server int32, args *RequestVoteArgs, reply *Requ
 //* 一次投票过程中，只能给一个任期中的一名发起者，投一次票
 func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 	rf.mu.Lock()
+	defer rf.mu.Unlock()
+	if rf.killed() {
+		return
+	}
 	reply.Term = rf.term
 	reply.Success = false
-	log.Printf("%d %d requestvote %d %d lastlogindex : %v lastlogterm %v", args.CandidateID, args.Term, rf.me, rf.term, args.LastLogIndex, args.LastLogTerm)
+	log.Printf("fun0 id: %d term: %v request %d %d curloglength %v curlogterm %v lastlogindex %v lastlogterm %v curapplied %v",
+		rf.me, rf.term, args.CandidateID, args.Term, len(rf.LogNums), rf.LogNums[len(rf.LogNums)-1].Term, args.LastLogIndex, args.LastLogTerm, rf.LastApplied)
 	if args.Term < rf.term {
 		log.Printf("id: %d term: %d %v  no vote %d %d", rf.me, rf.term, rf.job, args.CandidateID, args.Term)
-		rf.mu.Unlock()
 		return
 	}
 	if args.Term > rf.term {
 		rf.term = args.Term
 		rf.job = Follower
-		rf.lastreserve = time.Now().UnixMilli()
 		rf.persist()
 	}
-	if args.LastLogIndex == (int64)(len(rf.LogNums)-1) && args.LastLogTerm < rf.LogNums[len(rf.LogNums)-1].Term {
-		reply.Success = false
-		rf.mu.Unlock()
+	if (args.LastLogTerm < rf.LogNums[len(rf.LogNums)-1].Term) ||
+		(args.LastLogTerm == rf.LogNums[len(rf.LogNums)-1].Term && args.LastLogIndex < (int64)(len(rf.LogNums)-1)) {
 		return
 	}
-	//* 日志比我新 或者和当前follower一样新的情况
-	//* 1.  最后一条的日志直接比我大
-	//* 2.  最后一条的日志和我一样, 但是总的日志数量比我多
-	if args.LastLogTerm >= rf.LogNums[len(rf.LogNums)-1].Term && args.LastLogIndex >= (int64)(len(rf.LogNums)-1) {
-		rf.term = args.Term
-		rf.job = Follower
-		rf.lastreserve = time.Now().UnixMilli()
-		reply.Success = true
-		rf.Vote_map[args.Term] = int(args.CandidateID)
-		rf.persist()
-		log.Printf("fun2 id: %d term: %d %v  vote %d %d curloglength %v curlogterm %v",
-			rf.me, rf.term, rf.job, args.CandidateID, args.Term, len(rf.LogNums), rf.LogNums[len(rf.LogNums)-1].Term)
-		rf.mu.Unlock()
-		return
-	}
-	if (rf.Vote_map[args.Term] == -1 || rf.Vote_map[args.Term] == int(args.CandidateID)) &&
-		(args.LastLogTerm >= rf.LogNums[len(rf.LogNums)-1].Term &&
-			args.LastLogIndex >= (int64)(len(rf.LogNums)-1)) {
-		rf.job = Follower
-		rf.term = args.Term
+	if rf.Vote_map[rf.term] == (int)(args.CandidateID) {
 		reply.Success = true
 		rf.lastreserve = time.Now().UnixMilli()
-		rf.Vote_map[rf.term] = int(args.CandidateID)
-		rf.persist()
-		log.Printf("fun3 id: %d term: %d %v  vote %d %d curloglength %v curlogterm %v",
-			rf.me, rf.term, rf.job, args.CandidateID, args.Term, len(rf.LogNums), rf.LogNums[len(rf.LogNums)-1].Term)
-		rf.mu.Unlock()
 		return
 	}
-	if !reply.Success {
-		log.Printf("fun4 id: %d term: %d no vote %d %d %v  curloglength %v curlogterm %v",
-			rf.me, rf.term, rf.job, args.CandidateID, args.Term, len(rf.LogNums), rf.LogNums[len(rf.LogNums)-1].Term)
+	if (args.LastLogIndex == (int64)(len(rf.LogNums)-1)) && (args.LastLogTerm != rf.LogNums[len(rf.LogNums)-1].Term ||
+		args.LastLogCommand != rf.LogNums[len(rf.LogNums)-1].Command) {
+		return
 	}
-	rf.mu.Unlock()
+	if (args.LastLogIndex <= (int64)(len(rf.LogNums)-1)) && args.LastLogCommand != rf.LogNums[args.LastLogIndex].Command {
+		return
+	}
+	rf.term = args.Term
+	rf.job = Follower
+	rf.lastreserve = time.Now().UnixMilli()
+	reply.Success = true
+	rf.Vote_map[rf.term] = int(args.CandidateID)
+	rf.persist()
+	log.Printf("fun0 id: %d term: %d %v  vote %d %d curloglength %v curlogterm %v lastlogindex %v lastlogterm %v",
+		rf.me, rf.term, rf.job, args.CandidateID, args.Term, len(rf.LogNums), rf.LogNums[len(rf.LogNums)-1].Term, args.LastLogIndex, args.LastLogTerm)
 }
 
 type AppendEntriesArgs struct {
@@ -285,13 +277,15 @@ type AppendEntriesArgs struct {
 	CommitIndex      int64      //* Leader 已经 commit 的 index
 	PreLogIndex      int64      //* 给当前节点要附加日志的上一条的日志索引
 	PreLogTerm       int64      //* 给当前节点要附加日志的上一条索引的 Term
+	PreLogCommand    interface{}
 }
 
 type AppendEntriesReply struct {
-	Term         int64 //* 回复者的任期
-	Success      bool  //* append 是否成功
-	UnmatchIndex int64 //* 返回冲突条目的最小索引地址
-	UnmatchTerm  int64 //* 返回冲突条目的任期号
+	Term           int64 //* 回复者的任期
+	Success        bool  //* append 是否成功
+	UnmatchIndex   int64 //* 返回冲突条目的最小索引地址
+	UnmatchTerm    int64 //* 返回冲突条目的任期号
+	CurLastApplied int64 //* 当前节点已经 apply 的数量
 }
 
 //* 获取 Leader MatchIndex[] 中的中位数
@@ -311,12 +305,12 @@ func (rf *Raft) getMedianIndex() int64 {
 
 func (rf *Raft) SendAppendEntries(i int32, args *AppendEntriesArgs, reply *AppendEntriesReply) bool {
 	er := rf.peers[i].Call("Raft.AppendEntries", args, reply)
-	for !er {
-		er = rf.peers[i].Call("Raft.AppendEntries", args, reply)
-		if er {
-			break
-		}
-	}
+	// for !er {
+	// 	er = rf.peers[i].Call("Raft.AppendEntries", args, reply)
+	// 	if er {
+	// 		break
+	// 	}
+	// }
 	return er
 }
 
@@ -327,43 +321,50 @@ func (rf *Raft) SendAppendEntries(i int32, args *AppendEntriesArgs, reply *Appen
 func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply) {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
+	if rf.killed() {
+		return
+	}
 	reply.Term = rf.term
 	reply.Success = false
 	reply.UnmatchIndex = -2
 	reply.UnmatchTerm = -1
+	reply.CurLastApplied = rf.LastApplied
 	if args.Term < rf.term {
 		log.Printf("term %d %d to %d %d append fail", args.LeaderID, args.Term, rf.me, rf.term)
 		return
 	}
-	rf.term = args.Term
+	if args.Term > rf.term {
+		rf.job = Follower
+		rf.term = args.Term
+		rf.persist()
+	}
 	rf.job = Follower
+	rf.term = args.Term
 	curloglength := (int64)(len(rf.LogNums))
+	rf.lastreserve = time.Now().UnixMilli()
 	reply.Success = true
 	rf.persist()
 	/*
-	 * 2. 0 >= 1 || 0 != 0
 	 *
 	 */
-
 	if args.PreLogIndex >= curloglength {
 		log.Printf("logindex %d %d to %d %d append fail\n args.PreLogIndex %v curloglength %v args.PreLogTerm %v",
 			args.LeaderID, args.Term, rf.me, rf.term, args.PreLogIndex, curloglength,
 			args.PreLogTerm)
-		rf.lastreserve = time.Now().UnixMilli()
 		reply.Success = false
 		//* 快速找到冲突index
 		reply.UnmatchIndex = curloglength - 1
 		return
 	}
-	if args.PreLogTerm != (int64)(rf.LogNums[args.PreLogIndex].Term) {
-		rf.lastreserve = time.Now().UnixMilli()
+	if args.PreLogTerm != (int64)(rf.LogNums[args.PreLogIndex].Term) ||
+		args.PreLogCommand != rf.LogNums[args.PreLogIndex].Command {
 		//* 此时必定 args.PreLogIndex < curloglength
 		//* 找到不匹配的term 的日志块的前一条日志
 		i := args.PreLogIndex
 		conterm := rf.LogNums[i].Term
 		for ; i > 0; i-- {
 			if rf.LogNums[i].Term != conterm {
-				reply.UnmatchIndex = i + 1
+				reply.UnmatchIndex = i
 				reply.UnmatchTerm = rf.LogNums[reply.UnmatchIndex].Term
 				break
 			}
@@ -378,6 +379,7 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 			args.PreLogTerm, rf.LogNums[args.PreLogIndex].Term, reply.UnmatchIndex, reply.UnmatchTerm)
 		return
 	}
+	reply.Success = false
 	rf.lastreserve = time.Now().UnixMilli()
 	var i int = 0
 	var j int = (int)(args.PreLogIndex) + 1
@@ -388,8 +390,11 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	 * 2 . i = 0, j = 1, 0 < 1 && 1 < 1
 	 * 3 . i = 0, j = 2, 0 < 0 && 2 < 2 slogth = 0
 	 */
+	//* 处理是否冲突, 只有冲突才会才可以截断日志 >>_<<
+	isconflict := false
 	for ; i < slogth && j < (int)(curloglength); i++ {
 		if rf.LogNums[j].Term != args.ToSaveLogEntries[i].Term || rf.LogNums[j].Command != args.ToSaveLogEntries[i].Command {
+			isconflict = true
 			rf.LogNums = rf.LogNums[:j]
 			rf.LogNums = append(rf.LogNums, args.ToSaveLogEntries[i:]...)
 			rf.persist()
@@ -403,7 +408,7 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	 * 2. i = 0, j = 1 0 == 1 && 1 < 1
 	 * 3. i = 0, j = 2 0 == 0 && 2 < 2
 	 */
-	if i == slogth && j < (int)(curloglength) {
+	if i == slogth && j < (int)(curloglength) && isconflict {
 		rf.LogNums = rf.LogNums[:j]
 		rf.persist()
 	}
@@ -413,7 +418,7 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	 * 2. i = 0, j = 1, 1 == 1 && 0 < 1 true
 	 * 3. i = 0, j = 2, 2 == 2 && 0 < 0 false
 	 */
-	if j == int(curloglength) && i < slogth {
+	if j == int(curloglength) && i < slogth && !isconflict {
 		rf.LogNums = append(rf.LogNums, args.ToSaveLogEntries[i:]...)
 		rf.persist()
 	}
@@ -435,13 +440,13 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	// 	//* 1 - 1 = 0 -> 1
 	// 	//* 2 - 1 = 1
 	// 	rf.LeaderCommitIndex = args.CommitIndex
-	//*
 	if args.CommitIndex > rf.LastApplied {
 		if args.PreLogIndex > args.CommitIndex {
 			rf.LeaderCommitIndex = args.CommitIndex
 		} else {
 			rf.LeaderCommitIndex = args.PreLogIndex
 		}
+		rf.persist()
 	}
 	k := rf.LastApplied
 	for k < rf.LeaderCommitIndex {
@@ -454,6 +459,7 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 		rf.LastApplied = k
 	}
 	rf.lastreserve = time.Now().UnixMilli()
+	reply.Success = true
 	rf.persist()
 	for i := 0; i < len(args.ToSaveLogEntries); i++ {
 		fmt.Printf(" %v (%v %v) ", i, args.ToSaveLogEntries[i].Term,
@@ -523,12 +529,14 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	term := rf.term
 	IsLeader := (rf.job == Leader)
 	//* 如果是 Follower or Candidate
-	if !IsLeader {
+	if !IsLeader || rf.killed() {
 		return -1, (int)(term), false
 	}
 	rf.LogNums = append(rf.LogNums, LogEntry{command, rf.term})
 	rf.persist()
 	index := len(rf.LogNums) - 1
+	log.Printf("id: %v term: %v job: %v appendlog lastlogterm %v lastlogcommand %v",
+		rf.me, rf.term, rf.job, rf.LogNums[len(rf.LogNums)-1].Term, rf.LogNums[len(rf.LogNums)-1].Command)
 	return index, (int)(term), true
 }
 
@@ -545,7 +553,10 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 //
 func (rf *Raft) Kill() {
 	atomic.StoreInt32(&rf.dead, 1)
-	// Your code here, if desired.
+	rf.mu.Lock()
+	log.Printf("id: %v term: %v has be killed lastApplied %v", rf.me, rf.term, rf.LastApplied)
+	//rf.job = Follower
+	rf.mu.Unlock()
 }
 
 func (rf *Raft) killed() bool {
@@ -557,16 +568,24 @@ func (rf *Raft) ticker() {
 	n := len(rf.peers)
 	RequestVoteTimer := time.NewTimer(100 * time.Millisecond)
 	HeartBeatTimer := time.NewTimer(90 * time.Millisecond)
-
+	isappendlog := true
 	for !rf.killed() {
 		select {
 		case <-HeartBeatTimer.C:
 			go func() {
 				//* 只有 leader 需要发送心跳
 				rf.mu.Lock()
+				isappendlog = true
 				if rf.job != Leader {
-					rf.mu.Unlock()
 					HeartBeatTimer.Reset(100 * time.Millisecond)
+					rf.mu.Unlock()
+					return
+				}
+				//* 超时
+				if time.Now().UnixMilli()-rf.lastreserve >= 2800 {
+					log.Printf("id: %v term: %v timeout be leader!", rf.me, rf.term)
+					rf.job = Follower
+					rf.mu.Unlock()
 					return
 				}
 				rf.mu.Unlock()
@@ -581,7 +600,11 @@ func (rf *Raft) ticker() {
 						rf.mu.Unlock()
 						continue
 					}
+					rf.mu.Lock()
 					go func(ServerNumber int32) {
+						if rf.killed() {
+							return
+						}
 						args := AppendEntriesArgs{}
 						rf.mu.Lock()
 						if rf.job != Leader {
@@ -605,8 +628,8 @@ func (rf *Raft) ticker() {
 						args.PreLogIndex = rf.NextIndex[ServerNumber] - 1
 						//* args.PreLogTerm = CurRaftTerm
 						args.PreLogTerm = rf.LogNums[args.PreLogIndex].Term
+						args.PreLogCommand = rf.LogNums[args.PreLogIndex].Command
 						//* 1.  1  <  1
-						//*
 						var toSaveLogEntries []LogEntry
 						if rf.NextIndex[ServerNumber] < (int64)(len(rf.LogNums)) {
 							toSaveLogEntries = rf.LogNums[rf.NextIndex[ServerNumber]:]
@@ -618,24 +641,28 @@ func (rf *Raft) ticker() {
 							len(rf.LogNums), len(args.ToSaveLogEntries), rf.LeaderCommitIndex, rf.LastApplied)
 						rf.mu.Unlock()
 						reply := AppendEntriesReply{}
+						reply.Success = false
 						ref := rf.SendAppendEntries(ServerNumber, &args, &reply)
 						rf.mu.Lock()
-						if rf.job != Leader {
+						if reply.Term > rf.term {
+							rf.job = Follower
+							rf.term = reply.Term
+							rf.MatchIndex[ServerNumber] = 0
+							rf.persist()
+							rf.mu.Unlock()
+							return
+						}
+						//* 过时的回复
+						if args.Term != rf.term {
 							rf.mu.Unlock()
 							return
 						}
 						rf.mu.Unlock()
 						if ref {
 							rf.mu.Lock()
-							if reply.Term > rf.term {
-								rf.job = Follower
-								rf.term = args.Term
-								rf.lastreserve = time.Now().UnixMilli()
-								rf.persist()
-								rf.mu.Unlock()
-								return
-							}
 							if reply.Success {
+								isappendlog = false
+								rf.lastreserve = time.Now().UnixMilli()
 								//* args.PreLogIndex + (int64)(len(args.LogNums))
 								//* 1. 0 + 0 + 1 = 1
 								//*    0 + 1 + 1 = 2
@@ -646,38 +673,28 @@ func (rf *Raft) ticker() {
 								//* 2. 2 - 1 = 1
 								//*    2 - 1 = 1
 								rf.MatchIndex[ServerNumber] =
-									rf.NextIndex[ServerNumber] - 1
+									args.PreLogIndex + (int64)(len(args.ToSaveLogEntries))
 								rf.persist()
 								//* 获取 MatchIndex 中的中位数
 								//* 然后应用到状态机中
-								newcommitindex := rf.getMedianIndex()
-								//* Leader 只可以间接提交过去的日志
-								if newcommitindex > rf.LeaderCommitIndex && rf.LogNums[len(rf.LogNums)-1].Term == rf.term {
-									k := rf.LastApplied
-									for k < newcommitindex {
-										msg := ApplyMsg{}
-										msg.Command = rf.LogNums[k+1].Command
-										msg.CommandValid = true
-										msg.CommandIndex = int(k + 1)
-										rf.ApplyChan <- msg
-										k++
-										rf.LastApplied = k
-									}
-									rf.LeaderCommitIndex = newcommitindex
-									rf.persist()
-								}
 								rf.PrintLogNums()
 								log.Printf("%d %d leader commitindex %d nextindex %v matchindex %v ",
 									rf.me, rf.term, rf.LeaderCommitIndex, rf.NextIndex[ServerNumber],
 									rf.MatchIndex[ServerNumber])
 							} else {
-								//* 第一种条件情况下返回
-								//* 1. args.PreLogIndex > curloglength
-								//* 瞬间倒退, 方便补齐以前的日志.
+								rf.MatchIndex[ServerNumber] = 0
 								if reply.UnmatchIndex != -2 && reply.UnmatchTerm == -1 {
 									rf.NextIndex[ServerNumber] = reply.UnmatchIndex - 1
+									rf.persist()
 								} else if reply.UnmatchIndex != -2 && reply.UnmatchTerm != -1 {
-									rf.NextIndex[ServerNumber] = reply.UnmatchIndex
+									rf.NextIndex[ServerNumber] = reply.UnmatchIndex - 1
+									if rf.NextIndex[ServerNumber] < 1 {
+										rf.NextIndex[ServerNumber] = 1
+										reply.UnmatchIndex = 1
+									} else if reply.UnmatchIndex-1 > (int64)(len(rf.LogNums)-1) {
+										reply.UnmatchIndex = 1
+										rf.NextIndex[ServerNumber] = 1
+									}
 									//* 再次比较
 									//* Follower 通过返回 UnmatchTerm
 									//* Leader 再与本地的Log所对应的 UnmatchIndex 再次比较
@@ -686,24 +703,65 @@ func (rf *Raft) ticker() {
 										curterm := rf.LogNums[reply.UnmatchIndex-1].Term
 										for k := reply.UnmatchIndex - 1; k > 0; k-- {
 											if curterm != rf.LogNums[k].Term {
-												rf.NextIndex[ServerNumber] = k + 1
+												rf.NextIndex[ServerNumber] = k - 2
+												if rf.NextIndex[ServerNumber] <= 0 {
+													rf.NextIndex[ServerNumber] = 1
+												}
 												break
 											}
 										}
+										rf.persist()
 									}
-								}
-								if rf.NextIndex[ServerNumber] <= 1 {
+								} else {
 									rf.NextIndex[ServerNumber] = 1
 								}
-								rf.MatchIndex[ServerNumber] = 0
+								if rf.NextIndex[ServerNumber] <= 0 {
+									rf.NextIndex[ServerNumber] = 1
+								}
+
+								rf.persist()
+							}
+							rf.lastreserve = time.Now().UnixMilli()
+							//* 比我大, 说明我不应该选举成功
+							if rf.LeaderCommitIndex != -1 && reply.CurLastApplied > rf.LeaderCommitIndex + 1 {
+								log.Printf("id: %v term: %v won't be leader lastapplied %v", rf.me, rf.term, rf.LastApplied)
+								rf.job = Follower
+								rf.lastreserve = time.Now().UnixMilli()
+								//* 要截断日志
+								rf.LogNums = rf.LogNums[:rf.LeaderCommitIndex + 1]
 								rf.persist()
 							}
 							rf.mu.Unlock()
 							return
 						}
 					}(i)
+					rf.mu.Unlock()
 				}
-				HeartBeatTimer.Reset(90 * time.Millisecond)
+				rf.mu.Lock()
+				newcommitindex := rf.getMedianIndex()
+				if newcommitindex > rf.LeaderCommitIndex {
+					rf.LeaderCommitIndex = newcommitindex
+					isappendlog = true
+				}
+				//* Leader 只可以间接提交过去的日志
+				if rf.LogNums[len(rf.LogNums)-1].Term == rf.term && !isappendlog {
+					k := rf.LastApplied
+					for k < newcommitindex {
+						msg := ApplyMsg{}
+						msg.Command = rf.LogNums[k+1].Command
+						msg.CommandValid = true
+						msg.CommandIndex = int(k + 1)
+						rf.ApplyChan <- msg
+						k++
+						rf.LastApplied = k
+						rf.persist()
+					}
+					rf.lastreserve = time.Now().UnixMilli()
+					log.Printf("id: %v term: %v Leader AppendLog rf.LastApplied %v", rf.me, rf.term, rf.LastApplied)
+					rf.persist()
+				}
+				rf.mu.Unlock()
+				HeartBeatTimer.Reset(time.Duration(85) * time.Millisecond)
 			}()
 		case <-RequestVoteTimer.C:
 			go func() {
@@ -747,6 +805,10 @@ func (rf *Raft) ticker() {
 					rf.mu.Unlock()
 					go func(ServerNumber int32) {
 						rf.mu.Lock()
+						if rf.killed() {
+							rf.mu.Unlock()
+							return
+						}
 						args := RequestVoteArgs{}
 						args.Term = rf.term
 						args.CandidateID = (int64)(rf.me)
@@ -755,20 +817,26 @@ func (rf *Raft) ticker() {
 						 */
 						args.LastLogIndex = (int64)(len(rf.LogNums) - 1)
 						args.LastLogTerm = (int64)(rf.LogNums[args.LastLogIndex].Term)
+						args.LastLogCommand = rf.LogNums[len(rf.LogNums)-1].Command
 						rf.mu.Unlock()
 						reply := RequestVoteReply{}
+						reply.Success = false
 						rf.SendRequestVote(ServerNumber, &args, &reply)
+						rf.mu.Lock()
 						if reply.Success {
+							rf.lastreserve = time.Now().UnixMilli()
 							atomic.AddInt32(&vote_to_me, 1)
 						} else if !reply.Success {
 							atomic.AddInt32(&no_vote_to_me, 1)
 						}
-						rf.mu.Lock()
 						if reply.Term > rf.term {
 							rf.job = Follower
 							rf.term = reply.Term
-							rf.lastreserve = time.Now().UnixMilli()
 							rf.persist()
+							rf.mu.Unlock()
+							return
+						}
+						if args.Term != rf.term {
 							rf.mu.Unlock()
 							return
 						}
@@ -777,7 +845,6 @@ func (rf *Raft) ticker() {
 							rf.job == Candidate {
 							log.Printf("id: %d term: %d be Leader curloglength %v", rf.me, rf.term, len(rf.LogNums))
 							rf.job = Leader
-							rf.lastreserve = time.Now().UnixMilli()
 							//* 成为 Leader 之后
 							//* 所有 NextIndex[i] 都变为自己的 len(rf.LogNums)
 							CurLogNumsLength := len(rf.LogNums)
@@ -787,257 +854,28 @@ func (rf *Raft) ticker() {
 							}
 							//* 有变化
 							rf.persist()
+							rf.lastreserve = time.Now().UnixMilli()
 							rf.mu.Unlock()
 							return
 						}
 						//* 如果不投我的票数 > (n/2), 则立即变为 follower
 						if atomic.LoadInt32(&no_vote_to_me) > (int32)(n/2) {
 							rf.job = Follower
+							rf.persist()
 							//* 有变化
-							log.Printf("id: %d term: %d be follower novote %v", rf.me, rf.term, atomic.LoadInt32(&no_vote_to_me))
+							log.Printf("id: %v term: %v be follower novote %v", rf.me, rf.term, atomic.LoadInt32(&no_vote_to_me))
 							rf.mu.Unlock()
 							return
 						}
 						rf.mu.Unlock()
 					}(i)
 				}
-				RequestVoteTimer.Reset((time.Duration((rand.Intn(250) + 30))) * time.Millisecond)
+				RequestVoteTimer.Reset((time.Duration((rand.Intn(210) + 220))) * time.Millisecond)
 			}()
 		}
 	}
 	RequestVoteTimer.Stop()
 	HeartBeatTimer.Stop()
-}
-
-func (rf *Raft) ticker_1() {
-	n := len(rf.peers)
-	HeartBeatTimer := time.NewTimer(100 * time.Millisecond)
-	RequestVoteTimer := time.NewTimer(100 * time.Millisecond)
-	for !rf.killed() {
-		switch rf.job {
-		case Leader:
-			{
-				select {
-				case <-HeartBeatTimer.C:
-					go func() {
-						var i int32 = 0
-						for ; i < (int32)(n); i++ {
-							if i == (int32)(rf.me) {
-								rf.NextIndex[rf.me] = (int64)(len(rf.LogNums))
-								rf.MatchIndex[rf.me] = (int64)(rf.NextIndex[rf.me]) - 1
-							}
-							go func(ServerNumber int32) {
-								rf.mu.Lock()
-								args := AppendEntriesArgs{}
-								reply := AppendEntriesReply{}
-								args.CommitIndex = rf.LeaderCommitIndex
-								args.LeaderID = (int64)(rf.me)
-								args.Term = rf.term
-								/*
-								 * 1. args.PreLogIndex = 0
-								 *		args.PreLogTerm = ?
-								 *    LogEntry [] size = 0
-								 * 2. args.PreLogIndex = 0
-								 *		args.PreLogTerm = ?
-								 *    LogEntry [1] -> size = 1
-								 * 3. args.PreLogIndex = 1
-								 *		LogEntry [] nil
-								 */
-								//* args.PreLogIndex = 0
-								args.PreLogIndex = rf.NextIndex[ServerNumber] - 1
-								//* args.PreLogTerm = CurRaftTerm
-								args.PreLogTerm = rf.LogNums[args.PreLogIndex].Term
-								//* 1.  1  <  1
-								//*
-								var toSaveLogEntries []LogEntry
-								if rf.NextIndex[ServerNumber] < (int64)(len(rf.LogNums)) {
-									toSaveLogEntries = rf.LogNums[rf.NextIndex[ServerNumber]:]
-								}
-								args.ToSaveLogEntries = make([]LogEntry, len(toSaveLogEntries))
-								copy(args.ToSaveLogEntries, toSaveLogEntries)
-								log.Printf("leader %d to %d args.PreLogIndex: %d ars.PreLogterm: %d args.Commitindex %d nextindex %d matchindex %d curloglen %d tosavelogsize%d leadercommitidnex %v lastapplied %v",
-									rf.me, ServerNumber, args.PreLogIndex, args.PreLogTerm, args.CommitIndex, rf.NextIndex[ServerNumber], rf.MatchIndex[ServerNumber],
-									len(rf.LogNums), len(args.ToSaveLogEntries), rf.LeaderCommitIndex, rf.LastApplied)
-								rf.mu.Unlock()
-								ref := rf.SendAppendEntries(ServerNumber, &args, &reply)
-								rf.mu.Lock()
-								if ref {
-									if reply.Term > rf.term {
-										rf.job = Follower
-										rf.term = args.Term
-										rf.lastreserve = time.Now().UnixMilli()
-										rf.persist()
-										rf.mu.Unlock()
-										return
-									}
-									if reply.Success {
-										//* args.PreLogIndex + (int64)(len(args.LogNums))
-										//* 1. 0 + 0 + 1 = 1
-										//*    0 + 1 + 1 = 2
-										//*    1 + 0 + 1 = 2
-										rf.NextIndex[ServerNumber] =
-											args.PreLogIndex + (int64)(len(args.ToSaveLogEntries)) + 1
-										//* 1. 1 - 1 = 0
-										//* 2. 2 - 1 = 1
-										//*    2 - 1 = 1
-										rf.MatchIndex[ServerNumber] =
-											rf.NextIndex[ServerNumber] - 1
-										rf.persist()
-										//* 获取 MatchIndex 中的中位数
-										//* 然后应用到状态机中
-										newcommitindex := rf.getMedianIndex()
-										//* Leader 只可以间接提交过去的日志
-										if newcommitindex > rf.LeaderCommitIndex && rf.LogNums[len(rf.LogNums)-1].Term == rf.term {
-											k := rf.LastApplied
-											for k < newcommitindex {
-												msg := ApplyMsg{}
-												msg.Command = rf.LogNums[k+1].Command
-												msg.CommandValid = true
-												msg.CommandIndex = int(k + 1)
-												rf.ApplyChan <- msg
-												k++
-												rf.LastApplied = k
-											}
-											rf.LeaderCommitIndex = newcommitindex
-											rf.persist()
-										}
-										rf.PrintLogNums()
-										log.Printf("%d %d leader commitindex %d nextindex %v matchindex %v ",
-											rf.me, rf.term, rf.LeaderCommitIndex, rf.NextIndex[ServerNumber],
-											rf.MatchIndex[ServerNumber])
-									} else {
-										//* 第一种条件情况下返回
-										//* 1. args.PreLogIndex > curloglength
-										//* 瞬间倒退, 方便补齐以前的日志.
-										if reply.UnmatchIndex != -2 && reply.UnmatchTerm == -1 {
-											rf.NextIndex[ServerNumber] = reply.UnmatchIndex - 1
-										} else if reply.UnmatchIndex != -2 && reply.UnmatchTerm != -1 {
-											rf.NextIndex[ServerNumber] = reply.UnmatchIndex
-											//* 再次比较
-											//* Follower 通过返回 UnmatchTerm
-											//* Leader 再与本地的Log所对应的 UnmatchIndex 再次比较
-											//* 可以再一次向前回溯, 减少一次 RPC
-											if reply.UnmatchTerm != rf.LogNums[reply.UnmatchIndex-1].Term {
-												curterm := rf.LogNums[reply.UnmatchIndex-1].Term
-												for k := reply.UnmatchIndex - 1; k > 0; k-- {
-													if curterm != rf.LogNums[k].Term {
-														rf.NextIndex[ServerNumber] = k + 1
-														break
-													}
-												}
-											}
-										}
-										if rf.NextIndex[ServerNumber] <= 1 {
-											rf.NextIndex[ServerNumber] = 1
-										}
-										rf.MatchIndex[ServerNumber] = 0
-										rf.persist()
-									}
-									rf.mu.Unlock()
-									return
-								}
-							}(i)
-						}
-					}()
-				}
-			}
-		case Follower:
-			select {
-			case <-RequestVoteTimer.C:
-				go func() {
-					rf.mu.Lock()
-					//* 未超时 不发起选举
-					if time.Now().UnixMilli()-rf.lastreserve <= (int64)(300+rand.Intn(350)) {
-						RequestVoteTimer.Reset((time.Duration((120 + rand.Intn(80)))) * time.Millisecond)
-						rf.mu.Unlock()
-						return
-					}
-					//* 投我的票数
-					var vote_to_me int32 = 1
-					//* 不投我的票数
-					var no_vote_to_me int32 = 0
-					//* 我投我自己一票
-					rf.term++
-					//* 变为 Candidate
-					rf.job = Candidate
-					rf.Vote_map[rf.term] = rf.me
-					rf.lastreserve = time.Now().UnixMilli()
-					rf.persist()
-					log.Printf("id: %d term: %d start request vote", rf.me, rf.term)
-					rf.mu.Unlock()
-					var i int32 = 0
-					for ; i < (int32)(n); i++ {
-						rf.mu.Lock()
-						if i == (int32)(rf.me) {
-							rf.mu.Unlock()
-							continue
-						}
-						if rf.job != Candidate {
-							rf.mu.Unlock()
-							break
-						}
-						rf.mu.Unlock()
-						go func(ServerNumber int32) {
-							rf.mu.Lock()
-							args := RequestVoteArgs{}
-							args.Term = rf.term
-							args.CandidateID = (int64)(rf.me)
-							/*
-							 * 1. 0 0
-							 */
-							args.LastLogIndex = (int64)(len(rf.LogNums) - 1)
-							args.LastLogTerm = (int64)(rf.LogNums[args.LastLogIndex].Term)
-							rf.mu.Unlock()
-							reply := RequestVoteReply{}
-							rf.SendRequestVote(ServerNumber, &args, &reply)
-							if reply.Success {
-								atomic.AddInt32(&vote_to_me, 1)
-							} else if !reply.Success {
-								atomic.AddInt32(&no_vote_to_me, 1)
-							}
-							rf.mu.Lock()
-							if reply.Term > rf.term {
-								rf.job = Follower
-								rf.term = reply.Term
-								rf.lastreserve = time.Now().UnixMilli()
-								rf.persist()
-								rf.mu.Unlock()
-								return
-							}
-							//* 当投我的票数 >= (n/2 + 1), 则变成 Leader
-							if atomic.LoadInt32(&vote_to_me) >= ((int32)(n/2+1)) &&
-								rf.job == Candidate {
-								log.Printf("id: %d term: %d be Leader curloglength %v", rf.me, rf.term, len(rf.LogNums))
-								rf.job = Leader
-								rf.lastreserve = time.Now().UnixMilli()
-								//* 成为 Leader 之后
-								//* 所有 NextIndex[i] 都变为自己的 len(rf.LogNums)
-								CurLogNumsLength := len(rf.LogNums)
-								log.Printf("rf.LogNumslength = %d", CurLogNumsLength)
-								for k := 0; k < n; k++ {
-									rf.NextIndex[k] = (int64)(CurLogNumsLength)
-								}
-								//* 有变化
-								rf.persist()
-								rf.mu.Unlock()
-								return
-							}
-							//* 如果不投我的票数 > (n/2), 则立即变为 follower
-							if atomic.LoadInt32(&no_vote_to_me) > (int32)(n/2) {
-								rf.job = Follower
-								//* 有变化
-								log.Printf("id: %d term: %d be follower novote %v", rf.me, rf.term, atomic.LoadInt32(&no_vote_to_me))
-								rf.mu.Unlock()
-								return
-							}
-						}(i)
-					}
-				}()
-			}
-		case Candidate:
-
-		}
-	}
 }
 
 //
@@ -1061,7 +899,7 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	//* 集群开始的时候都是 follower, 任期为 0,
 	rf.job = Follower
 	rf.term = 0
-	rf.lastreserve = 0
+	rf.lastreserve = time.Now().UnixMilli()
 	rf.Vote_map = make(map[int64]int)
 	rf.MatchIndex = make([]int64, len(peers))
 	rf.NextIndex = make([]int64, len(peers))
@@ -1078,6 +916,7 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	rf.readPersist(persister.ReadRaftState())
 	rf.job = Follower
 	log.Printf("hi new raft! id : %v term : %v loglen : %d", rf.me, rf.term, len(rf.LogNums))
+	rf.PrintLogNums()
 	// start ticker goroutine to start elections
 	rf.mu.Lock()
 	go rf.ticker()
