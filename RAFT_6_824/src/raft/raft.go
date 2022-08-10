@@ -60,31 +60,35 @@ const (
 )
 
 type Raft struct {
-	mu        sync.Mutex          // Lock to protect shared access to this peer's state
-	peers     []*labrpc.ClientEnd // RPC end points of all peers
-	persister *Persister          // Object to hold this peer's persisted state
-	me        int                 // this peer's index into peers[]
-	dead      int32               // set by Kill()
-
-	job         int64         //* 服务器当前角色，Leader or Follower
-	term        int64         //* term 当前集群的任期
-	lastreserve int64         //* 更新时间
-	Vote_map    map[int64]int //* 每次只会给一个任期中给每个任期投票
-	// Ktime_t     int64
-	// Your data here (2A, 2B, 2C).
-	// Look at the paper's Figure 2 for a description of what
-	// state a Raft server must maintain.
-	LogNums           []LogEntry    //* 每个服务器的日志记录
-	MatchIndex        []int64       //* 已经同步的日志序号
-	NextIndex         []int64       //* 对于远程节点来说，应该复制的下一个日志的下标
-	LastApplied       int64         //* 最后被应用到状态机的日志条目索引
-	LeaderCommitIndex int64         //* 已经应用到状态机的日志下标
-	ApplyChan         chan ApplyMsg //* 返回给上层日志的通道
+	mu                sync.Mutex          // Lock to protect shared access to this peer's state
+	peers             []*labrpc.ClientEnd // RPC end points of all peers
+	persister         *Persister          // Object to hold this peer's persisted state
+	me                int                 // this peer's index into peers[]
+	dead              int32               // set by Kill()
+	job               int64               //* 服务器当前角色，Leader or Follower
+	term              int64               //* term 当前集群的任期
+	lastreserve       int64               //* 更新时间
+	Vote_map          map[int64]int       //* 每次只会给一个任期中给每个任期投票
+	LogNums           []LogEntry          //* 每个服务器的日志记录
+	MatchIndex        []int64             //* 已经同步的日志序号
+	NextIndex         []int64             //* 对于远程节点来说，应该复制的下一个日志的下标
+	LastApplied       int64               //* 最后被应用到状态机的日志条目索引
+	LeaderCommitIndex int64               //* 已经应用到状态机的日志下标
+	ApplyChan         chan ApplyMsg       //* 返回给上层日志的通道
+	Snapshotlog       SnapShotLog         //* 快照
+	Snapshotbyte      []byte
 }
 
 type LogEntry struct {
 	Command interface{}
 	Term    int64
+}
+
+type SnapShotLog struct {
+	//* 快照最后一条日志
+	LastLogEntry LogEntry
+	//* 快照最后一个日志的下标
+	LastIncludedIndex int64
 }
 
 // return currentTerm and whether this server
@@ -164,8 +168,6 @@ func (rf *Raft) readPersist(data []byte) {
 // have more recent info since it communicate the snapshot on applyCh.
 func (rf *Raft) CondInstallSnapshot(lastIncludedTerm int, lastIncludedIndex int, snapshot []byte) bool {
 
-	// Your code here (2D).
-
 	return true
 }
 
@@ -173,9 +175,18 @@ func (rf *Raft) CondInstallSnapshot(lastIncludedTerm int, lastIncludedIndex int,
 // all info up to and including index. this means the
 // service no longer needs the log through (and including)
 // that index. Raft should now trim its log as much as possible.
+// * index 快照的截止 快照截止的index
+// * snapshot [] 上层service 传来的快照字节流, 将会包含所有截止到index的信息
 func (rf *Raft) Snapshot(index int, snapshot []byte) {
 	// Your code here (2D).
-
+	if rf.Snapshotlog.LastIncludedIndex >= (int64)(index) {
+		return
+	}
+	rf.Snapshotlog.LastIncludedIndex = (int64)(index)
+	rf.Snapshotlog.LastLogEntry = rf.LogNums[index]
+	//* 截断日志
+	rf.LogNums = rf.LogNums[index+1:]
+	rf.Snapshotbyte = snapshot
 }
 
 //
@@ -223,19 +234,20 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 		rf.job = Follower
 		rf.persist()
 	}
-	//* 可能是重复投票
-	if rf.Vote_map[rf.term] == (int)(args.CandidateID) {
-		reply.Success = true
-		rf.job = Follower
-		rf.lastreserve = time.Now().UnixMilli()
-		return
-	}
 	//* 当前 term 已经投过票了
-	if rf.Vote_map[rf.term] != -1 {
+	if rf.Vote_map[rf.term] != -1 && rf.Vote_map[rf.term] != (int)(args.CandidateID) {
 		return
 	}
 	if (args.LastLogTerm < rf.LogNums[curlogindex-1].Term) ||
 		(args.LastLogTerm == rf.LogNums[curlogindex-1].Term && args.LastLogIndex < (int64)(curlogindex-1)) {
+		return
+	}
+	//* 可能是重复投票 并且日志和我一样新,
+	//* 也是可以投票给他的.
+	if rf.Vote_map[rf.term] == (int)(args.CandidateID) {
+		reply.Success = true
+		rf.job = Follower
+		rf.lastreserve = time.Now().UnixMilli()
 		return
 	}
 	rf.term = args.Term
@@ -440,6 +452,24 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	rf.PrintLogNums()
 	DEBUG(dCommit, "S%v %d %d to %d %d append ok curlogsize %v curleadercommitindex %v curapplied %v ",
 		rf.me, args.LeaderID, args.Term, rf.me, rf.term, len(rf.LogNums), rf.LeaderCommitIndex, rf.LastApplied)
+}
+
+type InstallSnapshotArgs struct {
+	//* Leader Current Term
+	Term              int64
+	LeaderID          int64
+	LastIncludedIndex int64
+	LastIncludedTerm  int64
+	Offset            int64
+
+	Done bool
+}
+
+type InstallSnapshotReply struct {
+	//* 是否成功
+	Success bool
+	//* 接收者的当前 Leader
+	CurrentTerm int64
 }
 
 //
@@ -706,7 +736,7 @@ func (rf *Raft) ticker() {
 						}
 					}(atomic.LoadInt32(&i))
 				}
-				HeartBeatTimer.Reset(time.Duration(100) * time.Millisecond)
+				HeartBeatTimer.Reset(time.Duration(85) * time.Millisecond)
 			}()
 		case <-RequestVoteTimer.C:
 			go func() {
@@ -718,15 +748,11 @@ func (rf *Raft) ticker() {
 					return
 				}
 				//* 未超时 不发起选举
-				if time.Now().UnixMilli()-rf.lastreserve <= (int64)(500+rand.Intn(450)) {
+				if time.Now().UnixMilli()-rf.lastreserve <= (int64)(360+rand.Intn(450)) {
 					RequestVoteTimer.Reset((time.Duration((120 + rand.Intn(80)))) * time.Millisecond)
 					rf.mu.Unlock()
 					return
 				}
-				//* 投我的票数
-				var vote_to_me int32 = 1
-				//* 不投我的票数
-				var no_vote_to_me int32 = 0
 				//* 我投我自己一票
 				rf.term++
 				//* 变为 Candidate
@@ -736,6 +762,13 @@ func (rf *Raft) ticker() {
 				rf.persist()
 				DEBUG(dVote, "S%v id: %v term: %v start request vote", rf.me, rf.me, rf.term)
 				rf.mu.Unlock()
+				beforetime := time.Now().UnixMilli()
+				requesttimeout := (int64)(rand.Intn(850) + 900)
+				istimeout := false
+				//* 投我的票数
+				var vote_to_me int32 = 1
+				//* 不投我的票数
+				var no_vote_to_me int32 = 0
 				var i int32 = 0
 				for ; i < (int32)(n); i++ {
 					rf.mu.Lock()
@@ -768,6 +801,7 @@ func (rf *Raft) ticker() {
 						rf.SendRequestVote(ServerNumber, &args, &reply)
 						rf.mu.Lock()
 						if args.Term != rf.term {
+							atomic.AddInt32(&no_vote_to_me, 1)
 							rf.mu.Unlock()
 							return
 						}
@@ -775,6 +809,7 @@ func (rf *Raft) ticker() {
 							rf.term = reply.Term
 							reply.Success = false
 							rf.job = Follower
+							atomic.AddInt32(&no_vote_to_me, 1)
 							rf.mu.Unlock()
 							return
 						}
@@ -783,7 +818,6 @@ func (rf *Raft) ticker() {
 							return
 						}
 						if reply.Success {
-							rf.lastreserve = time.Now().UnixMilli()
 							atomic.AddInt32(&vote_to_me, 1)
 						} else if !reply.Success {
 							atomic.AddInt32(&no_vote_to_me, 1)
@@ -806,6 +840,8 @@ func (rf *Raft) ticker() {
 							//* 有变化
 							rf.persist()
 							rf.lastreserve = time.Now().UnixMilli()
+							//* 立即发起心跳
+							RequestVoteTimer.Reset(time.Duration(0) * time.Millisecond)
 							rf.mu.Unlock()
 							return
 						}
@@ -823,12 +859,23 @@ func (rf *Raft) ticker() {
 							rf.mu.Unlock()
 							return
 						}
+						if time.Now().UnixMilli()-beforetime >= requesttimeout {
+							istimeout = true
+							rf.job = Follower
+						}
 						rf.mu.Unlock()
 					}(atomic.LoadInt32(&i))
 				}
 				rf.mu.Lock()
-				if rf.job == Follower {
-					RequestVoteTimer.Reset(time.Duration(rand.Intn(400)) * time.Millisecond)
+				//* 超时需要立即再次发起选举
+				if istimeout {
+					rf.job = Follower
+					istimeout = false
+					RequestVoteTimer.Reset(time.Duration(rand.Intn(0)) * time.Millisecond)
+				} else if rf.job == Follower {
+					//* 没有人给我投票就等待一段时间
+					//* 如果中间有心跳会打断我
+					RequestVoteTimer.Reset(time.Duration(rand.Intn(150)+180) * time.Millisecond)
 				} else {
 					RequestVoteTimer.Reset(time.Duration(250) * time.Millisecond)
 				}
@@ -871,6 +918,7 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	rf.LastApplied = 0
 	rf.LeaderCommitIndex = -1
 	rf.ApplyChan = applyCh
+	rf.Snapshotlog.LastIncludedIndex = 0
 	for i := 0; i < 1024; i++ {
 		rf.Vote_map[(int64)(i)] = -1
 	}
