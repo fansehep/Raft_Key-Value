@@ -1,4 +1,4 @@
-package raft
+package kvraft
 
 import (
 	"fmt"

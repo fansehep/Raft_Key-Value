@@ -4,6 +4,7 @@ const (
 	OK             = "OK"
 	ErrNoKey       = "ErrNoKey"
 	ErrWrongLeader = "ErrWrongLeader"
+	RepeatedReq    = "RepeatedReq"
 )
 
 type Err string
@@ -16,6 +17,8 @@ type PutAppendArgs struct {
 	// You'll have to add definitions here.
 	// Field names must start with capital letters,
 	// otherwise RPC will break.
+	//单个操作的 uuid, 标记, 防止 put 请求重复
+	Index int64
 }
 
 type PutAppendReply struct {

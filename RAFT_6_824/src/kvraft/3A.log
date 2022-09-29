@@ -1,0 +1,487 @@
+Test: unreliable net, many clients (3A) ...
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 4 value:  op: Put
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 2 value:  op: Put
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 3 value:  op: Put
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 0 value:  op: Put
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 1 value:  op: Put
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:04 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:04 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:04 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:04 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:04 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:04 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:04 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:04 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:04 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:04 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:04 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:04 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:04 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:04 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:04 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:04 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:04 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:04 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:04 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:04 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:04 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:04 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:04 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:04 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:04 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:04 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:04 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:04 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:04 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:04 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:04 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:04 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:04 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:04 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:04 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:04 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:04 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:04 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:04 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:04 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:04 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:04 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:04 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:04 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:04 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:04 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:04 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:04 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:04 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:04 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:04 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:04 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:04 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:04 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:04 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:04 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:04 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:04 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:04 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:04 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:04 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:04 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:04 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:04 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:04 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:04 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:04 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:04 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:04 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:04 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:04 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:04 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:04 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:04 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:04 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:04 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:04 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:04 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:04 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:04 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:04 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:04 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:04 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:04 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:04 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:04 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:04 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:04 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:04 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:04 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:04 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:04 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:04 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:04 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:05 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:05 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:05 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:05 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:05 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:05 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:05 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:05 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:05 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:05 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:05 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:05 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:05 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:05 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:05 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:05 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:05 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:05 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:05 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:05 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:05 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:05 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:05 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:05 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:05 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:05 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:05 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:05 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:05 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:05 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:05 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:05 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:05 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:05 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:05 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:05 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:05 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:05 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:05 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:05 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:05 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:05 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:05 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:05 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:05 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:05 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:05 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:05 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:05 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:05 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:05 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:05 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:05 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:05 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:05 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:05 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:05 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:05 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:05 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:05 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:05 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:05 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:05 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:05 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:05 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:05 92233720368547 INFO S3 client put append key: 3 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:05 92233720368547 INFO S5 client put append key: 1 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:05 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:05 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Put, key: 1 value:  Index: 2645286572820380460 
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 1 value: x 1 0 y op: Append
+2022/09/29 21:55:05 92233720368547 INFO S2 client put append key: 2 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 4 
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 4 value:  Err: ErrWrongLeader currleaderId: 0 
+2022/09/29 21:55:05 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 1 
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Put, key: 3 value:  Index: 2123835136010512958 
+2022/09/29 21:55:05 92233720368547 INFO S1 client get key: 3
+2022/09/29 21:55:05 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 2 
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Put, key: 4 value:  Index: 616876713035834766 
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 4 value: x 4 0 y op: Append
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Append, key: 1 value: x 1 0 y Index: 1845548476311715466 
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 1 value: x 1 1 y op: Append
+2022/09/29 21:55:05 92233720368547 INFO S3 client get key: 3 value:  ok:  CurrentLeader: 3
+2022/09/29 21:55:05 92233720368547 INFO S1 client get key: 3
+2022/09/29 21:55:05 92233720368547 INFO S4 client put append key: 0 value:  Err: ErrWrongLeader currleaderId: 3 
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Put, key: 2 value:  Index: 1878074816032896827 
+2022/09/29 21:55:05 92233720368547 INFO S1 client get key: 2
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Append, key: 4 value: x 4 0 y Index: 4493204409378104247 
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 4 value: x 4 1 y op: Append
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Append, key: 1 value: x 1 1 y Index: 14781352506389874 
+2022/09/29 21:55:05 92233720368547 INFO S1 client get key: 1
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Get, key: 3 value:  Index: 0 
+2022/09/29 21:55:05 92233720368547 INFO S3 client get key: 3 value:  ok:  CurrentLeader: 3
+2022/09/29 21:55:05 92233720368547 INFO S1 client get key: 3
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Put, key: 0 value:  Index: 4112011581892946830 
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 0 value: x 0 0 y op: Append
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Get, key: 2 value:  Index: 0 
+2022/09/29 21:55:05 92233720368547 INFO S2 client get key: 2 value:  ok: OK CurrentLeader: 3
+2022/09/29 21:55:05 92233720368547 INFO S1 client get key: 2
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Append, key: 4 value: x 4 1 y Index: 2054278642181375049 
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 4 value: x 4 2 y op: Append
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Get, key: 1 value:  Index: 0 
+2022/09/29 21:55:05 92233720368547 INFO S5 client get key: 1 value: x 1 0 yx 1 1 y ok: OK CurrentLeader: 4
+2022/09/29 21:55:05 92233720368547 INFO S1 client get key: 1
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Get, key: 3 value:  Index: 0 
+2022/09/29 21:55:05 92233720368547 INFO S3 client get key: 3 value:  ok: OK CurrentLeader: 3
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 3 value: x 3 0 y op: Append
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Append, key: 0 value: x 0 0 y Index: 2992450891904228559 
+2022/09/29 21:55:05 92233720368547 INFO S1 client get key: 0
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Get, key: 2 value:  Index: 0 
+2022/09/29 21:55:05 92233720368547 INFO S2 client get key: 2 value:  ok: OK CurrentLeader: 3
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 2 value: x 2 0 y op: Append
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Append, key: 4 value: x 4 2 y Index: 2895253570973063779 
+2022/09/29 21:55:05 92233720368547 INFO S1 client get key: 4
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Get, key: 1 value:  Index: 0 
+2022/09/29 21:55:05 92233720368547 INFO S5 client get key: 1 value: x 1 0 yx 1 1 y ok: OK CurrentLeader: 4
+2022/09/29 21:55:05 92233720368547 INFO S1 client get key: 1
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Append, key: 3 value: x 3 0 y Index: 2740037763483538755 
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 3 value: x 3 1 y op: Append
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Get, key: 0 value:  Index: 0 
+2022/09/29 21:55:05 92233720368547 INFO S4 client get key: 0 value: x 0 0 y ok: OK CurrentLeader: 4
+2022/09/29 21:55:05 92233720368547 INFO S1 client get key: 0
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Get, key: 4 value:  Index: 0 
+2022/09/29 21:55:05 92233720368547 INFO S1 client get key: 4 value: x 4 0 yx 4 1 yx 4 2 y ok: OK CurrentLeader: 1
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 4 value: x 4 3 y op: Append
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Append, key: 2 value: x 2 0 y Index: 2062966642500681042 
+2022/09/29 21:55:05 92233720368547 INFO S1 client get key: 2
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Get, key: 1 value:  Index: 0 
+2022/09/29 21:55:05 92233720368547 INFO S5 client get key: 1 value:  ok:  CurrentLeader: 4
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Get, key: 0 value:  Index: 0 
+2022/09/29 21:55:05 92233720368547 INFO S4 client get key: 0 value: x 0 0 y ok: OK CurrentLeader: 4
+2022/09/29 21:55:05 92233720368547 INFO S1 client get key: 0
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Append, key: 3 value: x 3 1 y Index: 1862316449995654599 
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 3 value: x 3 2 y op: Append
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Append, key: 4 value: x 4 3 y Index: 2882484745294118573 
+2022/09/29 21:55:05 92233720368547 INFO S1 client get key: 4
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Get, key: 2 value:  Index: 0 
+2022/09/29 21:55:05 92233720368547 INFO S2 client get key: 2 value: x 2 0 y ok: OK CurrentLeader: 3
+2022/09/29 21:55:05 92233720368547 INFO S1 client get key: 2
+2022/09/29 21:55:05 92233720368547 INFO S2 client get key: 2 value:  ok:  CurrentLeader: 3
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Append, key: 3 value: x 3 2 y Index: 3834009002943828844 
+2022/09/29 21:55:05 92233720368547 INFO S1 client get key: 3
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Get, key: 0 value:  Index: 0 
+2022/09/29 21:55:05 92233720368547 INFO S4 client get key: 0 value: x 0 0 y ok: OK CurrentLeader: 4
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 0 value: x 0 1 y op: Append
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Get, key: 4 value:  Index: 0 
+2022/09/29 21:55:05 92233720368547 INFO S1 client get key: 4 value: x 4 0 yx 4 1 yx 4 2 yx 4 3 y ok: OK CurrentLeader: 1
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 4 value: x 4 4 y op: Append
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Get, key: 3 value:  Index: 0 
+2022/09/29 21:55:05 92233720368547 INFO S3 client get key: 3 value: x 3 0 yx 3 1 yx 3 2 y ok: OK CurrentLeader: 3
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 3 value: x 3 3 y op: Append
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Append, key: 4 value: x 4 4 y Index: 3195603622948885578 
+2022/09/29 21:55:05 92233720368547 INFO S1 client get key: 4
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Append, key: 0 value: x 0 1 y Index: 2408247999232578997 
+2022/09/29 21:55:05 92233720368547 INFO S1 client get key: 0
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Append, key: 3 value: x 3 3 y Index: 3577655546291031852 
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 3 value: x 3 4 y op: Append
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Get, key: 4 value:  Index: 0 
+2022/09/29 21:55:05 92233720368547 INFO S1 client get key: 4 value: x 4 0 yx 4 1 yx 4 2 yx 4 3 yx 4 4 y ok: OK CurrentLeader: 1
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 4 value: x 4 5 y op: Append
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Get, key: 0 value:  Index: 0 
+2022/09/29 21:55:05 92233720368547 INFO S4 client get key: 0 value: x 0 0 yx 0 1 y ok: OK CurrentLeader: 4
+2022/09/29 21:55:05 92233720368547 INFO S1 client get key: 0
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Append, key: 3 value: x 3 4 y Index: 4544695352197252048 
+2022/09/29 21:55:05 92233720368547 INFO S1 client get key: 3
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Get, key: 0 value:  Index: 0 
+2022/09/29 21:55:05 92233720368547 INFO S4 client get key: 0 value: x 0 0 yx 0 1 y ok: OK CurrentLeader: 4
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 0 value: x 0 2 y op: Append
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Append, key: 4 value: x 4 5 y Index: 1192242466636046112 
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 4 value: x 4 6 y op: Append
+2022/09/29 21:55:05 92233720368547 INFO S0 Server id: 0 op: Get, key: 3 value:  Index: 0 
+2022/09/29 21:55:05 92233720368547 INFO S3 client get key: 3 value: x 3 0 yx 3 1 yx 3 2 yx 3 3 yx 3 4 y ok: OK CurrentLeader: 3
+2022/09/29 21:55:05 92233720368547 INFO S1 client put append key: 3 value: x 3 5 y op: Append
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Append, key: 0 value: x 0 2 y Index: 3629583412808463853 
+2022/09/29 21:55:06 92233720368547 INFO S1 client get key: 0
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Append, key: 4 value: x 4 6 y Index: 842705323414606008 
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Append, key: 3 value: x 3 5 y Index: 3512273072326746532 
+2022/09/29 21:55:06 92233720368547 INFO S1 client put append key: 3 value: x 3 6 y op: Append
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Get, key: 0 value:  Index: 0 
+2022/09/29 21:55:06 92233720368547 INFO S4 client get key: 0 value: x 0 0 yx 0 1 yx 0 2 y ok: OK CurrentLeader: 4
+2022/09/29 21:55:06 92233720368547 INFO S1 client put append key: 0 value: x 0 3 y op: Append
+2022/09/29 21:55:06 92233720368547 INFO S1 client put append key: 4 value: x 4 6 y Err: RepeatedReq currleaderId: 1 
+2022/09/29 21:55:06 92233720368547 INFO S1 client put append key: 4 value: x 4 7 y op: Append
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Append, key: 3 value: x 3 6 y Index: 398286857834706616 
+2022/09/29 21:55:06 92233720368547 INFO S1 client get key: 3
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Append, key: 0 value: x 0 3 y Index: 4325311496511576679 
+2022/09/29 21:55:06 92233720368547 INFO S1 client get key: 0
+2022/09/29 21:55:06 92233720368547 INFO S4 client get key: 0 value:  ok:  CurrentLeader: 4
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Append, key: 4 value: x 4 7 y Index: 2930648170665546245 
+2022/09/29 21:55:06 92233720368547 INFO S1 client get key: 4
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Get, key: 3 value:  Index: 0 
+2022/09/29 21:55:06 92233720368547 INFO S3 client get key: 3 value: x 3 0 yx 3 1 yx 3 2 yx 3 3 yx 3 4 yx 3 5 yx 3 6 y ok: OK CurrentLeader: 3
+2022/09/29 21:55:06 92233720368547 INFO S1 client get key: 3
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Get, key: 4 value:  Index: 0 
+2022/09/29 21:55:06 92233720368547 INFO S1 client get key: 4 value: x 4 0 yx 4 1 yx 4 2 yx 4 3 yx 4 4 yx 4 5 yx 4 6 yx 4 7 y ok: OK CurrentLeader: 1
+2022/09/29 21:55:06 92233720368547 INFO S1 client put append key: 4 value: x 4 8 y op: Append
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Get, key: 3 value:  Index: 0 
+2022/09/29 21:55:06 92233720368547 INFO S3 client get key: 3 value: x 3 0 yx 3 1 yx 3 2 yx 3 3 yx 3 4 yx 3 5 yx 3 6 y ok: OK CurrentLeader: 3
+2022/09/29 21:55:06 92233720368547 INFO S1 client put append key: 3 value: x 3 7 y op: Append
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Append, key: 4 value: x 4 8 y Index: 1081082009510528004 
+2022/09/29 21:55:06 92233720368547 INFO S1 client get key: 4
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Append, key: 3 value: x 3 7 y Index: 73016822736831237 
+2022/09/29 21:55:06 92233720368547 INFO S1 client get key: 3
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Get, key: 4 value:  Index: 0 
+2022/09/29 21:55:06 92233720368547 INFO S1 client get key: 4 value: x 4 0 yx 4 1 yx 4 2 yx 4 3 yx 4 4 yx 4 5 yx 4 6 yx 4 7 yx 4 8 y ok: OK CurrentLeader: 1
+2022/09/29 21:55:06 92233720368547 INFO S1 client put append key: 4 value: x 4 9 y op: Append
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Get, key: 3 value:  Index: 0 
+2022/09/29 21:55:06 92233720368547 INFO S3 client get key: 3 value: x 3 0 yx 3 1 yx 3 2 yx 3 3 yx 3 4 yx 3 5 yx 3 6 yx 3 7 y ok: OK CurrentLeader: 3
+2022/09/29 21:55:06 92233720368547 INFO S1 client put append key: 3 value: x 3 8 y op: Append
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Append, key: 4 value: x 4 9 y Index: 258580451118136997 
+2022/09/29 21:55:06 92233720368547 INFO S1 client get key: 4
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Append, key: 3 value: x 3 8 y Index: 926132975228874501 
+2022/09/29 21:55:06 92233720368547 INFO S1 client get key: 3
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Get, key: 4 value:  Index: 0 
+2022/09/29 21:55:06 92233720368547 INFO S1 client get key: 4 value: x 4 0 yx 4 1 yx 4 2 yx 4 3 yx 4 4 yx 4 5 yx 4 6 yx 4 7 yx 4 8 yx 4 9 y ok: OK CurrentLeader: 1
+2022/09/29 21:55:06 92233720368547 INFO S1 client get key: 4
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Get, key: 3 value:  Index: 0 
+2022/09/29 21:55:06 92233720368547 INFO S3 client get key: 3 value: x 3 0 yx 3 1 yx 3 2 yx 3 3 yx 3 4 yx 3 5 yx 3 6 yx 3 7 yx 3 8 y ok: OK CurrentLeader: 3
+2022/09/29 21:55:06 92233720368547 INFO S1 client put append key: 3 value: x 3 9 y op: Append
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Get, key: 4 value:  Index: 0 
+2022/09/29 21:55:06 92233720368547 INFO S1 client get key: 4 value: x 4 0 yx 4 1 yx 4 2 yx 4 3 yx 4 4 yx 4 5 yx 4 6 yx 4 7 yx 4 8 yx 4 9 y ok: OK CurrentLeader: 1
+2022/09/29 21:55:06 92233720368547 INFO S1 client put append key: 4 value: x 4 10 y op: Append
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Append, key: 3 value: x 3 9 y Index: 3087004122813808600 
+2022/09/29 21:55:06 92233720368547 INFO S1 client put append key: 3 value: x 3 10 y op: Append
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Append, key: 4 value: x 4 10 y Index: 2374911390768962354 
+2022/09/29 21:55:06 92233720368547 INFO S1 client put append key: 4 value: x 4 11 y op: Append
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Append, key: 3 value: x 3 10 y Index: 3765667759654697119 
+2022/09/29 21:55:06 92233720368547 INFO S1 client put append key: 3 value: x 3 11 y op: Append
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Append, key: 4 value: x 4 11 y Index: 4433886049708385805 
+2022/09/29 21:55:06 92233720368547 INFO S1 client put append key: 4 value: x 4 12 y op: Append
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Append, key: 3 value: x 3 11 y Index: 4603545029476023838 
+2022/09/29 21:55:06 92233720368547 INFO S1 client put append key: 3 value: x 3 12 y op: Append
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Append, key: 4 value: x 4 12 y Index: 2912777353050780586 
+2022/09/29 21:55:06 92233720368547 INFO S1 client put append key: 4 value: x 4 13 y op: Append
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Append, key: 3 value: x 3 12 y Index: 650736781017204766 
+2022/09/29 21:55:06 92233720368547 INFO S1 client get key: 3
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Append, key: 4 value: x 4 13 y Index: 4463213976670447355 
+2022/09/29 21:55:06 92233720368547 INFO S1 client put append key: 4 value: x 4 14 y op: Append
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Get, key: 3 value:  Index: 0 
+2022/09/29 21:55:06 92233720368547 INFO S3 client get key: 3 value: x 3 0 yx 3 1 yx 3 2 yx 3 3 yx 3 4 yx 3 5 yx 3 6 yx 3 7 yx 3 8 yx 3 9 yx 3 10 yx 3 11 yx 3 12 y ok: OK CurrentLeader: 3
+2022/09/29 21:55:06 92233720368547 INFO S1 client put append key: 3 value: x 3 13 y op: Append
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Append, key: 4 value: x 4 14 y Index: 1288434407909973737 
+2022/09/29 21:55:06 92233720368547 INFO S1 client put append key: 4 value: x 4 15 y op: Append
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Append, key: 3 value: x 3 13 y Index: 1403858763771281895 
+2022/09/29 21:55:06 92233720368547 INFO S1 client get key: 3
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Append, key: 4 value: x 4 15 y Index: 4554646627108873219 
+2022/09/29 21:55:06 92233720368547 INFO S1 client put append key: 4 value: x 4 16 y op: Append
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Get, key: 3 value:  Index: 0 
+2022/09/29 21:55:06 92233720368547 INFO S3 client get key: 3 value: x 3 0 yx 3 1 yx 3 2 yx 3 3 yx 3 4 yx 3 5 yx 3 6 yx 3 7 yx 3 8 yx 3 9 yx 3 10 yx 3 11 yx 3 12 yx 3 13 y ok: OK CurrentLeader: 3
+2022/09/29 21:55:06 92233720368547 INFO S1 client put append key: 3 value: x 3 14 y op: Append
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Append, key: 4 value: x 4 16 y Index: 1412516985678728854 
+2022/09/29 21:55:06 92233720368547 INFO S1 client get key: 4
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Append, key: 3 value: x 3 14 y Index: 2918481062959689821 
+2022/09/29 21:55:06 92233720368547 INFO S1 client put append key: 3 value: x 3 15 y op: Append
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Get, key: 4 value:  Index: 0 
+2022/09/29 21:55:06 92233720368547 INFO S1 client get key: 4 value:  ok:  CurrentLeader: 1
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Append, key: 3 value: x 3 15 y Index: 3646789061785869198 
+2022/09/29 21:55:06 92233720368547 INFO S1 client put append key: 3 value: x 3 16 y op: Append
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Append, key: 3 value: x 3 16 y Index: 311363557590481280 
+2022/09/29 21:55:06 92233720368547 INFO S1 client get key: 3
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Get, key: 3 value:  Index: 0 
+2022/09/29 21:55:06 92233720368547 INFO S3 client get key: 3 value: x 3 0 yx 3 1 yx 3 2 yx 3 3 yx 3 4 yx 3 5 yx 3 6 yx 3 7 yx 3 8 yx 3 9 yx 3 10 yx 3 11 yx 3 12 yx 3 13 yx 3 14 yx 3 15 yx 3 16 y ok: OK CurrentLeader: 3
+2022/09/29 21:55:06 92233720368547 INFO S1 client get key: 3
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Get, key: 3 value:  Index: 0 
+2022/09/29 21:55:06 92233720368547 INFO S3 client get key: 3 value: x 3 0 yx 3 1 yx 3 2 yx 3 3 yx 3 4 yx 3 5 yx 3 6 yx 3 7 yx 3 8 yx 3 9 yx 3 10 yx 3 11 yx 3 12 yx 3 13 yx 3 14 yx 3 15 yx 3 16 y ok: OK CurrentLeader: 3
+2022/09/29 21:55:06 92233720368547 INFO S1 client put append key: 3 value: x 3 17 y op: Append
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Append, key: 3 value: x 3 17 y Index: 206446753404215473 
+2022/09/29 21:55:06 92233720368547 INFO S1 client put append key: 3 value: x 3 18 y op: Append
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Append, key: 3 value: x 3 18 y Index: 522274290314589566 
+2022/09/29 21:55:06 92233720368547 INFO S1 client put append key: 3 value: x 3 19 y op: Append
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Append, key: 3 value: x 3 19 y Index: 4590113254401781993 
+2022/09/29 21:55:06 92233720368547 INFO S1 client get key: 3
+2022/09/29 21:55:06 92233720368547 INFO S0 Server id: 0 op: Get, key: 3 value:  Index: 0 
+2022/09/29 21:55:06 92233720368547 INFO S3 client get key: 3 value: x 3 0 yx 3 1 yx 3 2 yx 3 3 yx 3 4 yx 3 5 yx 3 6 yx 3 7 yx 3 8 yx 3 9 yx 3 10 yx 3 11 yx 3 12 yx 3 13 yx 3 14 yx 3 15 yx 3 16 yx 3 17 yx 3 18 yx 3 19 y ok: OK CurrentLeader: 3
+2022/09/29 21:55:06 92233720368547 INFO S1 client get key: 3
+2022/09/29 21:55:07 92233720368547 INFO S0 Server id: 0 op: Get, key: 3 value:  Index: 0 
+2022/09/29 21:55:07 92233720368547 INFO S3 client get key: 3 value:  ok:  CurrentLeader: 3
+2022/09/29 21:55:09 92233720368547 INFO S1 client get key: 0
+2022/09/29 21:55:09 92233720368547 INFO S0 client get key: 0 error: ErrWrongLeader 
+2022/09/29 21:55:09 92233720368547 INFO S0 client get key: 0 value:  ok:  CurrentLeader: 1
+--- FAIL: TestUnreliable3A (5.04s)
+    test_test.go:293: get wrong value, key 1, wanted:
+        x 1 0 yx 1 1 y
+        , got
+        
+    test_test.go:293: get wrong value, key 2, wanted:
+        x 2 0 y
+        , got
+        
+    test_test.go:293: get wrong value, key 0, wanted:
+        x 0 0 yx 0 1 yx 0 2 yx 0 3 y
+        , got
+        
+    test_test.go:293: get wrong value, key 4, wanted:
+        x 4 0 yx 4 1 yx 4 2 yx 4 3 yx 4 4 yx 4 5 yx 4 6 yx 4 7 yx 4 8 yx 4 9 yx 4 10 yx 4 11 yx 4 12 yx 4 13 yx 4 14 yx 4 15 yx 4 16 y
+        , got
+        
+    test_test.go:293: get wrong value, key 3, wanted:
+        x 3 0 yx 3 1 yx 3 2 yx 3 3 yx 3 4 yx 3 5 yx 3 6 yx 3 7 yx 3 8 yx 3 9 yx 3 10 yx 3 11 yx 3 12 yx 3 13 yx 3 14 yx 3 15 yx 3 16 yx 3 17 yx 3 18 yx 3 19 y
+        , got
+        
+    test_test.go:126: failure
+    test_test.go:144: 0 missing element x 0 0 y in Append result 
+FAIL
+exit status 1
+FAIL	6.824/kvraft	5.061s

@@ -1,0 +1,6 @@
+=== RUN   TestSnapshotBasic2D
+Test (2D): snapshots basic ...
+  ... Passed --   4.3  3  524  201641  224
+--- PASS: TestSnapshotBasic2D (4.26s)
+PASS
+ok  	6.824/raft	4.296s

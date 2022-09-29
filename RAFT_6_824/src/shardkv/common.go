@@ -27,6 +27,7 @@ type PutAppendArgs struct {
 	// You'll have to add definitions here.
 	// Field names must start with capital letters,
 	// otherwise RPC will break.
+	LeaderId int
 }
 
 type PutAppendReply struct {
@@ -39,6 +40,7 @@ type GetArgs struct {
 }
 
 type GetReply struct {
-	Err   Err
-	Value string
+	Err      Err
+	Value    string
+	NoLeader bool
 }
