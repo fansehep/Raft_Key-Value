@@ -5,6 +5,7 @@ const (
 	ErrNoKey       = "ErrNoKey"
 	ErrWrongLeader = "ErrWrongLeader"
 	RepeatedReq    = "RepeatedReq"
+	ExpiredReq     = "ExpiredReq" //* 过时的请求
 )
 
 type Err string
@@ -18,7 +19,8 @@ type PutAppendArgs struct {
 	// Field names must start with capital letters,
 	// otherwise RPC will break.
 	//单个操作的 uuid, 标记, 防止 put 请求重复
-	Index int64
+	Index    int64
+	ClientId int64
 }
 
 type PutAppendReply struct {
@@ -26,7 +28,10 @@ type PutAppendReply struct {
 }
 
 type GetArgs struct {
-	Key string
+	Key   string
+	Index int64
+	// 客户端 id
+	ClientId int64
 	// You'll have to add definitions here.
 }
 

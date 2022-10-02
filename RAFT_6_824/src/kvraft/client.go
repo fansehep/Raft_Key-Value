@@ -10,12 +10,13 @@ import (
 type Clerk struct {
 	servers []*labrpc.ClientEnd
 	// You will have to modify this struct.
-	LeaderId int // 当前LeaderID
-	ServerN  int // 远程服务器的数量
-	Me       int // 个人ID
+	LeaderId int   // 当前LeaderID
+	ServerN  int   // 远程服务器的数量
+	Me       int64 // 当前 client ID
+	ReqIndex int64 // 请求ID
 }
 
-var i int
+var i int64 = 0
 
 func nrand() int64 {
 	max := big.NewInt(int64(1) << 62)
@@ -29,8 +30,9 @@ func MakeClerk(servers []*labrpc.ClientEnd) *Clerk {
 	ck.servers = servers
 	ck.LeaderId = 0
 	ck.ServerN = len(ck.servers)
-	ck.Me = i
+	ck.Me = nrand()
 	i++
+	ck.ReqIndex = 0
 	// You'll have to add code here.
 	return ck
 }
@@ -46,18 +48,24 @@ func MakeClerk(servers []*labrpc.ClientEnd) *Clerk {
 // must match the declared types of the RPC handler function's
 // arguments. and reply must be passed as a pointer.
 func (ck *Clerk) Get(key string) string {
-	args := GetArgs{Key: key}
+	ck.ReqIndex++
+	args := GetArgs{
+		Key:      key,
+		Index:    ck.ReqIndex,
+		ClientId: ck.Me,
+	}
 	DEBUG(dInfo, "S%v client get key: %v",
 		1, args.Key)
 	for {
 		reply := GetReply{}
-		ck.servers[ck.LeaderId].Call("KVServer.Get", &args, &reply)
-		if reply.Err == ErrWrongLeader {
+		ok := ck.servers[ck.LeaderId].Call("KVServer.Get", &args, &reply)
+		//* 错误的 Leader 需要重发
+		DEBUG(dInfo, "S%v client get key: %v error: %v \n", ck.Me, args.Key, reply.Err)
+		//* 过时的请求 请重复
+		if ok && reply.Err == ErrWrongLeader {
 			ck.LeaderId = (ck.LeaderId + 1) % ck.ServerN
-			DEBUG(dInfo, "S%v client get key: %v error: %v \n", ck.Me, args.Key, reply.Err)
-		} else {
-			DEBUG(dInfo, "S%v client get key: %v value: %v ok: %v CurrentLeader: %v\n",
-				ck.Me, args.Key, reply.Value, reply.Err, ck.LeaderId)
+		}
+		if ok && (reply.Err == OK || reply.Err == ErrNoKey) {
 			return reply.Value
 		}
 	}
@@ -72,31 +80,25 @@ func (ck *Clerk) Get(key string) string {
 // must match the declared types of the RPC handler function's
 // arguments. and reply must be passed as a pointer.
 func (ck *Clerk) PutAppend(key string, value string, op string) {
+	ck.ReqIndex++
 	args := PutAppendArgs{
-		Key:   key,
-		Value: value,
-		Op:    op,
-		Index: nrand(),
+		Key:      key,
+		Value:    value,
+		Op:       op,
+		Index:    ck.ReqIndex,
+		ClientId: ck.Me,
 	}
 	DEBUG(dInfo, "S%v client put append key: %v value: %v op: %v\n",
 		1, args.Key, args.Value, args.Op)
 	for {
 		reply := PutAppendReply{}
-		ck.servers[ck.LeaderId].Call("KVServer.PutAppend", &args, &reply)
+		ok := ck.servers[ck.LeaderId].Call("KVServer.PutAppend", &args, &reply)
 		//* 错误的Leader请求
-		if reply.Err == ErrWrongLeader {
-			DEBUG(dInfo, "S%v client put append key: %v value: %v Err: %v currleaderId: %v \n",
-				ck.Me, args.Key, args.Value, reply.Err, ck.LeaderId)
-			ck.LeaderId = (ck.LeaderId + 1) % ck.ServerN
-			//* 重复的请求, 阻止客户端
-		} else if reply.Err == RepeatedReq {
-			DEBUG(dInfo, "S%v client put append key: %v value: %v Err: %v currleaderId: %v \n",
-				ck.Me, args.Key, args.Value, reply.Err, ck.LeaderId)
-			break
-			//* 执行成功, 返回即可
-		} else if reply.Err == OK {
-			break
+		if ok && reply.Err == OK {
+			return
 		}
+
+		ck.LeaderId = (ck.LeaderId + 1) % ck.ServerN
 	}
 }
 
