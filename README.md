@@ -10,16 +10,18 @@
   - 2. 当前节点 term + 1
   - 3. 投自己一票
   - 4. 并行地向集群发送请求投票 RPC,
-    - ```c++
-      message RequestVoteArgs {
-        Term        int // Candidate 的term
-        CandidateId int // Candidate 的ID
-      }
-      message RequestVoteReply {
-        Term        int  // 回复者的 term
-        VoteGranted bool // 是否投给该Candidate
-      }
-      ``` 
-    - 当受到投票 >= (1 / 2)N 时, 成为集群的Leader, 开始并行地向集群中的其他节点发送心跳, 或者在发送投票或者等待投票的过程中超时, 则需要立即变为Follower, 并且开启下一次投票. raft 使用随机超时时间.
-    - 受到RPC 的
-- 
+ - 当受到投票 >= (1 / 2)N 时, 成为集群的Leader, 开始并行地向集群中的其他节点发送心跳, 或者在发送投票或者等待投票的过程中超时, 则需要立即变为Follower, 并且开启下一次投票. raft 使用随机超时时间. 当节点发现自己超时时或者在此处时间内没有收到新的 Leader 所发来的信息时, 会继续尝试选举. 直至选举成功.
+
+ ### 2B 日志复制
+ - 一旦成为领导人, 并行的发送空的日志给其他所有服务器, 在一定时间内不停的发送, 以防止其他跟随者超时.
+ - Leader 会负责接受客户端的请求, 会将来自客户端的请求存储到本地节点之中.
+ - 同时, Follower 会检查 Leader 所发来的日志, 当发现 LastLogIndex 和 NextIndex 不一致时, 会让Leader 对应节点的 NextIndex 倒退并且不断重试.
+ - Leader 来决定什么时候将日志条目 commit, 当确定 1/2以上的节点都拥有该日志时, 才可以 commit 该日志.
+
+ ### 2C 持久化
+ - raft 算法中对于 Leader 和 Follower 的崩溃情况是同样的, 需要定期的将这些信息持久化, 当重启时可以快速恢复.
+ - Raft 算法需要持久化的信息有
+
+ ### 2D 安装快照
+ - 正常的操作中, 日志是会无限增长的, raft 算法会定期地创建快照, 每个服务器独立的创建快照, 只包含已经提交的日志. 主要的工作包括将状态机的状态写入到快照中。Raft 也包含一些少量的元数据到快照中主要的工作.
+ - Leader 有时需要将自己的快照发送给落后的 Follower, 当 Leader 发现 Follower 所需要的日志并不在自己的 内存当中, 此时则会将自身的快照发送给该 Follower.
